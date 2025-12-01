@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { notFoundHandler } from './src/exception/not-found.exception.js';
 import { errorHandler } from './src/exception/error-handler.js';
+import SwaggerConfig from './src/configs/swagger.config.js';
 
 // Load environment variables
 dotenv.config();
@@ -12,7 +13,7 @@ class App {
         this.port = process.env.PORT || 3000;
 
         this.initMiddleware();
-        this.initRoutes();
+        this.initSwagger();
         this.initErrorHandling();
     }
 
@@ -20,6 +21,10 @@ class App {
     initMiddleware() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+    }
+
+    initSwagger() {
+        SwaggerConfig(this.app)
     }
 
     // error handler
