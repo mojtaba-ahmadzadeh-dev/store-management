@@ -5,13 +5,17 @@ import { sequelize } from './src/configs/sequelize.config.js';
 import { errorHandler } from './src/exception/error-handler.js';
 import SwaggerConfig from './src/configs/swagger.config.js';
 
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: envFile });
 
 class App {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || 3000;
+        this.mode = process.env.NODE_ENV || "development";
+
 
         this.initMiddleware();
         this.initSwagger();
@@ -47,7 +51,11 @@ class App {
     // start the server
     listen() {
         this.app.listen(this.port, () => {
-            console.log(`Server started on http://localhost:${this.port}`);
+            const runningMode = `Server running in ${this.mode} mode`;
+            const runningOnPort = `on port ${this.port}`;
+            const runningSince = `[since ${new Date().toISOString()}]`;
+            console.log(`🏁 —> ${runningMode} ${runningOnPort} ${runningSince}`);
+            console.log(`🏁 —> swagger: http://localhost:${this.port}`);
         });
     }
 }
