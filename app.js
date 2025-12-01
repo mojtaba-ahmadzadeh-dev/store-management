@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { notFoundHandler } from './src/exception/not-found.exception.js';
+import { sequelize } from './src/configs/sequelize.config.js';
 import { errorHandler } from './src/exception/error-handler.js';
 import SwaggerConfig from './src/configs/swagger.config.js';
 
@@ -14,6 +15,7 @@ class App {
 
         this.initMiddleware();
         this.initSwagger();
+        this.initDatabase();;
         this.initErrorHandling();
     }
 
@@ -25,6 +27,15 @@ class App {
 
     initSwagger() {
         SwaggerConfig(this.app)
+    }
+
+    async initDatabase() {
+        try {
+            await sequelize.authenticate();
+            console.log('Database connection has been established successfully.');
+        } catch (error) {
+            console.log('Unable to connect to the database:', error);
+        }
     }
 
     // error handler
