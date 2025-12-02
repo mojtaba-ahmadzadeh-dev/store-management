@@ -1,3 +1,4 @@
+// auth.controller.js
 import autoBind from "auto-bind";
 import authService from "./auth.service.js";
 import { AuthMessage } from "../../constant/messages.constant.js";
@@ -6,30 +7,28 @@ import createHttpError from "http-errors";
 class AuthController {
     #service;
     constructor() {
-        autoBind(this)
-        this.#service = authService
+        autoBind(this);
+        this.#service = authService;
     }
 
     async sendOTP(req, res, next) {
         try {
             const { mobile } = req.body;
-
-            const result = await this.#service.sendOTP(mobile)
+            const result = await this.#service.sendOTP(mobile);
 
             return res.json({
                 message: AuthMessage.OTP_SENT_SUCCESS,
                 result
-            })
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
     async checkOTP(req, res, next) {
         try {
             const { mobile, code } = req.body;
-
-            const { user, accessToken, refreshToken } = await this.#service.checkOTP(mobile, code)
+            const { user, accessToken, refreshToken } = await this.#service.checkOTP(mobile, code);
 
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
@@ -38,13 +37,20 @@ class AuthController {
                 maxAge: 30 * 24 * 60 * 60 * 1000
             });
 
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 7 * 24 * 60 * 60 * 1000
+            });
+
             return res.json({
                 message: AuthMessage.OTP_VERIFIED_SUCCESS,
                 result: { user },
                 accessToken
-            })
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -55,11 +61,18 @@ class AuthController {
 
             const { accessToken, refreshToken } = await this.#service.verifyRefreshToken(token);
 
-            res.cookie("refreshToken", refreshToken, {
+            res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "strict",
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
                 maxAge: 30 * 24 * 60 * 60 * 1000
+            });
+
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 7 * 24 * 60 * 60 * 1000
             });
 
             return res.json({
@@ -67,9 +80,9 @@ class AuthController {
                 accessToken
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 }
 
-export default new AuthController()
+export default new AuthController();

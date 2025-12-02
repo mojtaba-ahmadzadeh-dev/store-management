@@ -1,39 +1,36 @@
+// auth.service.js
 import autoBind from "auto-bind";
 import { User, OTP } from "../user/user.model.js";
 import createHttpError from "http-errors";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import { randomInt } from "crypto";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 class AuthService {
     #userModel
     #otpModel
 
     constructor() {
-        autoBind(this)
+        autoBind(this);
         this.#userModel = User;
         this.#otpModel = OTP;
     }
 
     async sendOTP(mobile) {
         const now = new Date();
-        const user = await this.#userModel.findOne({ where: { mobile } });
+        let user = await this.#userModel.findOne({ where: { mobile } });
 
         const code = randomInt(100000, 999999);
         const expires_in = new Date(now.getTime() + 2 * 60 * 1000);
 
-        let userId;
         if (!user) {
-            const newUser = await this.#userModel.create({ mobile });
-            userId = newUser.id;
-        } else {
-            userId = user.id;
+            user = await this.#userModel.create({ mobile });
         }
 
-        await this.#otpModel.destroy({ where: { user_id: userId } });
+        await this.#otpModel.destroy({ where: { user_id: user.id } });
 
         const otp = await this.#otpModel.create({
-            user_id: userId,
+            user_id: user.id,
             code: code.toString(),
             expires_in
         });
@@ -57,9 +54,8 @@ class AuthService {
 
         await otp.destroy();
 
-        const { accessToken, refreshToken } = this.generateTokens({ userId: user.id })
-
-        return { user, accessToken, refreshToken };
+        const tokens = this.generateTokens({ userId: user.id });
+        return { user, ...tokens };
     }
 
     generateTokens(payload) {
@@ -72,17 +68,11 @@ class AuthService {
     async verifyRefreshToken(token) {
         try {
             const { REFRESH_TOKEN_SECRET } = process.env;
-
             const payload = jwt.verify(token, REFRESH_TOKEN_SECRET);
 
-            if (!payload?.userId) {
-                throw new createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_INVALID);
-            }
+            if (!payload?.userId) throw new createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_INVALID);
 
-            const { accessToken, refreshToken } = this.generateTokens({ userId: payload.userId });
-
-            return { accessToken, refreshToken };
-
+            return this.generateTokens({ userId: payload.userId });
         } catch (error) {
             throw new createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_EXPIRED);
         }
