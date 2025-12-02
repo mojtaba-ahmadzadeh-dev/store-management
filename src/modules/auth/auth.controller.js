@@ -1,4 +1,4 @@
-import autoBind from "auto-bind"
+import autoBind from "auto-bind";
 import authService from "./auth.service.js";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import createHttpError from "http-errors";
@@ -9,11 +9,14 @@ class AuthController {
         autoBind(this)
         this.#service = authService
     }
+
     async sendOTP(req, res, next) {
         try {
             const { mobile } = req.body;
             if (!mobile) throw createHttpError(400, AuthMessage.MOBILE_REQUIRED)
+
             const result = await this.#service.sendOTP(mobile)
+
             return res.json({
                 message: AuthMessage.OTP_SENT_SUCCESS,
                 result
@@ -22,16 +25,50 @@ class AuthController {
             next(error)
         }
     }
+
     async checkOTP(req, res, next) {
         try {
             const { mobile, code } = req.body;
             if (!mobile) throw createHttpError(400, AuthMessage.MOBILE_REQUIRED)
             if (!code) throw createHttpError(400, AuthMessage.CODE_REQUIRED)
-            const result = await this.#service.checkOTP(mobile, code)
+
+            const { user, accessToken, refreshToken } = await this.#service.checkOTP(mobile, code)
+
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 30 * 24 * 60 * 60 * 1000
+            });
+
             return res.json({
                 message: AuthMessage.OTP_VERIFIED_SUCCESS,
-                result
+                result: { user },
+                accessToken
             })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async refreshToken(req, res, next) {
+        try {
+            const token = req.cookies.refreshToken;
+            if (!token) throw createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_NOT_FOUND);
+
+            const { accessToken, refreshToken } = await this.#service.verifyRefreshToken(token);
+
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "strict",
+                maxAge: 30 * 24 * 60 * 60 * 1000
+            });
+
+            return res.json({
+                message: AuthMessage.REFRESH_TOKEN_SUCCESS,
+                accessToken
+            });
         } catch (error) {
             next(error)
         }

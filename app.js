@@ -4,9 +4,9 @@ import { notFoundHandler } from './src/exception/not-found.exception.js';
 import { sequelize } from './src/configs/sequelize.config.js';
 import { errorHandler } from './src/exception/error-handler.js';
 import SwaggerConfig from './src/configs/swagger.config.js';
+import cookieParser from 'cookie-parser';
 import { AuthRoutes } from './src/modules/auth/auth.routes.js';
 import { initDatabase as initDb } from './src/configs/model.init.js';
-
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -31,6 +31,7 @@ class App {
     initMiddleware() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(cookieParser())
     }
 
     initRoutes() {

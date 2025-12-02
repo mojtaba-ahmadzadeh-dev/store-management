@@ -5,5 +5,6 @@ const router = Router()
 
 router.post('/send-otp', authController.sendOTP)
 router.post('/check-otp', authController.checkOTP)
+router.post('/refresh-token', authController.refreshToken)
 
 export { router as AuthRoutes }

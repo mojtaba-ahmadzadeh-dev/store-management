@@ -7,7 +7,11 @@ const AuthMessage = {
     CODE_REQUIRED: "وارد کردن کد تأیید الزامی است",
     OTP_CODE_INCORRECT: "کد تأیید نادرست است",
     OTP_CODE_EXPIRED: "کد تأیید منقضی شده است",
-    OTP_CODE_NOT_FOUND: "کد تأیید یافت نشد"
+    OTP_CODE_NOT_FOUND: "کد تأیید یافت نشد",
+    REFRESH_TOKEN_INVALID: "توکن معتبر نیست",
+    REFRESH_TOKEN_EXPIRED: "رفرش توکن نامعتبر یا منقضی شده است",
+    REFRESH_TOKEN_NOT_FOUND: "رفرش توکن پیدا نشد",
+    REFRESH_TOKEN_SUCCESS: "توکن با موفقیت رفرش شد",
 }
 
 export { AuthMessage }
