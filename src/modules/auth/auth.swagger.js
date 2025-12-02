@@ -168,3 +168,50 @@
  *                   type: string
  *                   example: "رفرش توکن نامعتبر یا منقضی شده است"
  */
+
+/* -------------------------------------------------------------
+   📌 Get Logged-in User (GET /auth/me)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /auth/me:
+ *   get:
+ *     summary: Get authenticated user info using accessToken
+ *     tags: [Auth 🔒]
+ *     description: |
+ *       Requires **accessToken** stored in HttpOnly cookie.
+ *
+ *     responses:
+ *       200:
+ *         description: User fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "اطلاعات کاربر با موفقیت دریافت شد"
+ *                 result:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     mobile:
+ *                       type: string
+ *                       example: "09121234567"
+ *                 accessToken:
+ *                   type: string
+ *                   example: "yourAccessToken..."
+ *
+ *       401:
+ *         description: Access token missing or invalid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "توکن معتبر نیست"
+ */

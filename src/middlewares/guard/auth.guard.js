@@ -1,31 +1,31 @@
-import jwt from 'jsonwebtoken';
-import createHttpError from 'http-errors';
-import { AuthMessage } from '../../constant/messages.constant.js';
+import jwt from "jsonwebtoken";
+import createHttpError from "http-errors";
+import { User } from "../../modules/user/user.model.js";
+import { AuthMessage } from "../../constant/messages.constant.js";
 
-export const authGuard = (req, res, next) => {
+export const authGuard = async (req, res, next) => {
     try {
-        const authHeader = req.headers['authorization'];
-        const token = authHeader?.startsWith('Bearer ')
-            ? authHeader.split(' ')[1]
-            : req.cookies?.accessToken;
+        const { accessToken } = req.cookies;            
 
-        if (!token) {
-            throw createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_NOT_FOUND);
-        }
+        if (!accessToken) throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
 
-        const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        const payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        
+        if (!payload?.userId) throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
 
-        if (!payload?.userId) {
-            throw createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_INVALID);
-        }
+        const user = await User.findOne({
+            where: { id: payload.userId },
+        });
 
-        req.user = { id: payload.userId };
+        if (!user) throw createHttpError.NotFound(AuthMessage.USER_NOT_FOUND);
+
+        req.user = user;
         next();
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
-            next(createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_EXPIRED));
+            next(createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID));
         } else {
-            next(createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_INVALID));
+            next(createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID));
         }
     }
 };

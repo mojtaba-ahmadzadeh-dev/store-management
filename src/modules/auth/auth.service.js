@@ -77,6 +77,15 @@ class AuthService {
             throw new createHttpError.Unauthorized(AuthMessage.REFRESH_TOKEN_EXPIRED);
         }
     }
+
+    async getMe(userId) {
+        const user = await this.#userModel.findOne({
+            where: { id: userId },
+            attributes: { exclude: ['password'] }
+        })
+        if (!user) throw new createHttpError.NotFound(AuthMessage.USER_NOT_FOUND);
+        return user
+    }
 }
 
 export default new AuthService();

@@ -2,7 +2,6 @@ import Joi from "joi";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import { validate } from "../../middlewares/validate/validate.js";
 
-
 const sendOTPSchema = Joi.object({
     mobile: Joi.string()
         .pattern(/^09\d{9}$/)

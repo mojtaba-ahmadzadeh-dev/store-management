@@ -83,6 +83,20 @@ class AuthController {
             next(error);
         }
     }
+
+    async getMe(req, res, next) {
+        try {
+            if (!req.user) throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
+
+            return res.json({
+                message: AuthMessage.GET_ME_SUCCESS,
+                result: req.user
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default new AuthController();
