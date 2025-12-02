@@ -9,6 +9,7 @@ class AuthService {
     #otpModel
 
     constructor() {
+        autoBind(this)
         this.#userModel = User;
         this.#otpModel = OTP;
     }
@@ -39,6 +40,34 @@ class AuthService {
 
         return { mobile, otp };
     }
+
+    async checkOTP(mobile, code) {
+        const now = new Date();
+
+        const user = await this.#userModel.findOne({ where: { mobile } });
+
+        const otp = await this.#otpModel.findOne({
+            where: { user_id: user.id },
+            order: [["created_at", "DESC"]]
+        });
+
+        if (!otp) {
+            throw new createHttpError.BadRequest(AuthMessage.OTP_CODE_NOT_FOUND);
+        }
+
+        if (otp.code !== code) {
+            throw new createHttpError.BadRequest(AuthMessage.OTP_CODE_INCORRECT);
+        }
+
+        if (otp.expires_in < now) {
+            throw new createHttpError.BadRequest(AuthMessage.OTP_CODE_EXPIRED);
+        }
+
+        await otp.destroy();
+
+        return user
+    }
+
 
     async checkExistByIdMobile(mobile) {
         const user = await this.#userModel.findOne({ where: { mobile } });
