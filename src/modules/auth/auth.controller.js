@@ -97,6 +97,27 @@ class AuthController {
         }
     }
 
+    async logout(req, res, next) {
+        try {
+            res.clearCookie('accessToken', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            });
+
+            res.clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            });
+
+            return res.json({
+                message: AuthMessage.LOGOUT_SUCCESS
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default new AuthController();

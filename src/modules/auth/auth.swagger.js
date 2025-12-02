@@ -1,7 +1,7 @@
 /**
  * @swagger
  * tags:
- *   name: Auth 🔒
+ *   name: Authentication 🔒
  *   description: User authentication and token management APIs
  */
 
@@ -13,7 +13,7 @@
  * /auth/send-otp:
  *   post:
  *     summary: Send OTP to a mobile number
- *     tags: [Auth 🔒]
+ *     tags: [Authentication 🔒]
  *     requestBody:
  *       required: true
  *       content:
@@ -67,7 +67,7 @@
  * /auth/check-otp:
  *   post:
  *     summary: Verify OTP code and log in user
- *     tags: [Auth 🔒]
+ *     tags: [Authentication 🔒]
  *     requestBody:
  *       required: true
  *       content:
@@ -132,7 +132,7 @@
  * /auth/refresh-token:
  *   post:
  *     summary: Refresh access token using refresh token stored in HttpOnly cookie
- *     tags: [Auth 🔒]
+ *     tags: [Authentication 🔒]
  *     responses:
  *       200:
  *         description: Token refreshed successfully
@@ -177,7 +177,7 @@
  * /auth/me:
  *   get:
  *     summary: Get authenticated user info using accessToken
- *     tags: [Auth 🔒]
+ *     tags: [Authentication 🔒]
  *     description: |
  *       Requires **accessToken** stored in HttpOnly cookie.
  *
@@ -210,6 +210,42 @@
  *         content:
  *           application/json:
  *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "توکن معتبر نیست"
+ */
+
+/* -------------------------------------------------------------
+   📌 Logout (POST /auth/logout)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Log out the current user
+ *     tags: [Authentication 🔒]
+ *     description: |
+ *       Clears **accessToken** and **refreshToken** cookies to log out the user.
+ *
+ *     responses:
+ *       200:
+ *         description: User logged out successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کاربر با موفقیت از سیستم خارج شد"
+ *
+ *       401:
+ *         description: User not logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
  *               properties:
  *                 message:
  *                   type: string

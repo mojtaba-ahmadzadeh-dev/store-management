@@ -17,6 +17,8 @@ const AuthMessage = {
     REFRESH_TOKEN_SUCCESS: "توکن با موفقیت رفرش شد",
     ACCESS_TOKEN_INVALID: "توکن دسترسی معتبر نیست",
     GET_ME_SUCCESS: "اطلاعات کاربر با موفقیت دریافت شد",
+    LOGOUT_SUCCESS: "خروج با موفقیت انجام شد"
+
 };
 
 export { AuthMessage };
