@@ -13,7 +13,6 @@ class AuthController {
     async sendOTP(req, res, next) {
         try {
             const { mobile } = req.body;
-            if (!mobile) throw createHttpError(400, AuthMessage.MOBILE_REQUIRED)
 
             const result = await this.#service.sendOTP(mobile)
 
@@ -29,8 +28,6 @@ class AuthController {
     async checkOTP(req, res, next) {
         try {
             const { mobile, code } = req.body;
-            if (!mobile) throw createHttpError(400, AuthMessage.MOBILE_REQUIRED)
-            if (!code) throw createHttpError(400, AuthMessage.CODE_REQUIRED)
 
             const { user, accessToken, refreshToken } = await this.#service.checkOTP(mobile, code)
 
