@@ -14,6 +14,13 @@ class UserService {
             order: [["id", "DESC"]]
         })
     }
+
+    async getUserById(id) {
+        return await this.#model.findOne({
+            where: { id },
+            attributes: ["id", "mobile", "full_name", "avatar", "role", "created_at"],
+        })
+    }
 }
 
 export default new UserService()

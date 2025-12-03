@@ -21,7 +21,9 @@ const AuthMessage = {
 };
 
 const UserMessage = {
-    USERS_LIST_SUCCESS: "لیست کاربران با موفقیت دریافت شد"
+    USERS_LIST_SUCCESS: "لیست کاربران با موفقیت دریافت شد",
+    USER_NOT_FOUND: "کاربری با همچین آیدی وجود ندارد",
+    USER_SUCCESS: "کاربر با موفقیت دریافت شد"
 }
 
 export { AuthMessage, UserMessage };
