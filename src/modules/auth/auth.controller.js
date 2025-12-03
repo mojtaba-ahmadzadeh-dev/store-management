@@ -14,11 +14,10 @@ class AuthController {
     async sendOTP(req, res, next) {
         try {
             const { mobile } = req.body;
-            const result = await this.#service.sendOTP(mobile);
+             await this.#service.sendOTP(mobile);
 
             return res.json({
                 message: AuthMessage.OTP_SENT_SUCCESS,
-                result
             });
         } catch (error) {
             next(error);
@@ -46,8 +45,8 @@ class AuthController {
 
             return res.json({
                 message: AuthMessage.OTP_VERIFIED_SUCCESS,
-                result: { user },
-                accessToken
+                accessToken,
+                refreshToken
             });
         } catch (error) {
             next(error);
@@ -77,7 +76,8 @@ class AuthController {
 
             return res.json({
                 message: AuthMessage.REFRESH_TOKEN_SUCCESS,
-                accessToken
+                accessToken,
+                refreshToken
             });
         } catch (error) {
             next(error);

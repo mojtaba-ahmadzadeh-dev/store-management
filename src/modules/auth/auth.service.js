@@ -81,7 +81,6 @@ class AuthService {
     async getMe(userId) {
         const user = await this.#userModel.findOne({
             where: { id: userId },
-            attributes: { exclude: ['password'] }
         })
         if (!user) throw new createHttpError.NotFound(AuthMessage.USER_NOT_FOUND);
         return user
