@@ -34,6 +34,37 @@ class UserController {
             user
         })
     }
+
+    async updateUser(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = req.body;
+            const updateUser = await this.#service.updateUser(id, data)
+            return res.json({
+                message: UserMessage.USER_UPDATE_SUCCESS,
+                user: updateUser
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async changeUserRole(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { role } = req.body;
+
+            const updatedUser = await this.#service.changeUserRole(id, role);
+            if (!updatedUser) throw createHttpError(404, UserMessage.USER_NOT_FOUND);
+
+            return res.json({
+                message: UserMessage.USER_UPDATE_ROLE_SUCCESS,
+                user: updatedUser,
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new UserController()
