@@ -20,4 +20,8 @@ const AuthMessage = {
     LOGOUT_SUCCESS: "خروج با موفقیت انجام شد"
 };
 
-export { AuthMessage };
+const UserMessage = {
+    USERS_LIST_SUCCESS: "لیست کاربران با موفقیت دریافت شد"
+}
+
+export { AuthMessage, UserMessage };

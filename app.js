@@ -7,6 +7,7 @@ import SwaggerConfig from './src/configs/swagger.config.js';
 import cookieParser from 'cookie-parser';
 import { AuthRoutes } from './src/modules/auth/auth.routes.js';
 import { initDatabase as initDb } from './src/configs/model.init.js';
+import { UserRoutes } from './src/modules/user/user.routes.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -36,6 +37,7 @@ class App {
 
     initRoutes() {
         this.app.use('/auth', AuthRoutes)
+        this.app.use('/users', UserRoutes)
     }
 
     initSwagger() {
