@@ -307,3 +307,74 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     tags: [Users 👤]
+ *     summary: Delete a user by ID (Admin only)
+ *     description: This endpoint allows an admin to delete a user by their ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user to delete
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User deleted successfully"
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     mobile:
+ *                       type: string
+ *                       example: "09123456789"
+ *                     full_name:
+ *                       type: string
+ *                       nullable: true
+ *                       example: "Mohammad Javad"
+ *                     avatar:
+ *                       type: string
+ *                       nullable: true
+ *                       example: "https://example.com/avatar.png"
+ *                     role:
+ *                       type: string
+ *                       example: "user"
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2025-12-03T07:14:16.000Z"
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User with id 1 not found"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */

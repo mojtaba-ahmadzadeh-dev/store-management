@@ -51,6 +51,14 @@ class UserService {
         await user.update({ role })
         return user
     }
+
+    async deleteUser(id) {
+        const user = await this.#model.findByPk(id)
+        if (!user) return null
+
+        await user.destroy()
+        return user
+    }
 }
 
 export default new UserService()
