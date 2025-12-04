@@ -136,3 +136,69 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+   📌 Get Single Category (GET /category/:id)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /category/{id}:
+ *   get:
+ *     summary: Get a single category by ID
+ *     tags: [Category 📂]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the category to retrieve
+ *     responses:
+ *       200:
+ *         description: Category retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Category retrieved successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     title:
+ *                       type: string
+ *                       example: "New Category"
+ *                     description:
+ *                       type: string
+ *                       example: "Category description"
+ *                     status:
+ *                       type: string
+ *                       example: "ACTIVE"
+ *
+ *       404:
+ *         description: Category not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Category not found"
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */

@@ -37,6 +37,14 @@ class CategoryController {
         }
     }
 
+    async getCategoryById(req, res, next) {
+        const { id } = req.params;
+        const category = await this.#service.getCategoryById(id)
+        return res.status(200).json({
+            message: CategoryMessage.CATEGORY_RETRIEVED_SUCCESS,
+            data: category
+        });
+    }
 }
 
 export default new CategoryController

@@ -2,6 +2,7 @@ import autoBind from "auto-bind"
 import { Category } from "./category.model.js";
 import { CategoryMessage } from "../../constant/messages.constant.js";
 import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
+import createHttpError from "http-errors";
 
 class CategoryService {
     #model;
@@ -32,6 +33,14 @@ class CategoryService {
             order: [["id", "ASC"]]
         })
         return categories
+    }
+
+    async getCategoryById(id) {
+        const category = await this.#model.findByPk(id)
+        if (!category) {
+            throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND);
+        }
+        return category
     }
 
 }
