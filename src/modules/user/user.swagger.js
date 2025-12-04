@@ -310,7 +310,7 @@
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/delete/{id}:
  *   delete:
  *     tags: [User 👤]
  *     summary: Delete a user by ID (Admin only)
@@ -533,4 +533,58 @@
  *                 message:
  *                   type: string
  *                   example: "Internal server error"
+ */
+
+/**
+ * @swagger
+ * /users/unban/{id}:
+ *   put:
+ *     tags: [User 👤]
+ *     summary: Unban a user by ID (Admin only)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user to unban
+ *     responses:
+ *       200:
+ *         description: User unbanned successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کاربر با موفقیت از حالت مسدود خارج شد"
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     mobile:
+ *                       type: string
+ *                       example: "09132325454"
+ *                     full_name:
+ *                       type: string
+ *                       example: "Ali"
+ *                     avatar:
+ *                       type: string
+ *                       nullable: true
+ *                       example: null
+ *                     role:
+ *                       type: string
+ *                       example: "user"
+ *                     is_banned:
+ *                       type: boolean
+ *                       example: false
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2025-12-04T10:03:09.000Z"
+ *       404:
+ *         description: User not found
  */

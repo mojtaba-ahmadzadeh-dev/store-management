@@ -118,6 +118,22 @@ class UserController {
             next(error)
         }
     }
+
+    async unBanUser(req, res, next) {
+        try {
+            const { id } = req.params;
+            const user = await this.#service.unBanUser(id)
+            if (!user) {
+                return next(createHttpError(404, UserMessage.USER_NOT_FOUND));
+            }
+            return res.json({
+                message: UserMessage.USER_UNBAN_SUCCESS,
+                user
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new UserController()

@@ -28,7 +28,8 @@ const UserMessage = {
     USER_UPDATE_ROLE_SUCCESS: "نقش کاربر با موفقیت عوض شد",
     USER_DELETE_SUCCESS: "کاربر مورد نظر با موفقیت حذف شد",
     USER_MOBILE_EXISTS: "این شماره موبایل قبلاً ثبت شده است",
-    USER_BAN_SUCCESS: "کاربر با موفقیت مسدود شد"
+    USER_BAN_SUCCESS: "کاربر با موفقیت مسدود شد",
+    USER_UNBAN_SUCCESS: "کاربر با موفقیت از حالت مسدود خارج شد"
 }
 
 export { AuthMessage, UserMessage };

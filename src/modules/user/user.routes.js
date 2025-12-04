@@ -11,5 +11,6 @@ router.patch('/:id', authGuard, validateUpdateUser, userController.updateUser)
 router.put('/role/:id', authGuard, validateChangeUserRole, userController.changeUserRole)
 router.delete('/delete/:id', authGuard, userController.deleteUser)
 router.put('/ban/:id', authGuard, userController.banUser)
+router.put('/unban/:id', authGuard, userController.unBanUser)
 
 export { router as UserRoutes }

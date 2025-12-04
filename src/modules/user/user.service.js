@@ -92,6 +92,14 @@ class UserService {
         await user.update({ is_banned: true })
         return user
     }
+
+    async unBanUser(id) {
+        const user = await this.#model.findByPk(id)
+        if (!user) return null
+
+        await user.update({ is_banned: false })
+        return user
+    }
 }
 
 export default new UserService()
