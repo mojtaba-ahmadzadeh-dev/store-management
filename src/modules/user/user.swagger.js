@@ -218,7 +218,7 @@
 
 /**
  * @swagger
- * /users/{id}/role:
+ * /users/role/{id}:
  *   put:
  *     tags: [User 👤]
  *     summary: Change user role (Admin only)
@@ -450,6 +450,79 @@
  *                 message:
  *                   type: string
  *                   example: "کاربر پیدا نشد"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+/**
+ * @swagger
+ * /users/ban/{id}:
+ *   put:
+ *     tags: [User 👤]
+ *     summary: Ban a user by ID (Admin only)
+ *     description: This endpoint allows an admin to ban a user by setting `is_banned` to true.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user to ban
+ *     responses:
+ *       200:
+ *         description: User banned successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کاربر با موفقیت مسدود شد"
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     mobile:
+ *                       type: string
+ *                       example: "09123456789"
+ *                     full_name:
+ *                       type: string
+ *                       example: "Mohammad Javad"
+ *                     avatar:
+ *                       type: string
+ *                       nullable: true
+ *                       example: "https://example.com/avatar.png"
+ *                     role:
+ *                       type: string
+ *                       example: "user"
+ *                     is_banned:
+ *                       type: boolean
+ *                       example: true
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2025-12-03T07:14:16.000Z"
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User with id 1 not found"
  *       500:
  *         description: Internal server error
  *         content:

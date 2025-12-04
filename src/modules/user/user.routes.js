@@ -8,7 +8,8 @@ router.get('/', authGuard, userController.getAllUsers)
 router.patch('/me/name', authGuard, userController.updateMyName);
 router.get('/:id', userController.getUserById)
 router.patch('/:id', authGuard, validateUpdateUser, userController.updateUser)
-router.put('/:id/role', authGuard, validateChangeUserRole, userController.changeUserRole)
-router.delete('/:id', authGuard, userController.deleteUser)
+router.put('/role/:id', authGuard, validateChangeUserRole, userController.changeUserRole)
+router.delete('/delete/:id', authGuard, userController.deleteUser)
+router.put('/ban/:id', authGuard, userController.banUser)
 
 export { router as UserRoutes }

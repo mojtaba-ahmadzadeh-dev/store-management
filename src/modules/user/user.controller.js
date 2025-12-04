@@ -101,6 +101,23 @@ class UserController {
             user: deletedUser
         });
     }
+
+    async banUser(req, res, next) {
+        try {
+            const { id } = req.params;
+
+            const user = await this.#service.banUser(id)
+            if (!user) {
+                return next(createHttpError(404, UserMessage.USER_NOT_FOUND));
+            }
+            return res.json({
+                message: UserMessage.USER_BAN_SUCCESS,
+                user
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new UserController()

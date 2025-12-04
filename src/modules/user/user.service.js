@@ -22,7 +22,7 @@ class UserService {
 
     async getAllUsers() {
         return await this.#model.findAll({
-            attributes: ["id", "mobile", "full_name", "avatar", "role", "created_at"],
+            attributes: ["id", "mobile", "full_name", "avatar", "role", "is_banned", "created_at"],
             order: [["id", "DESC"]]
         })
     }
@@ -30,7 +30,7 @@ class UserService {
     async getUserById(id) {
         return await this.#model.findOne({
             where: { id },
-            attributes: ["id", "mobile", "full_name", "avatar", "role", "created_at"],
+            attributes: ["id", "mobile", "full_name", "avatar", "role", "is_banned", "created_at"],
         })
     }
 
@@ -81,6 +81,15 @@ class UserService {
         if (!user) return null
 
         await user.destroy()
+        return user
+    }
+
+    async banUser(id) {
+        const user = await this.#model.findByPk(id)
+
+        if (!user) return null
+
+        await user.update({ is_banned: true })
         return user
     }
 }

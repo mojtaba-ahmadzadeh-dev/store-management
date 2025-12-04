@@ -8,6 +8,7 @@ const User = sequelize.define('user', {
     full_name: { type: DataTypes.STRING(100), allowNull: true },
     avatar: { type: DataTypes.STRING, allowNull: true, defaultValue: null },
     role: { type: DataTypes.ENUM(USER_ROLES.USER, USER_ROLES.ADMIN), defaultValue: USER_ROLES.USER },
+    is_banned: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, { timestamps: true, createdAt: 'created_at', updatedAt: false, modelName: 'user', tableName: 'users' });
 
 const OTP = sequelize.define('otp', {
