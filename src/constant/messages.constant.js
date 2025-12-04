@@ -43,4 +43,8 @@ const CategoryMessage = {
     CATEGORY_UPDATED_SUCCESS: "دسته بندی مورد نظر با موفقیت آپدیت شد"
 }
 
-export { AuthMessage, UserMessage, CategoryMessage };
+const ProductMessage = {
+    CREATE_PRODUCT_SUCCESS: "محصول مورد نیاز با موفقیت ایجاد شد"
+}
+
+export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };
