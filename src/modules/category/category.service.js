@@ -43,10 +43,34 @@ class CategoryService {
         return category
     }
 
+    async updateCategoryById(id, data) {
+        const category = await this.#model.findOne({ where: { id } });
+
+        if (!category) {
+            throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND);
+        }
+
+        if (data.title) {
+            const exists = await this.#model.findOne({
+                where: { title: data.title, id: { $ne: id } }
+            })
+
+            if (exists) {
+                throw createHttpError(400, CategoryMessage.CATEGORY_ALREADY_EXISTS);
+            }
+
+            await category.update({
+                title: data.title ?? category.title,
+                description: data.description ?? category.description,
+                status: data.status ?? category.status
+            })
+        }
+    }
+
     async deleteCategoryById(id) {
         const category = await this.#model.findOne({ where: { id } });
         if (!category) throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND)
-            
+
         await category.destroy();
         return category
     }

@@ -40,6 +40,7 @@ const CategoryMessage = {
     CATEGORY_RETRIEVED_SUCCESS: "دسته‌بندی با موفقیت دریافت شد",
     CATEGORY_NOT_FOUND: "دسته‌بندی پیدا نشد",
     CATEGORY_DELETED_SUCCESS: "دسته‌بندی با موفقیت حذف شد",
+    CATEGORY_UPDATED_SUCCESS: "دسته بندی مورد نظر با موفقیت آپدیت شد"
 }
 
 export { AuthMessage, UserMessage, CategoryMessage };

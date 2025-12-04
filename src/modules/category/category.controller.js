@@ -46,6 +46,24 @@ class CategoryController {
         });
     }
 
+    async updateCategoryById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { title, description, status } = req.body;
+            const updated = await this.#service.updateCategoryById(id, {
+                title,
+                description,
+                status
+            })
+            return res.status(200).json({
+                message: CategoryMessage.CATEGORY_UPDATED_SUCCESS,
+                data: updated
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
     async deleteCategory(req, res, next) {
         try {
             const { id } = req.params;
