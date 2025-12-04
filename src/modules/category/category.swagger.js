@@ -202,3 +202,70 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+   📌 Delete Category (DELETE /category/:id)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /category/{id}:
+ *   delete:
+ *     summary: Delete a category by ID
+ *     tags: [Category 📂]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the category to delete
+ *
+ *     responses:
+ *       200:
+ *         description: Category deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Category deleted successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     title:
+ *                       type: string
+ *                       example: "Sample Category"
+ *                     description:
+ *                       type: string
+ *                       example: "Some description"
+ *                     status:
+ *                       type: string
+ *                       example: "ACTIVE"
+ *
+ *       404:
+ *         description: Category not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Category not found"
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */

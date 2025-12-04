@@ -43,6 +43,13 @@ class CategoryService {
         return category
     }
 
+    async deleteCategoryById(id) {
+        const category = await this.#model.findOne({ where: { id } });
+        if (!category) throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND)
+            
+        await category.destroy();
+        return category
+    }
 }
 
 export default new CategoryService

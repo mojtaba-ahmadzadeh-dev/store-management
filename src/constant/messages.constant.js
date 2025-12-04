@@ -38,7 +38,8 @@ const CategoryMessage = {
     CATEGORY_TITLE_REQUIRED: "عنوان دسته‌بندی الزامی است",
     CATEGORY_LIST_RETRIEVED_SUCCESS: "لیست دسته‌بندی‌ها با موفقیت دریافت شد",
     CATEGORY_RETRIEVED_SUCCESS: "دسته‌بندی با موفقیت دریافت شد",
-    CATEGORY_NOT_FOUND: "دسته‌بندی پیدا نشد"
+    CATEGORY_NOT_FOUND: "دسته‌بندی پیدا نشد",
+    CATEGORY_DELETED_SUCCESS: "دسته‌بندی با موفقیت حذف شد",
 }
 
 export { AuthMessage, UserMessage, CategoryMessage };
