@@ -1,5 +1,10 @@
+import path from 'path';
 import swaggerJsDocs from 'swagger-jsdoc';
+import { fileURLToPath } from 'url';
 import swaggerUi from 'swagger-ui-express';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const SwaggerConfig = (app) => {
     const swaggerOptions = {
@@ -11,7 +16,7 @@ const SwaggerConfig = (app) => {
                 description: 'API documentation for Store Management project',
             }
         },
-        apis: ['/src/modules/**/*.swagger.js'],
+        apis: [path.join(__dirname, '../modules/**/*.swagger.js')],
     };
 
     const swaggerSpec = swaggerJsDocs(swaggerOptions);

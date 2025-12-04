@@ -4,6 +4,11 @@ import { notFoundHandler } from './src/exception/not-found.exception.js';
 import { sequelize } from './src/configs/sequelize.config.js';
 import { errorHandler } from './src/exception/error-handler.js';
 import SwaggerConfig from './src/configs/swagger.config.js';
+import cookieParser from 'cookie-parser';
+import { AuthRoutes } from './src/modules/auth/auth.routes.js';
+import { initDatabase as initDb } from './src/configs/model.init.js';
+import { UserRoutes } from './src/modules/user/user.routes.js';
+import { authGuard } from './src/middlewares/guard/auth.guard.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -16,8 +21,8 @@ class App {
         this.port = process.env.PORT || 3000;
         this.mode = process.env.NODE_ENV || "development";
 
-
         this.initMiddleware();
+        this.initRoutes();
         this.initSwagger();
         this.initDatabase();;
         this.initErrorHandling();
@@ -27,6 +32,12 @@ class App {
     initMiddleware() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(cookieParser())
+    }
+
+    initRoutes() {
+        this.app.use('/auth', AuthRoutes)
+        this.app.use('/users', UserRoutes)
     }
 
     initSwagger() {
@@ -37,6 +48,7 @@ class App {
         try {
             await sequelize.authenticate();
             console.log('Database connection has been established successfully.');
+            await initDb();
         } catch (error) {
             console.log('Unable to connect to the database:', error);
         }

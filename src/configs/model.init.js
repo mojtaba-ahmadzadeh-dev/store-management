@@ -1,0 +1,14 @@
+import { OTP, User } from "../modules/user/user.model.js";
+import { sequelize } from "./sequelize.config.js";
+
+const initDatabase = async () => {
+    User.hasMany(OTP, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+    OTP.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+
+    // User.sync()
+    // OTP.sync()
+
+    // await sequelize.sync({alter: true})
+}
+
+export { initDatabase }
