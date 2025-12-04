@@ -32,4 +32,10 @@ const UserMessage = {
     USER_UNBAN_SUCCESS: "کاربر با موفقیت از حالت مسدود خارج شد"
 }
 
-export { AuthMessage, UserMessage };
+const CategoryMessage = {
+    CATEGORY_CREATED_SUCCESS: "دسته‌بندی با موفقیت اضافه شد",
+    CATEGORY_ALREADY_EXISTS: "دسته‌بندی با این عنوان قبلاً وجود دارد",
+    CATEGORY_TITLE_REQUIRED: "عنوان دسته‌بندی الزامی است",
+}
+
+export { AuthMessage, UserMessage, CategoryMessage };
