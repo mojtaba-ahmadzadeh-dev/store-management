@@ -9,6 +9,7 @@ class CategoryService {
         autoBind(this)
         this.#model = Category
     }
+
     async createCategory(data) {
         const existing = await this.#model.findOne({
             where: { title: data.title }
@@ -25,6 +26,14 @@ class CategoryService {
 
         return category
     }
+
+    async getAllCategories() {
+        const categories = await this.#model.findAll({
+            order: [["id", "ASC"]]
+        })
+        return categories
+    }
+
 }
 
 export default new CategoryService

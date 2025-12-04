@@ -8,6 +8,7 @@ class CategoryController {
         autoBind(this)
         this.#service = categoryService;
     }
+
     async createCategory(req, res, next) {
         try {
             const { title, description, status } = req.body;
@@ -23,6 +24,19 @@ class CategoryController {
             next(error)
         }
     }
+
+    async getAllCategories(req, res, next) {
+        try {
+            const categories = await this.#service.getAllCategories()
+            return res.status(200).json({
+                message: CategoryMessage.CATEGORY_LIST_RETRIEVED_SUCCESS,
+                data: categories
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default new CategoryController

@@ -86,3 +86,53 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+   📌 Get All Categories (GET /category/all)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /category:
+ *   get:
+ *     summary: Get the list of all categories
+ *     tags: [Category 📂]
+ *     responses:
+ *       200:
+ *         description: Categories retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Categories retrieved successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       title:
+ *                         type: string
+ *                         example: "New Category"
+ *                       description:
+ *                         type: string
+ *                         example: "Category description"
+ *                       status:
+ *                         type: string
+ *                         example: "ACTIVE"
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */

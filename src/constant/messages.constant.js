@@ -36,6 +36,7 @@ const CategoryMessage = {
     CATEGORY_CREATED_SUCCESS: "دسته‌بندی با موفقیت اضافه شد",
     CATEGORY_ALREADY_EXISTS: "دسته‌بندی با این عنوان قبلاً وجود دارد",
     CATEGORY_TITLE_REQUIRED: "عنوان دسته‌بندی الزامی است",
+    CATEGORY_LIST_RETRIEVED_SUCCESS: "لیست دسته‌بندی‌ها با موفقیت دریافت شد",
 }
 
 export { AuthMessage, UserMessage, CategoryMessage };
