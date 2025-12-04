@@ -1,12 +1,23 @@
 import autoBind from "auto-bind"
 import { User } from "./user.model.js";
 import { USER_ROLES } from "../../constant/roles.constant.js";
+import { Op } from "sequelize";
+import createHttpError from "http-errors";
+import { UserMessage } from "../../constant/messages.constant.js";
 
 class UserService {
     #model;
     constructor() {
         autoBind(this)
         this.#model = User
+    }
+
+    async updateUserName(userId, full_name) {
+        const user = await this.#model.findByPk(userId);
+        if (!user) return null;
+
+        await user.update({ full_name });
+        return user;
     }
 
     async getAllUsers() {
@@ -26,6 +37,19 @@ class UserService {
     async updateUser(id, data) {
         const user = await this.#model.findByPk(id)
         if (!user) return null
+
+        if (data.mobile) {
+            const exists = await this.#model.findOne({
+                where: {
+                    mobile: data.mobile,
+                    id: { [Op.ne]: id }
+                }
+            });
+
+            if (exists) {
+                throw createHttpError.Conflict(UserMessage.USER_MOBILE_EXISTS);
+            }
+        }
 
         const allowedFields = ["mobile", "full_name", "avatar"];
         const fieldsToUpdate = {};

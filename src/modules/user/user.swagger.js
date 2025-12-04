@@ -1,7 +1,7 @@
 /**
  * @swagger
  * tags:
- *   name: Users 👤
+ *   name: User 👤
  *   description: APIs for managing users
  */
 
@@ -9,7 +9,7 @@
  * @swagger
  * /users:
  *   get:
- *     tags: [Users 👤]
+ *     tags: [User 👤]
  *     summary: Get all users
  *     description: This endpoint retrieves a list of all registered users.
  *     responses:
@@ -65,7 +65,7 @@
  * @swagger
  * /users/{id}:
  *   get:
- *     tags: [Users 👤]
+ *     tags: [User 👤]
  *     summary: Get user by ID
  *     description: This endpoint retrieves a single user by their ID.
  *     parameters:
@@ -136,7 +136,7 @@
  * @swagger
  * /users/{id}:
  *   patch:
- *     tags: [Users 👤]
+ *     tags: [User 👤]
  *     summary: Update a user by ID
  *     description: This endpoint updates user information for a given ID. The role cannot be updated here.
  *     parameters:
@@ -220,7 +220,7 @@
  * @swagger
  * /users/{id}/role:
  *   put:
- *     tags: [Users 👤]
+ *     tags: [User 👤]
  *     summary: Change user role (Admin only)
  *     description: This endpoint allows an admin to change the role of a user by their ID.
  *     parameters:
@@ -312,7 +312,7 @@
  * @swagger
  * /users/{id}:
  *   delete:
- *     tags: [Users 👤]
+ *     tags: [User 👤]
  *     summary: Delete a user by ID (Admin only)
  *     description: This endpoint allows an admin to delete a user by their ID.
  *     parameters:
@@ -367,6 +367,89 @@
  *                 message:
  *                   type: string
  *                   example: "User with id 1 not found"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+/**
+ * @swagger
+ * /users/me/name:
+ *   patch:
+ *     tags: [User 👤]
+ *     summary: Update logged-in user's name
+ *     description: This endpoint updates only the `full_name` of the logged-in user.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *                 example: "Mohammad Javad"
+ *     responses:
+ *       200:
+ *         description: Name updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "نام با موفقیت تغییر کرد"
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     full_name:
+ *                       type: string
+ *                       example: "Mohammad Javad"
+ *                     mobile:
+ *                       type: string
+ *                       example: "09123456789"
+ *                     avatar:
+ *                       type: string
+ *                       nullable: true
+ *                       example: "https://example.com/avatar.png"
+ *                     role:
+ *                       type: string
+ *                       example: "user"
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *                       example: "2025-12-03T07:14:16.000Z"
+ *       400:
+ *         description: full_name not provided
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "نام جدید ارسال نشده است"
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کاربر پیدا نشد"
  *       500:
  *         description: Internal server error
  *         content:

@@ -10,6 +10,30 @@ class UserController {
         this.#service = userService
     }
 
+    async updateMyName(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const { full_name } = req.body;
+
+            if (!full_name) {
+                throw createHttpError.BadRequest("نام جدید ارسال نشده است");
+            }
+
+            const updatedUser = await this.#service.updateUserName(userId, full_name);
+
+            if (!updatedUser) {
+                throw createHttpError.NotFound("کاربر پیدا نشد");
+            }
+
+            return res.json({
+                message: "نام با موفقیت تغییر کرد",
+                user: updatedUser
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async getAllUsers(req, res, next) {
         try {
             const users = await this.#service.getAllUsers()

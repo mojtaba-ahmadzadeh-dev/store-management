@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import { AuthRoutes } from './src/modules/auth/auth.routes.js';
 import { initDatabase as initDb } from './src/configs/model.init.js';
 import { UserRoutes } from './src/modules/user/user.routes.js';
+import { authGuard } from './src/middlewares/guard/auth.guard.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -19,7 +20,6 @@ class App {
         this.app = express();
         this.port = process.env.PORT || 3000;
         this.mode = process.env.NODE_ENV || "development";
-
 
         this.initMiddleware();
         this.initRoutes();
