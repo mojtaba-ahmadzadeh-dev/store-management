@@ -53,7 +53,9 @@ const ProductMessage = {
     UPDATE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت آپدیت شد",
     LIKE_PRODUCT_SUCCESS: "محصول موردنظر با موفقیت لایک شد",
     DISLIKE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت نپسندیده شد",
-    NO_PRODUCTS_FOUND: "محصولی با این شرایط پیدا نشد"
+    NO_PRODUCTS_FOUND: "محصولی با این شرایط پیدا نشد",
+    BOOKMARK_PRODUCT_SUCCESS: "محصول با موفقیت نشانک‌گذاری شد",
+    UNBOOKMARK_PRODUCT_SUCCESS: "نشانک محصول با موفقیت برداشته شد",
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };

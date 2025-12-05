@@ -99,6 +99,22 @@ class ProductService {
             throw new Error(`Like/Dislike product failed: ${error.message}`);
         }
     }
+
+    async toggleProductBookmark(id) {
+        try {
+            const product = await this.#model.findByPk(id)
+            if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND);
+
+            if (product.bookmarked === undefined) product.bookmarked = false;
+
+            product.bookmarked = !product.bookmarked;
+
+            await product.save()
+            return product
+        } catch (error) {
+            throw new Error(`Bookmark product failed: ${error.message}`);
+        }
+    }
 }
 
 export default new ProductService()

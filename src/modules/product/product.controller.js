@@ -93,6 +93,21 @@ class ProductController {
             next(error)
         }
     }
+
+    async toggleProductBookmark(req, res, next) {
+        try {
+            const { id } = req.params;
+            const updatedProduct = await this.#service.toggleProductBookmark(id)
+            return res.status(200).json({
+                message: updatedProduct.bookmarked
+                    ? ProductMessage.BOOKMARK_PRODUCT_SUCCESS
+                    : ProductMessage.UNBOOKMARK_PRODUCT_SUCCESS,
+                data: updatedProduct
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new ProductController()

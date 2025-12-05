@@ -446,3 +446,54 @@
  *       500:
  *         description: Server error
  */
+
+/**
+ * @swagger
+ * /product/bookmark/{id}:
+ *   put:
+ *     summary: Bookmark or unbookmark a product
+ *     tags: [Product 📦]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *         description: Product ID to bookmark/unbookmark
+ *     responses:
+ *       200:
+ *         description: Product bookmarked/unbookmarked successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "محصول با موفقیت نشانک‌گذاری شد"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     bookmarked:
+ *                       type: boolean
+ *                       example: true
+ *       404:
+ *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "محصول مورد نظر وجود ندارد"
+ *       500:
+ *         description: Server error
+ */
