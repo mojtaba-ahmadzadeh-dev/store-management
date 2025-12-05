@@ -302,7 +302,7 @@
 
 /**
  * @swagger
- * /product/{id}:
+ * /product/update/{id}:
  *   patch:
  *     summary: Update a product by its ID
  *     tags: [Product 📦]
@@ -388,7 +388,7 @@
 /**
  * @swagger
  * /product/like/{id}:
- *   post:
+ *   put:
  *     summary: Like or dislike a product (optional count, default 1)
  *     tags: [Product 📦]
  *     parameters:
