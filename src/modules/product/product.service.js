@@ -18,7 +18,8 @@ class ProductService {
                 description: data.description,
                 price: data.price,
                 stats: data.status,
-                category_id: data.category_id
+                category_id: data.category_id,
+                image: data.image || null,
             })
             return product
         } catch (err) {

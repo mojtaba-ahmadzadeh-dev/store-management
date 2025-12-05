@@ -11,7 +11,10 @@ class ProductController {
 
     async createProduct(req, res, next) {
         try {
-            const product = await this.#service.createProduct(req.body)
+            const productData = { ...req.body };
+            if (req.file) productData.image = req.file.path;
+
+            const product = await this.#service.createProduct(productData)
             return res.status(201).json({
                 message: ProductMessage.CREATE_PRODUCT_SUCCESS,
                 data: product

@@ -1,10 +1,11 @@
 import { Router } from "express";
 import productController from "./product.controller.js";
 import { authGuard } from "../../middlewares/guard/auth.guard.js";
+import { uploadProductImage } from "../../middlewares/upload/upload.middleware.js";
 
 const router = Router()
 
-router.post('/create', authGuard, productController.createProduct)
+router.post('/create', authGuard, uploadProductImage.single('image'), productController.createProduct)
 router.get('/', authGuard, productController.getAllProducts)
 router.get('/:id', authGuard, productController.getProductById)
 router.delete('/:id', authGuard, productController.deleteProductById)

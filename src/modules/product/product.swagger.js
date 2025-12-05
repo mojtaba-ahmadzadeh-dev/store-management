@@ -12,12 +12,12 @@
  * @swagger
  * /product/create:
  *   post:
- *     summary: Create a new product
+ *     summary: Create a new product with optional image upload
  *     tags: [Product 📦]
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
@@ -28,14 +28,12 @@
  *               name:
  *                 type: string
  *                 example: "PS5 Controller"
- *                 description: Product name
  *               description:
  *                 type: string
  *                 example: "Original Sony PS5 controller"
  *               price:
  *                 type: number
  *                 example: 59.9
- *                 description: Product price
  *               status:
  *                 type: string
  *                 enum: [active, inactive]
@@ -43,7 +41,10 @@
  *               category_id:
  *                 type: integer
  *                 example: 2
- *                 description: Attached category ID
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: Product image file
  *
  *     responses:
  *       201:
@@ -77,16 +78,16 @@
  *                     category_id:
  *                       type: integer
  *                       example: 2
+ *                     image_url:
+ *                       type: string
+ *                       example: "uploads/ps5-controller.jpg"
  *                     createdAt:
  *                       type: string
- *                       example: "2024-01-28T12:34:56.000Z"
  *                     updatedAt:
  *                       type: string
- *                       example: "2024-01-28T12:34:56.000Z"
  *
  *       400:
  *         description: Missing required fields or validation error
- *
  *       500:
  *         description: Server error while creating product
  */
