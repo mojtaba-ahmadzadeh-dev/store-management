@@ -12,7 +12,9 @@ class ProductController {
     async createProduct(req, res, next) {
         try {
             const productData = { ...req.body };
-            if (req.file) productData.image = req.file.path;
+            if (req.file) {
+                productData.image = req.file.path.replace("public/", "");
+            }
 
             const product = await this.#service.createProduct(productData)
             return res.status(201).json({
