@@ -67,6 +67,23 @@ class ProductService {
         await product.destroy()
         return product
     }
+
+    async toggleProductLike(id, count = 1) {
+        try {
+            const product = await this.#model.findByPk(id)
+            if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND);
+
+            product.likes += count;
+
+            if (product.likes < 0) product.likes = 0;
+
+            await product.save()
+            return product
+        } catch (error) {
+            throw new Error(`Like/Dislike product failed: ${error.message}`);
+        }
+    }
+
 }
 
 export default new ProductService()

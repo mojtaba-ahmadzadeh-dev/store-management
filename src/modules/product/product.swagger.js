@@ -350,3 +350,65 @@
  *       500:
  *         description: Server error while updating product
  */
+
+/**
+ * @swagger
+ * /product/like/{id}:
+ *   post:
+ *     summary: Like or dislike a product (optional count, default 1)
+ *     tags: [Product 📦]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *         description: Product ID to like or dislike
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               count:
+ *                 type: integer
+ *                 example: 1
+ *                 description: Number of likes to add (positive for like, negative for dislike, default 1)
+ *     responses:
+ *       200:
+ *         description: Product liked/disliked successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product liked successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     likes:
+ *                       type: integer
+ *                       example: 3
+ *       404:
+ *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Product not found"
+ *       500:
+ *         description: Server error
+ */

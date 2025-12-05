@@ -72,6 +72,20 @@ class ProductController {
             next(error)
         }
     }
+
+    async toggleProductLike(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { count = 1 } = req.body;
+            const updatedProduct = await this.#service.toggleProductLike(id, count)
+            return res.status(200).json({
+                message: count >= 0 ? ProductMessage.LIKE_PRODUCT_SUCCESS : ProductMessage.DISLIKE_PRODUCT_SUCCESS,
+                data: updatedProduct
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new ProductController()

@@ -50,7 +50,9 @@ const ProductMessage = {
     PRODUCT_NOT_FOUND: "محصول مورد نظر وجود ندارد",
     DELETE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت حذف شد",
     PRODUCR_DELETE_SUCCESS: "محصولات با موفقیت حذف شدن",
-    UPDATE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت آپدیت شد"
+    UPDATE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت آپدیت شد",
+    LIKE_PRODUCT_SUCCESS: "محصول موردنظر با موفقیت لایک شد",
+    DISLIKE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت نپسندیده شد"
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };
