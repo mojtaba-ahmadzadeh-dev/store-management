@@ -6,5 +6,6 @@ const router = Router()
 
 router.post('/create', authGuard, productController.createProduct)
 router.get('/', authGuard, productController.getAllProducts)
+router.get('/:id', authGuard, productController.getProductById)
 
 export { router as ProductRoutes }

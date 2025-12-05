@@ -146,3 +146,65 @@
  *       500:
  *         description: Server error while fetching products
  */
+
+/* -------------------------------------------------------------
+   📌 Get Product by ID (GET /product/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /product/{id}:
+ *   get:
+ *     summary: Get a product by its ID
+ *     tags: [Product 📦]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *         description: Product ID
+ *
+ *     responses:
+ *       200:
+ *         description: Product retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product fetched successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     name:
+ *                       type: string
+ *                       example: "PS5 Controller"
+ *                     description:
+ *                       type: string
+ *                       example: "Original Sony PS5 controller"
+ *                     price:
+ *                       type: number
+ *                       example: 59.9
+ *                     status:
+ *                       type: string
+ *                       example: "active"
+ *                     category_id:
+ *                       type: integer
+ *                       example: 2
+ *                     createdAt:
+ *                       type: string
+ *                     updatedAt:
+ *                       type: string
+ *
+ *       404:
+ *         description: Product not found
+ *
+ *       500:
+ *         description: Server error while fetching product
+ */

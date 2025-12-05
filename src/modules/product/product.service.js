@@ -1,5 +1,7 @@
 import autoBind from "auto-bind"
 import { Product } from "./product.modle.js";
+import createHttpError from "http-errors";
+import { ProductMessage } from "../../constant/messages.constant.js";
 
 class ProductService {
     #model;
@@ -29,6 +31,16 @@ class ProductService {
             return products
         } catch (error) {
             throw new Error(`Get products failed: ${err.message}`);
+        }
+    }
+
+    async getProductById(id) {
+        try {
+            const product = await this.#model.findByPk(id)
+            if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND)
+            return product
+        } catch (error) {
+            throw new Error(`Get product failed: ${err.message}`);
         }
     }
 }
