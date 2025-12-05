@@ -48,7 +48,9 @@ const ProductMessage = {
     GET_PRODUCTS_SUCCESS: "تمام محصولات با موفقیت دریافت شدن",
     GET_PRODUCT_SUCCESS: "محصول با موفقیت دریافت شد",
     PRODUCT_NOT_FOUND: "محصول مورد نظر وجود ندارد",
-    DELETE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت حذف شد"
+    DELETE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت حذف شد",
+    PRODUCR_DELETE_SUCCESS: "محصولات با موفقیت حذف شدن",
+    UPDATE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت آپدیت شد"
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };

@@ -265,3 +265,88 @@
  *       500:
  *         description: Server error while deleting product
  */
+
+/**
+ * @swagger
+ * /product/{id}:
+ *   patch:
+ *     summary: Update a product by its ID
+ *     tags: [Product 📦]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *         description: Product ID to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "PS5 Controller Pro"
+ *                 description: Updated product name
+ *               description:
+ *                 type: string
+ *                 example: "Updated description for PS5 controller"
+ *               price:
+ *                 type: number
+ *                 example: 69.9
+ *               status:
+ *                 type: string
+ *                 enum: [active, inactive]
+ *                 example: "active"
+ *               category_id:
+ *                 type: integer
+ *                 example: 2
+ *
+ *     responses:
+ *       200:
+ *         description: Product updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product updated successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     name:
+ *                       type: string
+ *                       example: "PS5 Controller Pro"
+ *                     description:
+ *                       type: string
+ *                       example: "Updated description for PS5 controller"
+ *                     price:
+ *                       type: number
+ *                       example: 69.9
+ *                     status:
+ *                       type: string
+ *                       example: "active"
+ *                     category_id:
+ *                       type: integer
+ *                       example: 2
+ *                     createdAt:
+ *                       type: string
+ *                       example: "2024-01-28T12:34:56.000Z"
+ *                     updatedAt:
+ *                       type: string
+ *                       example: "2024-01-29T09:12:34.000Z"
+ *
+ *       404:
+ *         description: Product not found
+ *
+ *       500:
+ *         description: Server error while updating product
+ */

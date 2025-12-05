@@ -46,6 +46,19 @@ class ProductController {
         }
     }
 
+    async updateProductById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const updatedProduct = await this.#service.updateProductById(id, req.body)
+            return res.status(200).json({
+                message: ProductMessage.UPDATE_PRODUCT_SUCCESS,
+                data: updatedProduct
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
     async deleteProductById(req, res, next) {
         try {
             const { id } = req.params;

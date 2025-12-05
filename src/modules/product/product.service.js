@@ -44,6 +44,23 @@ class ProductService {
         }
     }
 
+    async updateProductById(id, data) {
+        try {
+            const product = await this.#model.findByPk(id)
+            if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND);
+            const allowedFields = ["name", "description", "price", "status", "category_id"];
+            const updatedFields = Object.fromEntries(
+                Object.entries(data).filter(([key, value]) => allowedFields.includes(key) && value !== undefined)
+            );
+            await product.update(updatedFields);
+
+            return product;
+
+        } catch (error) {
+            throw new Error(`Update product failed: ${error.message}`);
+        }
+    }
+
     async deleteProductById(id) {
         const product = await this.#model.findByPk(id)
         if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND)
