@@ -44,7 +44,8 @@ const CategoryMessage = {
 }
 
 const ProductMessage = {
-    CREATE_PRODUCT_SUCCESS: "محصول مورد نیاز با موفقیت ایجاد شد"
+    CREATE_PRODUCT_SUCCESS: "محصول مورد نیاز با موفقیت ایجاد شد",
+    GET_PRODUCTS_SUCCESS: "تمام محصولات با موفقیت دریافت شدن"
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };

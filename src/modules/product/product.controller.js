@@ -20,6 +20,18 @@ class ProductController {
             next(error)
         }
     }
+
+    async getAllProducts(req, res, next) {
+        try {
+            const products = await this.#service.getAllProducts()
+            return res.status(200).json({
+                message: ProductMessage.GET_PRODUCTS_SUCCESS,
+                data: products
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new ProductController()

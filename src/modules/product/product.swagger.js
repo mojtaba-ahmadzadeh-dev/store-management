@@ -90,3 +90,59 @@
  *       500:
  *         description: Server error while creating product
  */
+
+/* -------------------------------------------------------------
+   📌 Get All Products (GET /product/all)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /product:
+ *   get:
+ *     summary: Get all products
+ *     tags: [Product 📦]
+ *     description: Retrieve a list of all available products
+ *
+ *     responses:
+ *       200:
+ *         description: List of products retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "List of products fetched successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       name:
+ *                         type: string
+ *                         example: "PS5 Controller"
+ *                       description:
+ *                         type: string
+ *                         example: "Original Sony PS5 controller"
+ *                       price:
+ *                         type: number
+ *                         example: 59.9
+ *                       status:
+ *                         type: string
+ *                         example: "active"
+ *                       category_id:
+ *                         type: integer
+ *                         example: 2
+ *                       createdAt:
+ *                         type: string
+ *                         example: "2024-01-28T12:34:56.000Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         example: "2024-01-28T12:34:56.000Z"
+ *
+ *       500:
+ *         description: Server error while fetching products
+ */

@@ -22,6 +22,15 @@ class ProductService {
             throw new Error(`Create product failed: ${err.message}`);
         }
     }
+
+    async getAllProducts() {
+        try {
+            const products = await this.#model.findAll()
+            return products
+        } catch (error) {
+            throw new Error(`Get products failed: ${err.message}`);
+        }
+    }
 }
 
 export default new ProductService()
