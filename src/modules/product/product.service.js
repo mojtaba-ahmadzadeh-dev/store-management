@@ -43,6 +43,13 @@ class ProductService {
             throw new Error(`Get product failed: ${err.message}`);
         }
     }
+
+    async deleteProductById(id) {
+        const product = await this.#model.findByPk(id)
+        if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND)
+        await product.destroy()
+        return product
+    }
 }
 
 export default new ProductService()

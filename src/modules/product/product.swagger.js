@@ -208,3 +208,60 @@
  *       500:
  *         description: Server error while fetching product
  */
+
+/* -------------------------------------------------------------
+   📌 Delete Product by ID (DELETE /product/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /product/{id}:
+ *   delete:
+ *     summary: Delete a product by its ID
+ *     tags: [Product 📦]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *         description: Product ID to delete
+ *
+ *     responses:
+ *       200:
+ *         description: Product deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "محصول با موفقیت حذف شد"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *
+ *       404:
+ *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "محصول مورد نظر یافت نشد"
+ *
+ *       500:
+ *         description: Server error while deleting product
+ */
