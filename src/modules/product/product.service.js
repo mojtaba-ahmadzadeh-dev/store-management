@@ -17,9 +17,9 @@ class ProductService {
             const product = await this.#model.create({
                 name: data.name,
                 description: data.description,
-                price: data.price,
+                price: +data.price,
                 stats: data.status,
-                category_id: data.category_id,
+                category_id: +data.category_id,
                 image: data.image || null,
             })
             return product
@@ -61,7 +61,7 @@ class ProductService {
 
     async getProductById(id) {
         try {
-            const product = await this.#model.findByPk(id)
+            const product = await this.#model.findByPk(Number(id))
             if (!product) throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND)
             return product
         } catch (error) {

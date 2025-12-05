@@ -1,0 +1,53 @@
+import { Basket } from "./basket.model.js";
+import { Product } from "../product/product.modle.js";
+import autoBind from "auto-bind";
+import createHttpError from "http-errors";
+import { BasketMessage } from "../../constant/messages.constant.js";
+
+class BasketService {
+    #service;
+    constructor() {
+        autoBind(this)
+        this.#service = Product;
+    }
+    async addToBasket(userId, productId, quantity = 1) {
+        const userIdNum = +userId;
+        const productIdNum = +productId;
+        const quantityNum = +quantity;
+
+        const product = await this.#service.findByPk(productIdNum);
+        if (!product) throw createHttpError(404, BasketMessage.PRODUCT_NOT_FOUND);
+
+        let basketItem = await Basket.findOne({
+            where: { user_id: userIdNum, product_id: productIdNum },
+        });
+
+        if (basketItem) {
+            basketItem.quantity += quantityNum;
+            basketItem.total_price = Number((basketItem.quantity * product.price).toFixed(2));
+            await basketItem.save();
+        } else {
+            basketItem = await Basket.create({
+                user_id: userIdNum,
+                product_id: productIdNum,
+                quantity: quantityNum,
+                total_price: Number((quantityNum * product.price).toFixed(2)),
+            });
+        }
+
+        return this._formatBasketItem(basketItem);
+    }
+
+    _formatBasketItem(item) {
+        const basket = item.toJSON();
+        basket.id = +basket.id;
+        basket.user_id = +basket.user_id;
+        basket.product_id = +basket.product_id;
+        basket.quantity = +basket.quantity;
+        basket.total_price = +basket.total_price.toFixed(2);
+        return basket;
+    }
+
+}
+
+export default new BasketService();

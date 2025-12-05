@@ -1,3 +1,4 @@
+import { Basket } from "../modules/basket/basket.model.js";
 import { Category } from "../modules/category/category.model.js";
 import { Product } from "../modules/product/product.modle.js";
 import { OTP, User } from "../modules/user/user.model.js";
@@ -10,10 +11,20 @@ const initDatabase = async () => {
     Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE' })
     Product.belongsTo(Category, { foreignKey: 'category_id', onDelete: 'CASCADE' });
 
+    // تعریف روابط
+    User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+    Basket.belongsTo(User, { foreignKey: 'user_id' });
+
+    Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE' });
+    Basket.belongsTo(Product, { foreignKey: 'product_id' });
 
     // User.sync()
     // OTP.sync()
     // Product.sync()
+
+    // Cart.sync()
+
+    // Basket.sync()
 
     // await sequelize.sync({alter: true})
 }

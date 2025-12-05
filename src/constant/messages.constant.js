@@ -58,4 +58,9 @@ const ProductMessage = {
     UNBOOKMARK_PRODUCT_SUCCESS: "نشانک محصول با موفقیت برداشته شد",
 }
 
-export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };
+const BasketMessage = {
+    ADDED_SUCCESS: "محصول موردنظر با موفقیت اضافه شد",
+    PRODUCT_NOT_FOUND: "محصول مورد نظر یافت نشد"
+}
+
+export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage };
