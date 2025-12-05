@@ -23,7 +23,14 @@ class ProductController {
 
     async getAllProducts(req, res, next) {
         try {
-            const products = await this.#service.getAllProducts()
+            const filters = {
+                category_id: req.query.category_id,
+                min_likes: req.query.min_likes,
+                max_likes: req.query.max_likes,
+                sort_by: req.query.sort_by,
+                order: req.query.order,
+            }
+            const products = await this.#service.getAllProducts(filters)
             return res.status(200).json({
                 message: ProductMessage.GET_PRODUCTS_SUCCESS,
                 data: products

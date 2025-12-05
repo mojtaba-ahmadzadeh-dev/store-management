@@ -98,10 +98,42 @@
  * @swagger
  * /product:
  *   get:
- *     summary: Get all products
+ *     summary: Get all products with advanced filters
  *     tags: [Product 📦]
- *     description: Retrieve a list of all available products
- *
+ *     description: Retrieve a list of products with optional filters like category and popularity.
+ *     parameters:
+ *       - in: query
+ *         name: category_id
+ *         schema:
+ *           type: integer
+ *         description: Filter products by category ID
+ *         example: 2
+ *       - in: query
+ *         name: min_likes
+ *         schema:
+ *           type: integer
+ *         description: Minimum number of likes
+ *         example: 5
+ *       - in: query
+ *         name: max_likes
+ *         schema:
+ *           type: integer
+ *         description: Maximum number of likes
+ *         example: 100
+ *       - in: query
+ *         name: sort_by
+ *         schema:
+ *           type: string
+ *           enum: [likes, price, createdAt]
+ *         description: Field to sort products by
+ *         example: likes
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [ASC, DESC]
+ *         description: Sort order
+ *         example: DESC
  *     responses:
  *       200:
  *         description: List of products retrieved successfully
@@ -130,6 +162,9 @@
  *                       price:
  *                         type: number
  *                         example: 59.9
+ *                       likes:
+ *                         type: integer
+ *                         example: 10
  *                       status:
  *                         type: string
  *                         example: "active"
@@ -142,7 +177,6 @@
  *                       updatedAt:
  *                         type: string
  *                         example: "2024-01-28T12:34:56.000Z"
- *
  *       500:
  *         description: Server error while fetching products
  */

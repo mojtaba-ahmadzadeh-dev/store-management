@@ -2,6 +2,7 @@ import autoBind from "auto-bind"
 import { Product } from "./product.modle.js";
 import createHttpError from "http-errors";
 import { ProductMessage } from "../../constant/messages.constant.js";
+import { Op } from "sequelize";
 
 class ProductService {
     #model;
@@ -25,12 +26,27 @@ class ProductService {
         }
     }
 
-    async getAllProducts() {
+    async getAllProducts(filters = {}) {
         try {
-            const products = await this.#model.findAll()
+            const { category_id, min_likes, max_likes, sort_by = "createdAt", order = "DESC" } = filters;
+            const where = {};
+
+            if (category_id) where.category_id = category_id;
+            if (min_likes) where.likes = { ...(where.likes || {}), [Op.gte]: Number(min_likes) };
+            if (max_likes) where.likes = { ...(where.likes || {}), [Op.lte]: Number(max_likes) };
+
+            const products = await this.#model.findAll({
+                where,
+                order: [[sort_by, order.toUpperCase()]],
+            })
+
+            if (!products || products.length === 0) {
+                throw createHttpError(404, ProductMessage.NO_PRODUCTS_FOUND);
+            }
+
             return products
         } catch (error) {
-            throw new Error(`Get products failed: ${err.message}`);
+            throw new Error(`Get products failed: ${error.message}`);
         }
     }
 
@@ -83,7 +99,6 @@ class ProductService {
             throw new Error(`Like/Dislike product failed: ${error.message}`);
         }
     }
-
 }
 
 export default new ProductService()
