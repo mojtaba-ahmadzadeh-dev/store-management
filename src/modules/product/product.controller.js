@@ -1,6 +1,6 @@
 import autoBind from "auto-bind"
 import productService from "./product.service.js";
-import { ProductMessage } from "../../constant/messages.constant.js";
+import { AuthMessage, ProductMessage } from "../../constant/messages.constant.js";
 
 class ProductController {
     #service;
@@ -11,7 +11,12 @@ class ProductController {
 
     async createProduct(req, res, next) {
         try {
-            const product = await this.#service.createProduct(req.body)
+            const productData = { ...req.body };
+            if (req.file) {
+                productData.image = req.file.path.replace("public/", "");
+            }
+
+            const product = await this.#service.createProduct(productData)
             return res.status(201).json({
                 message: ProductMessage.CREATE_PRODUCT_SUCCESS,
                 data: product
@@ -23,20 +28,20 @@ class ProductController {
 
     async getAllProducts(req, res, next) {
         try {
-            const filters = {
-                category_id: req.query.category_id,
-                min_likes: req.query.min_likes,
-                max_likes: req.query.max_likes,
-                sort_by: req.query.sort_by,
-                order: req.query.order,
-            }
-            const products = await this.#service.getAllProducts(filters)
-            return res.status(200).json({
+            const filters = (({ category_id, search, sort_by, page, limit }) =>
+                ({ category_id, search, sort_by, page, limit }))(req.query);
+
+            console.log('filtered: ', filters);
+            
+
+            const productsData = await this.#service.getAllProducts(filters);
+
+            res.status(200).json({
                 message: ProductMessage.GET_PRODUCTS_SUCCESS,
-                data: products
+                products: productsData.products
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 

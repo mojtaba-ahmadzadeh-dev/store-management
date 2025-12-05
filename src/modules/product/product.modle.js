@@ -29,6 +29,10 @@ const Product = sequelize.define('product', {
     },
     likes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     bookmarked: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     category_id: {
         type: DataTypes.INTEGER,
         references: {

@@ -3,6 +3,7 @@ import { Product } from "./product.modle.js";
 import createHttpError from "http-errors";
 import { ProductMessage } from "../../constant/messages.constant.js";
 import { Op } from "sequelize";
+import { getPagingData, getPagination } from "../../utils/pagination.utils.js";
 
 class ProductService {
     #model;
@@ -18,7 +19,8 @@ class ProductService {
                 description: data.description,
                 price: data.price,
                 stats: data.status,
-                category_id: data.category_id
+                category_id: data.category_id,
+                image: data.image || null,
             })
             return product
         } catch (err) {
@@ -28,23 +30,30 @@ class ProductService {
 
     async getAllProducts(filters = {}) {
         try {
-            const { category_id, min_likes, max_likes, sort_by = "createdAt", order = "DESC" } = filters;
+            const { page = 1, limit = 10, search, category_id, sort_by } = filters;
+
             const where = {};
-
             if (category_id) where.category_id = category_id;
-            if (min_likes) where.likes = { ...(where.likes || {}), [Op.gte]: Number(min_likes) };
-            if (max_likes) where.likes = { ...(where.likes || {}), [Op.lte]: Number(max_likes) };
+            if (search) where.name = { [Op.like]: `%${search}%` };
 
-            const products = await this.#model.findAll({
+            const { currentPage, perPage, offset } = getPagination(page, limit);
+
+            let order = [['id', 'ASC']];
+            if (sort_by === 'latest') order = [['createdAt', 'DESC']];
+            if (sort_by === 'oldest') order = [['createdAt', 'ASC']];
+
+            const result = await this.#model.findAndCountAll({
                 where,
-                order: [[sort_by, order.toUpperCase()]],
-            })
+                limit: perPage,
+                offset,
+                order
+            });
 
-            if (!products || products.length === 0) {
-                throw createHttpError(404, ProductMessage.NO_PRODUCTS_FOUND);
+            if (result.count === 0) {
+                throw createHttpError(404, ProductMessage.PRODUCT_NOT_FOUND); 
             }
 
-            return products
+            return getPagingData(result.count, currentPage, perPage, result.rows);
         } catch (error) {
             throw new Error(`Get products failed: ${error.message}`);
         }
