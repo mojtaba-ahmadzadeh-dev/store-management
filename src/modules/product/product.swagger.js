@@ -99,88 +99,40 @@
  * @swagger
  * /product:
  *   get:
- *     summary: Get all products with advanced filters
+ *     summary: Get all products with filtering, pagination, and sorting
  *     tags: [Product 📦]
- *     description: Retrieve a list of products with optional filters like category and popularity.
  *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         example: 10
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         example: "ps5"
  *       - in: query
  *         name: category_id
  *         schema:
  *           type: integer
- *         description: Filter products by category ID
- *         example: 2
- *       - in: query
- *         name: min_likes
- *         schema:
- *           type: integer
- *         description: Minimum number of likes
- *         example: 5
- *       - in: query
- *         name: max_likes
- *         schema:
- *           type: integer
- *         description: Maximum number of likes
- *         example: 100
+ *         example: 3
  *       - in: query
  *         name: sort_by
  *         schema:
  *           type: string
- *           enum: [likes, price, createdAt]
- *         description: Field to sort products by
- *         example: likes
- *       - in: query
- *         name: order
- *         schema:
- *           type: string
- *           enum: [ASC, DESC]
- *         description: Sort order
- *         example: DESC
+ *           enum: [latest, oldest]
+ *         example: latest
  *     responses:
  *       200:
- *         description: List of products retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "List of products fetched successfully"
- *                 data:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: integer
- *                         example: 1
- *                       name:
- *                         type: string
- *                         example: "PS5 Controller"
- *                       description:
- *                         type: string
- *                         example: "Original Sony PS5 controller"
- *                       price:
- *                         type: number
- *                         example: 59.9
- *                       likes:
- *                         type: integer
- *                         example: 10
- *                       status:
- *                         type: string
- *                         example: "active"
- *                       category_id:
- *                         type: integer
- *                         example: 2
- *                       createdAt:
- *                         type: string
- *                         example: "2024-01-28T12:34:56.000Z"
- *                       updatedAt:
- *                         type: string
- *                         example: "2024-01-28T12:34:56.000Z"
- *       500:
- *         description: Server error while fetching products
+ *         description: List of products with pagination
  */
+
 
 /* -------------------------------------------------------------
    📌 Get Product by ID (GET /product/{id})
