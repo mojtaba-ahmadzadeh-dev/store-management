@@ -8,8 +8,8 @@ import cookieParser from 'cookie-parser';
 import { AuthRoutes } from './src/modules/auth/auth.routes.js';
 import { initDatabase as initDb } from './src/configs/model.init.js';
 import { UserRoutes } from './src/modules/user/user.routes.js';
-import { authGuard } from './src/middlewares/guard/auth.guard.js';
 import { CategoryRoutes } from './src/modules/category/category.routes.js';
+import { ProductRoutes } from './src/modules/product/product.routes.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -40,6 +40,7 @@ class App {
         this.app.use('/auth', AuthRoutes)
         this.app.use('/users', UserRoutes)
         this.app.use('/category', CategoryRoutes)
+        this.app.use('/product', ProductRoutes)
     }
 
     initSwagger() {

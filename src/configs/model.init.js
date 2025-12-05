@@ -13,6 +13,7 @@ const initDatabase = async () => {
 
     // User.sync()
     // OTP.sync()
+    // Product.sync()
 
     // await sequelize.sync({alter: true})
 }

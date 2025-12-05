@@ -43,4 +43,19 @@ const CategoryMessage = {
     CATEGORY_UPDATED_SUCCESS: "دسته بندی مورد نظر با موفقیت آپدیت شد"
 }
 
-export { AuthMessage, UserMessage, CategoryMessage };
+const ProductMessage = {
+    CREATE_PRODUCT_SUCCESS: "محصول مورد نیاز با موفقیت ایجاد شد",
+    GET_PRODUCTS_SUCCESS: "تمام محصولات با موفقیت دریافت شدن",
+    GET_PRODUCT_SUCCESS: "محصول با موفقیت دریافت شد",
+    PRODUCT_NOT_FOUND: "محصول مورد نظر وجود ندارد",
+    DELETE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت حذف شد",
+    PRODUCR_DELETE_SUCCESS: "محصولات با موفقیت حذف شدن",
+    UPDATE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت آپدیت شد",
+    LIKE_PRODUCT_SUCCESS: "محصول موردنظر با موفقیت لایک شد",
+    DISLIKE_PRODUCT_SUCCESS: "محصول مورد نظر با موفقیت نپسندیده شد",
+    NO_PRODUCTS_FOUND: "محصولی با این شرایط پیدا نشد",
+    BOOKMARK_PRODUCT_SUCCESS: "محصول با موفقیت نشانک‌گذاری شد",
+    UNBOOKMARK_PRODUCT_SUCCESS: "نشانک محصول با موفقیت برداشته شد",
+}
+
+export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };

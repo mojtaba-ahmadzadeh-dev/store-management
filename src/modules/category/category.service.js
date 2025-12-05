@@ -3,6 +3,7 @@ import { Category } from "./category.model.js";
 import { CategoryMessage } from "../../constant/messages.constant.js";
 import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
 import createHttpError from "http-errors";
+import { Product } from "../product/product.modle.js";
 
 class CategoryService {
     #model;
@@ -30,7 +31,14 @@ class CategoryService {
 
     async getAllCategories() {
         const categories = await this.#model.findAll({
-            order: [["id", "ASC"]]
+            order: [["id", "ASC"]],
+            include: [
+                {
+                    model: Product,
+                    as: 'products',
+                    required: false 
+                }
+            ]
         })
         return categories
     }
