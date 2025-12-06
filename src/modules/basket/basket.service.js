@@ -2,20 +2,20 @@ import { Basket } from "./basket.model.js";
 import { Product } from "../product/product.modle.js";
 import autoBind from "auto-bind";
 import createHttpError from "http-errors";
-import { BasketMessage } from "../../constant/messages.constant.js";
+import { BasketMessage, ProductMessage } from "../../constant/messages.constant.js";
 
 class BasketService {
-    #service;
+    #model;
     constructor() {
         autoBind(this)
-        this.#service = Product;
+        this.#model = Product;
     }
     async addToBasket(userId, productId, quantity = 1) {
         const userIdNum = +userId;
         const productIdNum = +productId;
         const quantityNum = +quantity;
 
-        const product = await this.#service.findByPk(productIdNum);
+        const product = await this.#model.findByPk(productIdNum);
         if (!product) throw createHttpError(404, BasketMessage.PRODUCT_NOT_FOUND);
 
         let basketItem = await Basket.findOne({
@@ -24,9 +24,16 @@ class BasketService {
 
         if (basketItem) {
             basketItem.quantity += quantityNum;
+            if (basketItem.quantity <= 0) {
+                await basketItem.destroy()
+                return { remove: true }
+            }
             basketItem.total_price = Number((basketItem.quantity * product.price).toFixed(2));
             await basketItem.save();
         } else {
+            if (quantityNum < 0) {
+                throw createHttpError(400, BasketMessage.INVALID_NEGATIVE_QUANTITY);
+            }
             basketItem = await Basket.create({
                 user_id: userIdNum,
                 product_id: productIdNum,

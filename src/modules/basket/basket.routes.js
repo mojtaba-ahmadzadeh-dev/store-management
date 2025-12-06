@@ -6,4 +6,5 @@ const router = Router()
 
 router.post('/add', authGuard, basketController.addToBasket)
 
-export {router as BasketRoutes}
+
+export { router as BasketRoutes }
