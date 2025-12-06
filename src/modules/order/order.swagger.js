@@ -267,3 +267,56 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/**
+ * @swagger
+ * /order/admin:
+ *   get:
+ *     summary: Get all orders (Admin Only)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of all orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "لیست تمام سفارش‌ها با موفقیت دریافت شد"
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       user_id:
+ *                         type: integer
+ *                       total_price:
+ *                         type: number
+ *                       status:
+ *                         type: string
+ *                       payment_method:
+ *                         type: string
+ *                       shipping_address:
+ *                         type: string
+ *                       createdAt:
+ *                         type: string
+ *                       updatedAt:
+ *                         type: string
+ *                       items:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             product_id:
+ *                               type: integer
+ *                             quantity:
+ *                               type: integer
+ *                             price:
+ *                               type: number
+ */

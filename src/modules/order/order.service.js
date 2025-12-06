@@ -79,6 +79,19 @@ class OrderService {
         }
         return order
     }
+
+    async getAllOrders() {
+        return await Order.findAll({
+            include: [
+                {
+                    model: OrderItem,
+                    as: "order_items",
+                    attributes: ['product_id', 'quantity', 'price', 'total_price']
+                }
+            ],
+            order: [["createdAt", "DESC"]]
+        });
+    }
 }
 
 export default new OrderService();

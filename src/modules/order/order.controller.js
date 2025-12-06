@@ -54,6 +54,18 @@ class OrderController {
             next(error)
         }
     }
+
+    async getAllOrders(req, res, next) {
+        try {
+            const orders = await this.#service.getAllOrders()
+            res.json({
+                message: OrderMessage.ADMIN_GET_ALL_ORDERS_SUCCESS,
+                orders
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new OrderController();
