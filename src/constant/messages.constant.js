@@ -58,4 +58,15 @@ const ProductMessage = {
     UNBOOKMARK_PRODUCT_SUCCESS: "نشانک محصول با موفقیت برداشته شد",
 }
 
-export { AuthMessage, UserMessage, CategoryMessage, ProductMessage };
+const BasketMessage = {
+    ADDED_SUCCESS: "محصول موردنظر با موفقیت اضافه شد",
+    PRODUCT_NOT_FOUND: "محصول مورد نظر یافت نشد",
+    INVALID_NEGATIVE_QUANTITY: "نمیتوان مقدار منفی برای محصولی که وجود ندارد وارد کرد",
+    REMOVED_SUCCESS: "محصول از سبد خرید حذف شد",
+    BASKET_USER: "سبد خرید کاربر",
+    BASKET_EMPTY: "سبد خرید خالی است",
+    BASKET_CLEARED: "سبد خرید خالی شد",
+    BASKET_ALREADY_EMPTY: "سبد خرید از قبل خالی بود"
+}
+
+export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage };
