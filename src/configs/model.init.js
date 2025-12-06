@@ -1,32 +1,34 @@
-import { Basket } from "../modules/basket/basket.model.js";
-import { Category } from "../modules/category/category.model.js";
-import { Product } from "../modules/product/product.modle.js";
-import { OTP, User } from "../modules/user/user.model.js";
 import { sequelize } from "./sequelize.config.js";
+import { User } from "../modules/user/user.model.js";
+import { Product } from "../modules/product/product.modle.js";
+import { Category } from "../modules/category/category.model.js";
+import { Basket } from "../modules/basket/basket.model.js";
+import { Order, OrderItem } from "../modules/order/order.model.js";
 
 const initDatabase = async () => {
-    User.hasMany(OTP, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-    OTP.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-
-    Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE' })
-    Product.belongsTo(Category, { foreignKey: 'category_id', onDelete: 'CASCADE' });
-
-    // تعریف روابط
     User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
     Basket.belongsTo(User, { foreignKey: 'user_id' });
+
+    User.hasMany(Order, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+    Order.belongsTo(User, { foreignKey: 'user_id' });
+
+    Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE' });
+    Product.belongsTo(Category, { foreignKey: 'category_id' });
 
     Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE' });
     Basket.belongsTo(Product, { foreignKey: 'product_id' });
 
-    // User.sync()
-    // OTP.sync()
-    // Product.sync()
+    Product.hasMany(OrderItem, { foreignKey: 'product_id' });
+    OrderItem.belongsTo(Product, { foreignKey: 'product_id' });
 
-    // Cart.sync()
+    Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE' });
+    OrderItem.belongsTo(Order, { foreignKey: 'order_id' });
 
-    // Basket.sync()
+    // Order.sync()
+    // OrderItem.sync()
 
-    // await sequelize.sync({alter: true})
+    // await sequelize.sync({ alter: true });
+    // console.log("Database initialized with Order & OrderItem!");
 }
 
-export { initDatabase }
+export { initDatabase };
