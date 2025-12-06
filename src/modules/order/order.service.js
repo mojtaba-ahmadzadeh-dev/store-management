@@ -63,6 +63,22 @@ class OrderService {
         })
         return orders
     }
+
+    async getOrderById(orderId, userId) {
+        const order = await Order.findOne({
+            where: { id: orderId, user_id: userId },
+            include: [
+                {
+                    model: OrderItem,
+                    attributes: ["product_id", "quantity", "price", "total_price"]
+                }
+            ]
+        })
+        if (!order) {
+            throw new Error(OrderMessage.ORDER_NOT_FOUND);
+        }
+        return order
+    }
 }
 
 export default new OrderService();

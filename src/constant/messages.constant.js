@@ -74,6 +74,7 @@ const OrderMessage = {
     ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
     ORDER_FAILED: "ثبت سفارش با خطا مواجه شد",
     GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
+    GET_ORDER_BY_ID_SUCCESS: "جزئیات سفارش با موفقیت دریافت شد",
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage, OrderMessage };

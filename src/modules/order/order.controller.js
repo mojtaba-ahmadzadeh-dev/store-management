@@ -38,6 +38,22 @@ class OrderController {
             next(error)
         }
     }
+
+    async getOrderById(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const orderId = req.params.id;
+
+            const order = await this.#service.getOrderById(orderId, userId);
+
+            res.json({
+                message: OrderMessage.GET_ORDER_BY_ID_SUCCESS,
+                order
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new OrderController();
