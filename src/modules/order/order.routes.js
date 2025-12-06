@@ -5,5 +5,6 @@ import { authGuard } from "../../middlewares/guard/auth.guard.js";
 const router = express.Router();
 
 router.post("/create" , authGuard, orderController.createOrder);
+router.get("/" , authGuard, orderController.getUserOrders);
 
 export {router as OrderRoutes};

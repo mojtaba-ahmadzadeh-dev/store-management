@@ -57,6 +57,7 @@ const OrderItem = sequelize.define("order_item", {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },
+    total_price: { type: DataTypes.DECIMAL(10, 2), allowNull: false }
 }, {
     tableName: "order_items",
     timestamps: true,

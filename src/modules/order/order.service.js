@@ -49,6 +49,20 @@ class OrderService {
             throw error;
         }
     }
+
+    async getUserOrders(userId) {
+        const orders = await Order.findAll({
+            where: { user_id: userId },
+            include: [
+                {
+                    model: OrderItem,
+                    attributes: ['product_id', 'quantity', 'price', 'total_price']
+                }
+            ],
+            order: [['createdAt', 'DESC']]
+        })
+        return orders
+    }
 }
 
 export default new OrderService();

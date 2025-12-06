@@ -73,6 +73,7 @@ const OrderMessage = {
     ORDER_SUCCESS: "سفارش با موفقیت ثبت شد",
     ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
     ORDER_FAILED: "ثبت سفارش با خطا مواجه شد",
+    GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage, OrderMessage };

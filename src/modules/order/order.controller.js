@@ -25,6 +25,19 @@ class OrderController {
             next(error);
         }
     }
+
+    async getUserOrders(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const orders = await this.#service.getUserOrders(userId)
+            res.json({
+                message: OrderMessage.GET_ORDERS_SUCCESS,
+                orders
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new OrderController();

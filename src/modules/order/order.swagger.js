@@ -113,3 +113,68 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+   📌 Get User Basket (GET /basket)
+-------------------------------------------------------------- */
+
+/* -------------------------------------------------------------
+   📌 Get User Orders (GET /order)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /order:
+ *   get:
+ *     summary: Get all orders of the current user
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of user's orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 12
+ *                       total_price:
+ *                         type: number
+ *                         example: 128.4
+ *                       payment_method:
+ *                         type: string
+ *                         example: "online"
+ *                       shipping_address:
+ *                         type: string
+ *                         example: "تهران، خیابان ولیعصر، پلاک 123"
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                       order_items:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             product_id:
+ *                               type: integer
+ *                               example: 24
+ *                             quantity:
+ *                               type: integer
+ *                               example: 2
+ *                             price:
+ *                               type: number
+ *                               example: 32.2
+ *                             total_price:
+ *                               type: number
+ *                               example: 64.4
+ */
