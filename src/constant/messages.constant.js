@@ -78,4 +78,16 @@ const OrderMessage = {
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
 }
 
-export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage, OrderMessage };
+const RBACMessage = {
+    ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
+}
+
+export {
+    AuthMessage,
+    UserMessage,
+    CategoryMessage,
+    ProductMessage,
+    BasketMessage,
+    OrderMessage,
+    RBACMessage
+};
