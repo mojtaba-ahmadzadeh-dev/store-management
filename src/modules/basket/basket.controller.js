@@ -60,6 +60,18 @@ class BasketController {
         }
     }
 
+    async clearBasket(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const result = await this.#service.clearBasket(userId)
+            return res.json({
+                message: result.removedCount > 0 ? BasketMessage.BASKET_CLEARED : BasketMessage.BASKET_ALREADY_EMPTY,
+                result
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new BasketController();

@@ -102,6 +102,16 @@ class BasketService {
         });
         return { items, totalPrice: +totalPrice.toFixed(2) }
     }
+
+    async clearBasket(userId) {
+        const userIdNum = +userId;
+
+        const deletedCount = await Basket.destroy({
+            where: { user_id: userIdNum }
+        });
+
+        return { removedCount: deletedCount }
+    }
 }
 
 export default new BasketService();

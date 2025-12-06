@@ -252,3 +252,45 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+📌 Clear User Basket (DELETE /basket/clear)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /basket/clear:
+ *   delete:
+ *     summary: Clear all items from the current user's basket
+ *     tags: [Basket 🛒]
+ *     security:
+ *       - bearerAuth: []
+ *
+ *     responses:
+ *       200:
+ *         description: Basket cleared successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سبد خرید خالی شد"
+ *                 result:
+ *                   type: object
+ *                   properties:
+ *                     removedCount:
+ *                       type: integer
+ *                       example: 5
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
