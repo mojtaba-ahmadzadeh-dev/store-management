@@ -95,27 +95,19 @@
 -------------------------------------------------------------- */
 /**
  * @swagger
- * /basket/delete:
+ * /basket/delete/{id}:
  *   delete:
  *     summary: Remove a product completely from the user's basket
  *     tags: [Basket 🛒]
  *     security:
  *       - bearerAuth: []
- *
- *     requestBody:
- *       required: true
- *       content:
- *         application/x-www-form-urlencoded:
- *           schema:
- *             type: object
- *             required:
- *               - productId
- *             properties:
- *               productId:
- *                 type: integer
- *                 example: 24
- *                 description: ID of the product to remove from basket
- *
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the product to remove
  *     responses:
  *       200:
  *         description: Product removed from basket successfully
@@ -133,39 +125,15 @@
  *                     removed:
  *                       type: boolean
  *                       example: true
- *
- *       400:
- *         description: productId not provided or invalid
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "شناسه محصول لازم است"
- *
  *       404:
- *         description: Product does not exist in user's basket
+ *         description: Product not found in basket
  *         content:
  *           application/json:
  *             schema:
- *               type: object
  *               properties:
  *                 message:
  *                   type: string
  *                   example: "محصول مورد نظر یافت نشد"
- *
- *       500:
- *         description: Internal server error
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Internal server error"
  */
 
 /* -------------------------------------------------------------
@@ -258,7 +226,7 @@
 -------------------------------------------------------------- */
 /**
  * @swagger
- * /basket/clear:
+ * /basket/delete:
  *   delete:
  *     summary: Clear all items from the current user's basket
  *     tags: [Basket 🛒]

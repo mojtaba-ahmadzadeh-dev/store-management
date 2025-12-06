@@ -33,17 +33,19 @@ class BasketController {
         }
     }
 
-    async removeFromBasket(req, res, next) {
+    async removeFromBasketById(req, res, next) {
         try {
             const userId = req.user.id;
-            const { productId } = req.body;
-            const result = await this.#service.removeFromBasket(userId, productId)
+            const productId = req.params.id;
+
+            const result = await this.#service.removeFromBasket(userId, productId);
+
             return res.json({
-                message: BasketMessage.REMOVED_SUCCESS,
+                message: result.removed ? BasketMessage.REMOVED_SUCCESS : BasketMessage.PRODUCT_NOT_FOUND,
                 result
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -60,7 +62,7 @@ class BasketController {
         }
     }
 
-    async clearBasket(req, res, next) {
+    async removeFromBasket(req, res, next) {
         try {
             const userId = req.user.id;
             const result = await this.#service.clearBasket(userId)

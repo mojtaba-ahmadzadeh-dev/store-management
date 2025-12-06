@@ -55,19 +55,19 @@ class BasketService {
         return basket;
     }
 
-    async removeFromBasket(userId, productId) {
+    async removeFromBasketById(userId, productId) {
         const userIdNum = +userId;
         const productIdNum = +productId;
 
-        const basketItm = await Basket.findOne({
+        const basketItem = await Basket.findOne({
             where: { user_id: userIdNum, product_id: productIdNum }
-        })
+        });
 
-        if (!basketItm) throw createHttpError(404, BasketMessage.PRODUCT_NOT_FOUND)
+        if (!basketItem) throw createHttpError(404, BasketMessage.PRODUCT_NOT_FOUND);
 
-        await basketItm.destroy()
+        await basketItem.destroy();
 
-        return { remove: true }
+        return { removed: true };
     }
 
     async getUserBasket(userId) {
@@ -103,7 +103,7 @@ class BasketService {
         return { items, totalPrice: +totalPrice.toFixed(2) }
     }
 
-    async clearBasket(userId) {
+    async removeFromBasket(userId) {
         const userIdNum = +userId;
 
         const deletedCount = await Basket.destroy({
