@@ -61,8 +61,10 @@ const ProductMessage = {
 const BasketMessage = {
     ADDED_SUCCESS: "محصول موردنظر با موفقیت اضافه شد",
     PRODUCT_NOT_FOUND: "محصول مورد نظر یافت نشد",
-    INVALID_NEGATIVE_QUANTITY: "نمیتوان مقدار منفی برای محصولی که وجود ندارد وارد کرد" ,
-    REMOVED_SUCCESS: "محصول از سبد خرید حذف شد"
+    INVALID_NEGATIVE_QUANTITY: "نمیتوان مقدار منفی برای محصولی که وجود ندارد وارد کرد",
+    REMOVED_SUCCESS: "محصول از سبد خرید حذف شد",
+    BASKET_USER: "سبد خرید کاربر",
+    BASKET_EMPTY: "سبد خرید خالی است"
 }
 
 export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage };

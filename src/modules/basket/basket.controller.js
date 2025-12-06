@@ -47,6 +47,19 @@ class BasketController {
         }
     }
 
+    async getUserBasket(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const userBasket = await this.#service.getUserBasket(userId);
+            return res.json({
+                message: userBasket.message || BasketMessage.BASKET_USER,
+                basket: userBasket
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default new BasketController();

@@ -69,6 +69,32 @@ class BasketService {
 
         return { remove: true }
     }
+
+    async getUserBasket(userId) {
+        const userIdNum = +userId;
+        const basketItems = await Basket.findAll({
+            where: { user_id: userIdNum },
+            include: [
+                {
+                    model: Product,
+                    attributes: ['id', 'name', 'price', 'description']
+                }
+            ]
+        })
+        if (!basketItems || basketItems.length === 0) {
+            return { message: BasketMessage.BASKET_EMPTY, items: [] };
+        }
+
+        const items = basketItems.map(item => ({
+            id: +item.id,
+            user_id: +item.user_id,
+            product_id: +item.product_id,
+            quantity: +item.quantity,
+            total_price: +item.total_price.toFixed(2),
+            product: item.Product
+        }));
+        return { items }
+    }
 }
 
 export default new BasketService();
