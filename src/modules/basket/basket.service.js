@@ -75,7 +75,7 @@ class BasketService {
             include: [
                 {
                     model: Product,
-                    as: 'product', // حتماً همانند تعریف model
+                    as: 'product',
                     attributes: ['id', 'name', 'price', 'description']
                 }
             ]
