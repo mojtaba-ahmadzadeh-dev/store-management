@@ -90,3 +90,80 @@
  *                   example: "Internal server error"
  */
 
+/* -------------------------------------------------------------
+📌 Remove Product from Basket (DELETE /basket/remove)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /basket/delete:
+ *   delete:
+ *     summary: Remove a product completely from the user's basket
+ *     tags: [Basket 🛒]
+ *     security:
+ *       - bearerAuth: []
+ *
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - productId
+ *             properties:
+ *               productId:
+ *                 type: integer
+ *                 example: 24
+ *                 description: ID of the product to remove from basket
+ *
+ *     responses:
+ *       200:
+ *         description: Product removed from basket successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "محصول از سبد خرید حذف شد"
+ *                 result:
+ *                   type: object
+ *                   properties:
+ *                     removed:
+ *                       type: boolean
+ *                       example: true
+ *
+ *       400:
+ *         description: productId not provided or invalid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "شناسه محصول لازم است"
+ *
+ *       404:
+ *         description: Product does not exist in user's basket
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "محصول مورد نظر یافت نشد"
+ *
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */

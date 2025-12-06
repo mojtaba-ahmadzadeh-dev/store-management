@@ -55,6 +55,20 @@ class BasketService {
         return basket;
     }
 
+    async removeFromBasket(userId, productId) {
+        const userIdNum = +userId;
+        const productIdNum = +productId;
+
+        const basketItm = await Basket.findOne({
+            where: { user_id: userIdNum, product_id: productIdNum }
+        })
+
+        if (!basketItm) throw createHttpError(404, BasketMessage.PRODUCT_NOT_FOUND)
+
+        await basketItm.destroy()
+
+        return { remove: true }
+    }
 }
 
 export default new BasketService();

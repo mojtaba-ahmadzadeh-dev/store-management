@@ -33,6 +33,19 @@ class BasketController {
         }
     }
 
+    async removeFromBasket(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const { productId } = req.body;
+            const result = await this.#service.removeFromBasket(userId, productId)
+            return res.json({
+                message: BasketMessage.REMOVED_SUCCESS,
+                result
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 
 }
 
