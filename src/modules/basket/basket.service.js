@@ -81,19 +81,26 @@ class BasketService {
                 }
             ]
         })
+
         if (!basketItems || basketItems.length === 0) {
-            return { message: BasketMessage.BASKET_EMPTY, items: [] };
+            return { message: BasketMessage.BASKET_EMPTY, items: [], total_price: 0 };
         }
 
-        const items = basketItems.map(item => ({
-            id: +item.id,
-            user_id: +item.user_id,
-            product_id: +item.product_id,
-            quantity: +item.quantity,
-            total_price: +item.total_price.toFixed(2),
-            product: item.Product
-        }));
-        return { items }
+        let totalPrice = 0
+
+        const items = basketItems.map(item => {
+            const total = +item.total_price;
+            totalPrice += total;
+            return {
+                id: +item.id,
+                user_id: +item.user_id,
+                product_id: +item.product_id,
+                quantity: +item.quantity,
+                total_price: total,
+                product: item.Product
+            };
+        });
+        return { items, totalPrice: +totalPrice.toFixed(2) }
     }
 }
 
