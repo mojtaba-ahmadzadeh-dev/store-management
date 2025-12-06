@@ -69,4 +69,10 @@ const BasketMessage = {
     BASKET_ALREADY_EMPTY: "سبد خرید از قبل خالی بود"
 }
 
-export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage };
+const OrderMessage = {
+    ORDER_SUCCESS: "سفارش با موفقیت ثبت شد",
+    ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
+    ORDER_FAILED: "ثبت سفارش با خطا مواجه شد",
+}
+
+export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage, OrderMessage };

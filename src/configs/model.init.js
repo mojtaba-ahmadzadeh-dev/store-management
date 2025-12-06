@@ -1,4 +1,3 @@
-// src/configs/modelInit.js
 import { sequelize } from "./sequelize.config.js";
 import { User } from "../modules/user/user.model.js";
 import { Product } from "../modules/product/product.modle.js";
@@ -7,7 +6,6 @@ import { Basket } from "../modules/basket/basket.model.js";
 import { Order, OrderItem } from "../modules/order/order.model.js";
 
 const initDatabase = async () => {
-    // روابط User
     User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
     Basket.belongsTo(User, { foreignKey: 'user_id' });
 
