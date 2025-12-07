@@ -82,7 +82,9 @@ const RBACMessage = {
     ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
     USER_ROLES_FETCHED: "نقش‌های کاربر با موفقیت دریافت شد",
     PERMISSIONS_FETCHED_SUCCESS: "دسترسی‌ها با موفقیت دریافت شدند",
-    PERMISSION_UPDATED_SUCCESS: "دسترسی با موفقیت بروزرسانی شد"
+    PERMISSION_UPDATED_SUCCESS: "دسترسی با موفقیت بروزرسانی شد",
+    PERMISSION_DELETED_SUCCESS: "دسترسی با موفقیت حذف شد",
+    PERMISSION_NOT_FOUND: "Permission پیدا نشد"
 }
 
 export {

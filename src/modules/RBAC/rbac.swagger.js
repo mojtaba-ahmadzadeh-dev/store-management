@@ -204,3 +204,73 @@
  *                   type: boolean
  *                   example: false
  */
+
+/* -------------------------------------------------------------
+   📌 Delete Permission (DELETE /permission/delete/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /permission/delete/{id}:
+ *   delete:
+ *     summary: Delete a Permission by ID
+ *     tags: [RBAC 🔑]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the Permission to delete
+ *
+ *     responses:
+ *       200:
+ *         description: Permission deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission deleted successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     name:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *
+ *       404:
+ *         description: Permission not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission not found"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Server error"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */
