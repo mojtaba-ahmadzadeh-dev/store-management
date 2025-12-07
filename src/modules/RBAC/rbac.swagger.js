@@ -534,21 +534,22 @@
 
 /**
  * @swagger
- * /roles/{id}:
+ * /role/delete/{id}:
  *   delete:
- *     summary: حذف یک نقش
- *     description: نقش موردنظر را بر اساس شناسه حذف می‌کند.
- *     tags: [RBAC - Roles]
+ *     summary: Delete a Role
+ *     description: Deletes the specified role by its ID.
+ *     tags: [RBAC 🔑]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: شناسه نقش
+ *         description: ID of the role to delete
+ *
  *     responses:
  *       200:
- *         description: نقش با موفقیت حذف شد
+ *         description: Role deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -556,15 +557,16 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: نقش با موفقیت حذف شد
+ *                   example: "Role deleted successfully"
  *                 success:
  *                   type: boolean
  *                   example: true
  *                 data:
  *                   type: object
- *                   description: اطلاعات نقش حذف شده
+ *                   description: Information of the deleted role
+ *
  *       404:
- *         description: نقش پیدا نشد
+ *         description: Role not found
  *         content:
  *           application/json:
  *             schema:
@@ -572,7 +574,65 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: نقش پیدا نشد
+ *                   example: "Role not found"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */
+
+/**
+ * @swagger
+ * /role/assign-permission:
+ *   post:
+ *     summary: Assign permissions to a role
+ *     description: Adds one or more permissions to an existing role without removing previous permissions.
+ *     tags: [RBAC 🔑]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - roleId
+ *               - permissionIds
+ *             properties:
+ *               roleId:
+ *                 type: integer
+ *                 example: 3
+ *               permissionIds:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 example: [2, 4, 7]
+ *
+ *     responses:
+ *       200:
+ *         description: Permissions assigned successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permissions assigned to role successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   description: Updated role with all permissions
+ *
+ *       404:
+ *         description: Role or Permission not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *                 success:
  *                   type: boolean
  *                   example: false

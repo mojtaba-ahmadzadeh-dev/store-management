@@ -2,7 +2,6 @@ import autoBind from "auto-bind"
 import { Permission, Role } from "./rbac.model.js";
 import createHttpError from "http-errors";
 import { RBACMessage } from "../../constant/messages.constant.js";
-
 class RBACService {
     #model;
     constructor() {
@@ -109,6 +108,17 @@ class RBACService {
         await role.setPermissions([]);
         await role.destroy()
         return role
+    }
+
+    async assignPermissionToRole(roleId, permissionIds = []) {
+        const role = await Role.findByPk(roleId, { include: ["permissions"] });
+        if (!role) throw createHttpError(404, RBACMessage.ROLE_NOT_FOUND);
+        const permissions = await Permission.findAll({ where: { id: permissionIds } });
+        if (permissions.length !== permissionIds.length) {
+            throw createHttpError(404, RBACMessage.PERMISSION_NOT_FOUND);
+        }
+        await role.addPermissions(permissions);
+        return await Role.findByPk(roleId, { include: ["permissions"] });
     }
 }
 

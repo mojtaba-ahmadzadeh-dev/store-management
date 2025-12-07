@@ -112,11 +112,25 @@ class RBACController {
             const { id } = req.params;
             const deletedRole = await this.#service.deleteRole(id);
 
-                    res.status(200).json({
-            message: RBACMessage.ROLE_DELETED_SUCCESS,
-            success: true,
-            data: deletedRole
-        });
+            res.status(200).json({
+                message: RBACMessage.ROLE_DELETED_SUCCESS,
+                success: true,
+                data: deletedRole
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async assignPermissionToRole(req, res, next) {
+        try {
+            const { roleId, permissionIds } = req.body;
+            const updatedRole = await this.#service.assignPermissionToRole(roleId, permissionIds)
+            res.status(200).json({
+                message: RBACMessage.PERMISSION_ASSIGN_SUCCESS,
+                success: true,
+                data: updatedRole
+            });
         } catch (error) {
             next(error)
         }
