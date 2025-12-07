@@ -13,10 +13,7 @@ class RBACService {
         const { name, description } = data;
 
         const exists = await Permission.findOne({ where: { name } });
-        if (exists) {
-            throw new Error(`Permission با نام "${name}" قبلاً موجود است`);
-        }
-
+        if (exists) throw createHttpError(409, RBACMessage.PERMISSION_ALREADY_EXISTS)
         const permission = await Permission.create({ name, description });
         return permission;
     }
@@ -27,15 +24,13 @@ class RBACService {
 
     async updatePermission(id, data) {
         const permission = await Permission.findByPk(id);
-        if (!permission) {
-            throw new Error("Permission پیدا نشد");
-        }
+        if (!permission) throw createHttpError(404, RBACMessage.PERMISSION_NOT_FOUND)
         const { name, description } = data;
 
         if (name && name !== permission.name) {
             const exists = await Permission.findOne({ where: { name } });
             if (exists) {
-                throw new Error(`Permission با نام "${name}" قبلاً موجود است`);
+                throw createHttpError(409, RBACMessage.PERMISSION_ALREADY_EXISTS)
             }
         }
 
