@@ -102,6 +102,14 @@ class RBACService {
         }
         return await Role.findByPk(role.id, { include: ["permissions"] });
     }
+
+    async deleteRole(id) {
+        const role = await Role.findByPk(id, { include: ["permissions"] });
+        if (!role) throw createHttpError(404, RBACMessage.ROLE_NOT_FOUND);
+        await role.setPermissions([]);
+        await role.destroy()
+        return role
+    }
 }
 
 export default new RBACService()

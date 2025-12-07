@@ -106,6 +106,21 @@ class RBACController {
             next(error)
         }
     }
+
+    async deleteRole(req, res, next) {
+        try {
+            const { id } = req.params;
+            const deletedRole = await this.#service.deleteRole(id);
+
+                    res.status(200).json({
+            message: RBACMessage.ROLE_DELETED_SUCCESS,
+            success: true,
+            data: deletedRole
+        });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new RBACController()

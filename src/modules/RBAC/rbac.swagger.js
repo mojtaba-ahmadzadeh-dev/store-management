@@ -531,3 +531,49 @@
  *                   type: boolean
  *                   example: false
  */
+
+/**
+ * @swagger
+ * /roles/{id}:
+ *   delete:
+ *     summary: حذف یک نقش
+ *     description: نقش موردنظر را بر اساس شناسه حذف می‌کند.
+ *     tags: [RBAC - Roles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: شناسه نقش
+ *     responses:
+ *       200:
+ *         description: نقش با موفقیت حذف شد
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: نقش با موفقیت حذف شد
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   description: اطلاعات نقش حذف شده
+ *       404:
+ *         description: نقش پیدا نشد
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: نقش پیدا نشد
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */

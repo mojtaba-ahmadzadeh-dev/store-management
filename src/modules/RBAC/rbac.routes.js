@@ -11,5 +11,6 @@ router.delete('/permission/delete/:id', authGuard, rbacController.deletePermissi
 router.post('/role/add', authGuard, rbacController.createRole)
 router.get('/role', authGuard, rbacController.getAllPermissions)
 router.put('/role/update/:id', authGuard, rbacController.updateRole)
+router.delete('/role/delete/:id', authGuard, rbacController.deleteRole)
 
 export { router as RBACRoutes }

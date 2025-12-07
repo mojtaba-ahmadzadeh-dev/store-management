@@ -90,6 +90,7 @@ const RBACMessage = {
     ROLE_UPDATED_SUCCESS: "نقش با موفقیت بروزرسانی شد",
     ROLE_NOT_FOUND: "Role پیدا نشد",
     ROLE_ALREADY_EXISTS: "Role با این عنوان قبلاً موجود است",
+    ROLE_DELETED_SUCCESS: "نقش با موفقیت حذف شد"
 }
 
 export {
