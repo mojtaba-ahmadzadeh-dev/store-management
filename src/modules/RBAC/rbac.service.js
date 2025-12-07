@@ -53,6 +53,34 @@ class RBACService {
         await permission.destroy();
         return permission;
     }
+
+    async createRole(data) {
+        const { title, description, permissionIds = [] } = data;
+        const exists = await Role.findOne({ where: { title } });
+        if (exists) throw createHttpError(400, RBACMessage.ROLE_ALREADY_EXISTS);
+
+        const role = await Role.create({ title, description });
+
+        if (permissionIds.length > 0) {
+            const permissions = await Permission.findAll({ where: { id: permissionIds } });
+            await role.setPermissions(permissions);
+        }
+
+        return await Role.findByPk(role.id, { include: ["permissions"] });
+    }
+
+    async getAllRoles() {
+        return Role.findAll({
+            include: [
+                {
+                    model: Permission,
+                    as: "permissions",
+                    through: { attributes: [] }
+                }
+            ],
+            order: [["id", "ASC"]]
+        })
+    }
 }
 
 export default new RBACService()

@@ -274,3 +274,146 @@
  *                   type: boolean
  *                   example: false
  */
+
+/* -------------------------------------------------------------
+   📌 Create Role (POST /role/add)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /role/add:
+ *   post:
+ *     summary: Create a new Role
+ *     tags: [RBAC 🔑]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Admin"
+ *                 description: Title of the role
+ *               description:
+ *                 type: string
+ *                 example: "Administrator role with full permissions"
+ *               permissionIds:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 description: Array of permission IDs to assign to the role
+ *
+ *     responses:
+ *       201:
+ *         description: Role created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role created successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     permissions:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           name:
+ *                             type: string
+ *                           description:
+ *                             type: string
+ *
+ *       400:
+ *         description: Error creating Role (e.g., duplicate title)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role with title 'Admin' already exists"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */
+
+/* -------------------------------------------------------------
+   📌 Get All Roles (GET /roles)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /role:
+ *   get:
+ *     summary: Get all Roles with their Permissions
+ *     tags: [RBAC 🔑]
+ *
+ *     responses:
+ *       200:
+ *         description: Roles fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Roles fetched successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       permissions:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             id:
+ *                               type: integer
+ *                             name:
+ *                               type: string
+ *                             description:
+ *                               type: string
+ *
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Server error"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */

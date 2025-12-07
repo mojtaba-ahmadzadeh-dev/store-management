@@ -80,11 +80,13 @@ const OrderMessage = {
 
 const RBACMessage = {
     ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
+    ROLE_ALREADY_EXISTS: "Role با عنوان مشخص قبلاً موجود است",
     USER_ROLES_FETCHED: "نقش‌های کاربر با موفقیت دریافت شد",
     PERMISSIONS_FETCHED_SUCCESS: "دسترسی‌ها با موفقیت دریافت شدند",
     PERMISSION_UPDATED_SUCCESS: "دسترسی با موفقیت بروزرسانی شد",
     PERMISSION_DELETED_SUCCESS: "دسترسی با موفقیت حذف شد",
-    PERMISSION_NOT_FOUND: "Permission پیدا نشد"
+    PERMISSION_NOT_FOUND: "Permission پیدا نشد",
+    ROLES_FETCHED_SUCCESS: "لیست نقش‌ها با موفقیت دریافت شد",
 }
 
 export {

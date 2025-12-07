@@ -64,6 +64,33 @@ class RBACController {
             next(error)
         }
     }
+
+    async createRole(req, res, next) {
+        try {
+            const { title, description, permissionIds } = req.body;
+            const role = await this.#service.createRole({ title, description, permissionIds });
+            res.status(201).json({
+                message: RBACMessage.ROLE_CREATED_SUCCESS,
+                success: true,
+                data: role
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async getAllRoles(req, res, next) {
+        try {
+            const roles = await this.#service.getAllRoles();
+            res.status(200).json({
+                message: RBACMessage.ROLES_FETCHED_SUCCESS,
+                success: true,
+                data: roles
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new RBACController()
