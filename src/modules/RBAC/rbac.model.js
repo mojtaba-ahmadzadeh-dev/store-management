@@ -1,8 +1,7 @@
-// rbac.model.js
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 
-// مدل Permission
+
 const Permission = sequelize.define('Permission', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, allowNull: false, unique: true },
@@ -12,7 +11,7 @@ const Permission = sequelize.define('Permission', {
   timestamps: true
 });
 
-// مدل Role
+
 const Role = sequelize.define('Role', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   title: { type: DataTypes.STRING, allowNull: false, unique: true },
@@ -21,7 +20,5 @@ const Role = sequelize.define('Role', {
   tableName: 'roles',
   timestamps: true
 });
-
-
 
 export { Role, Permission };

@@ -23,6 +23,27 @@ class RBACService {
     async getAllPermissions() {
         return Permission.findAll()
     }
+    
+    async updatePermission(id, data) {
+        const permission = await Permission.findByPk(id);
+        if (!permission) {
+            throw new Error("Permission پیدا نشد");
+        }
+        const { name, description } = data;
+
+        if (name && name !== permission.name) {
+            const exists = await Permission.findOne({ where: { name } });
+            if (exists) {
+                throw new Error(`Permission با نام "${name}" قبلاً موجود است`);
+            }
+        }
+
+        permission.name = name ?? permission.name;
+        permission.description = description ?? permission.description;
+
+        await permission.save();
+        return permission;
+    }
 }
 
 export default new RBACService()

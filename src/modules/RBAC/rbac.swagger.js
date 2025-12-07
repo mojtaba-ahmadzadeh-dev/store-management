@@ -120,3 +120,87 @@
  *                   type: boolean
  *                   example: false
  */
+
+/* -------------------------------------------------------------
+   📌 Update Permission (PUT /permission/update/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /permission/update/{id}:
+ *   put:
+ *     summary: Update an existing Permission
+ *     tags: [RBAC 🔑]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the Permission to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "read_users"
+ *                 description: Updated name of the permission
+ *               description:
+ *                 type: string
+ *                 example: "Updated permission to view users"
+ *
+ *     responses:
+ *       200:
+ *         description: Permission updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission updated successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     name:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *
+ *       400:
+ *         description: Error updating Permission (e.g., duplicate name)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission with name 'read_users' already exists"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *
+ *       404:
+ *         description: Permission not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission not found"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */
