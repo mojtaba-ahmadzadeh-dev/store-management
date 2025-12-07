@@ -1,19 +1,19 @@
 /**
  * @swagger
  * tags:
- *   name: RBAC 🔐
- *   description: Role-based access control APIs
+ *   name: RBAC 🔑
+ *   description: Role & Permission management APIs
  */
 
 /* -------------------------------------------------------------
-   📌 Create Role (POST /rbac/roles)
+   📌 Create Permission (POST /rbac/permissions)
 -------------------------------------------------------------- */
 /**
  * @swagger
  * /permission/add:
  *   post:
- *     summary: Create a new role
- *     tags: [RBAC 🔐]
+ *     summary: Create a new Permission
+ *     tags: [RBAC 🔑]
  *     requestBody:
  *       required: true
  *       content:
@@ -21,55 +21,102 @@
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 example: "admin"
- *                 description: Role title
+ *                 example: "read_users"
+ *                 description: Name of the permission
  *               description:
  *                 type: string
- *                 example: "Administrator role with full permissions"
- *                 description: Role description
+ *                 example: "Permission to view users"
  *
  *     responses:
  *       201:
- *         description: Role created successfully
+ *         description: Permission created successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission created successfully"
  *                 success:
  *                   type: boolean
  *                   example: true
- *                 message:
- *                   type: string
- *                   example: "Role created successfully"
  *                 data:
  *                   type: object
  *                   properties:
  *                     id:
  *                       type: integer
- *                       example: 1
- *                     title:
+ *                     name:
  *                       type: string
- *                       example: "admin"
  *                     description:
  *                       type: string
- *                       example: "Administrator role with full permissions"
  *
  *       400:
- *         description: Invalid input or role already exists
+ *         description: Error creating Permission (e.g., duplicate name)
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Permission with name 'read_users' already exists"
  *                 success:
  *                   type: boolean
  *                   example: false
+ */
+
+/* -------------------------------------------------------------
+   📌 Get All Permissions (GET /permission/all)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /permission:
+ *   get:
+ *     summary: Get all Permissions
+ *     tags: [RBAC 🔑]
+ *
+ *     responses:
+ *       200:
+ *         description: Permissions fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
  *                 message:
  *                   type: string
- *                   example: "Role title is required or already exists"
+ *                   example: "Permissions fetched successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       name:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Server error"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
  */

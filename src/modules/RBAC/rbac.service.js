@@ -1,5 +1,5 @@
 import autoBind from "auto-bind"
-import { Role } from "./rbac.model.js";
+import { Permission, Role } from "./rbac.model.js";
 
 class RBACService {
     #model;
@@ -8,16 +8,20 @@ class RBACService {
         this.#model = Role
     }
 
-    async createRole(data) {
-        try {
-            const role = await this.#model.create({
-                title: data.title,
-                description: data.description || ""
-            });
-            return role;
-        } catch (error) {
-            throw new Error(error.message);
+    async createPermission(data) {
+        const { name, description } = data;
+
+        const exists = await Permission.findOne({ where: { name } });
+        if (exists) {
+            throw new Error(`Permission با نام "${name}" قبلاً موجود است`);
         }
+
+        const permission = await Permission.create({ name, description });
+        return permission;
+    }
+
+    async getAllPermissions() {
+        return Permission.findAll()
     }
 }
 

@@ -8,15 +8,26 @@ class RBACController {
         autoBind(this)
         this.#service = rbacService
     }
-
-    async createRole(req, res, next) {
+    async createPermission(req, res, next) {
         try {
-            const { title, description } = req.body;
-            const role = await this.#service.createRole({ title, description })
-            return res.status(201).json({
-                success: true,
+            const { name, description } = req.body
+            const permission = await this.#service.createPermission({ name, description })
+            res.status(201).json({
                 message: RBACMessage.ROLE_CREATED_SUCCESS,
-                data: role
+                success: true,
+                data: permission
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+    async getAllPermissions(req, res, next) {
+        try {
+            const permissions = await this.#service.getAllPermissions();
+            res.status(200).json({
+                message: RBACMessage.PERMISSIONS_FETCHED_SUCCESS,
+                success: true,
+                data: permissions
             });
         } catch (error) {
             next(error)

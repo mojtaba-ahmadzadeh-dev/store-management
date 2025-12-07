@@ -80,6 +80,8 @@ const OrderMessage = {
 
 const RBACMessage = {
     ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
+    USER_ROLES_FETCHED: "نقش‌های کاربر با موفقیت دریافت شد",
+    PERMISSIONS_FETCHED_SUCCESS: "دسترسی‌ها با موفقیت دریافت شدند"
 }
 
 export {
