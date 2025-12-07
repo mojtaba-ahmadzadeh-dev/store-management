@@ -91,6 +91,21 @@ class RBACController {
             next(error)
         }
     }
+
+    async updateRole(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { title, description, permissionIds } = req.body;
+            const role = await this.#service.updateRole(id, { title, description, permissionIds })
+            res.status(200).json({
+                message: RBACMessage.ROLE_UPDATED_SUCCESS,
+                success: true,
+                data: role
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new RBACController()

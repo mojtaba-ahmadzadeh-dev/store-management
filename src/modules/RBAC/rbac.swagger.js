@@ -417,3 +417,117 @@
  *                   type: boolean
  *                   example: false
  */
+
+/* -------------------------------------------------------------
+   📌 Update Role (PUT /role/update/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /role/update/{id}:
+ *   put:
+ *     summary: Update an existing Role
+ *     tags: [RBAC 🔑]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the Role to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Admin Updated"
+ *                 description: Updated title of the role
+ *               description:
+ *                 type: string
+ *                 example: "Updated administrator role with full permissions"
+ *               permissionIds:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 description: Array of permission IDs to assign to the role
+ *
+ *     responses:
+ *       200:
+ *         description: Role updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role updated successfully"
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     permissions:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           name:
+ *                             type: string
+ *                           description:
+ *                             type: string
+ *
+ *       400:
+ *         description: Duplicate role title
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role with this title already exists"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *
+ *       404:
+ *         description: Role not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Role not found"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Server error"
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ */

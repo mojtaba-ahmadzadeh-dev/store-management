@@ -81,6 +81,27 @@ class RBACService {
             order: [["id", "ASC"]]
         })
     }
+
+    async updateRole(id, data) {
+        const { title, description, permissionIds = [] } = data;
+        const role = await Role.findByPk(id)
+        if (!role) throw createHttpError(404, RBACMessage.ROLE_NOT_FOUND);
+
+        if (title && title !== role.title) {
+            const exists = await Role.findOne({ where: { title } });
+            if (exists) throw createHttpError(400, RBACMessage.ROLE_ALREADY_EXISTS);
+            role.title = title;
+        }
+
+        role.description = description ?? role.description;
+        await role.save();
+
+        if (permissionIds.length > 0) {
+            const permissions = await Permission.findAll({ where: { id: permissionIds } });
+            await role.setPermissions(permissions);
+        }
+        return await Role.findByPk(role.id, { include: ["permissions"] });
+    }
 }
 
 export default new RBACService()

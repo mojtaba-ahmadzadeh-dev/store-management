@@ -87,6 +87,9 @@ const RBACMessage = {
     PERMISSION_DELETED_SUCCESS: "دسترسی با موفقیت حذف شد",
     PERMISSION_NOT_FOUND: "Permission پیدا نشد",
     ROLES_FETCHED_SUCCESS: "لیست نقش‌ها با موفقیت دریافت شد",
+    ROLE_UPDATED_SUCCESS: "نقش با موفقیت بروزرسانی شد",
+    ROLE_NOT_FOUND: "Role پیدا نشد",
+    ROLE_ALREADY_EXISTS: "Role با این عنوان قبلاً موجود است",
 }
 
 export {
