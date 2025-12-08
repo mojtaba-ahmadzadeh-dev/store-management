@@ -105,6 +105,17 @@ class OrderService {
         await order.save();
         return order;
     }
+
+    async deleteOrder(orderId, userId, isAdmin = false) {
+        const order = await Order.findOne({ where: { id: orderId } });
+        if (!order) throw createHttpError(404, OrderMessage.ORDER_NOT_FOUND);
+        
+        if (!isAdmin && order.user_id !== userId) {
+            throw createHttpError(403, OrderMessage.ORDER_NOT_AUTHORIZED);
+        }
+        await order.destroy();
+        return order;
+    }
 }
 
 export default new OrderService();

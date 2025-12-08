@@ -10,5 +10,6 @@ router.get("/admin", adminMiddleware, orderController.getAllOrders);
 router.get("/", authGuard, orderController.getUserOrders);
 router.get("/:id", authGuard, orderController.getOrderById);
 router.patch("/update/:id", authGuard, orderController.updateOrder);
+router.delete("/delete/:id", authGuard, orderController.deleteOrder);
 
 export { router as OrderRoutes };

@@ -409,3 +409,53 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/* -------------------------------------------------------------
+   📌 Delete Order (DELETE /order/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /order/delete/{id}:
+ *   delete:
+ *     summary: Delete an existing order (user must own the order or admin)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Order ID
+ *     responses:
+ *       200:
+ *         description: Order deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش با موفقیت حذف شد"
+ *                 order:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     total_price:
+ *                       type: number
+ *                     payment_method:
+ *                       type: string
+ *                     shipping_address:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ */

@@ -68,18 +68,37 @@ class OrderController {
     }
 
     async updateOrder(req, res, next) {
-        const userId = req.user.id;
-        const orderId = req.params.id;
-        const { shipping_address, payment_method, status } = req.body;
-        const updatedOrder = await this.#service.updateOrder(orderId, userId, {
-            shipping_address,
-            payment_method,
-            status
-        })
-        res.json({
-            message: OrderMessage.ORDER_UPDATE_SUCCESS,
-            order: updatedOrder
-        });
+        try {
+            const userId = req.user.id;
+            const orderId = req.params.id;
+            const { shipping_address, payment_method, status } = req.body;
+            const updatedOrder = await this.#service.updateOrder(orderId, userId, {
+                shipping_address,
+                payment_method,
+                status
+            })
+            res.json({
+                message: OrderMessage.ORDER_UPDATE_SUCCESS,
+                order: updatedOrder
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async deleteOrder(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const orderId = req.params.id;
+            const isAdmin = req.user.role === "admin";
+            const deletedOrder = await this.#service.deleteOrder(orderId, userId, isAdmin);
+            res.json({
+                message: OrderMessage.ORDER_DELETE_SUCCESS,
+                order: deletedOrder
+            });
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
