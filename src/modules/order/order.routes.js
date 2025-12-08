@@ -6,8 +6,12 @@ import adminMiddleware from "../../middlewares/admin.middleware.js";
 const router = express.Router();
 
 router.post("/create", authGuard, orderController.createOrder);
-router.get("/admin", adminMiddleware, orderController.getAllOrders);
+router.get("/admin", authGuard, adminMiddleware, orderController.getAllOrders);
 router.get("/", authGuard, orderController.getUserOrders);
+router.patch("/update/:id", authGuard, orderController.updateOrder);
 router.get("/:id", authGuard, orderController.getOrderById);
+router.delete("/delete/:id", authGuard, orderController.deleteOrder);
+router.put("/update-status/:id", authGuard, adminMiddleware, orderController.updateOrderStatus);
+router.get("/admin/status", authGuard, adminMiddleware, orderController.getOrdersByStatus);
 
 export { router as OrderRoutes };

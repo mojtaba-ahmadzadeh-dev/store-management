@@ -320,3 +320,299 @@
  *                             price:
  *                               type: number
  */
+
+/**
+ * @swagger
+ * /order/update/{id}:
+ *   patch:
+ *     summary: Update an existing order (shipping address, payment method, or status)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Order ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               shipping_address:
+ *                 type: string
+ *                 example: "تهران، خیابان ولیعصر، پلاک 123"
+ *               payment_method:
+ *                 type: string
+ *                 example: "online"
+ *               status:
+ *                 type: string
+ *                 example: "shipped"
+ *                 description: "Order status (pending, shipped, completed, cancelled)"
+ *     responses:
+ *       200:
+ *         description: Order updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش با موفقیت آپدیت شد"
+ *                 order:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 12
+ *                     total_price:
+ *                       type: number
+ *                       example: 128.4
+ *                     payment_method:
+ *                       type: string
+ *                       example: "online"
+ *                     shipping_address:
+ *                       type: string
+ *                       example: "تهران، خیابان ولیعصر، پلاک 123"
+ *                     status:
+ *                       type: string
+ *                       example: "shipped"
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *       404:
+ *         description: Order not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش یافت نشد"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+/* -------------------------------------------------------------
+   📌 Delete Order (DELETE /order/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /order/delete/{id}:
+ *   delete:
+ *     summary: Delete an existing order (user must own the order or admin)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Order ID
+ *     responses:
+ *       200:
+ *         description: Order deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش با موفقیت حذف شد"
+ *                 order:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     total_price:
+ *                       type: number
+ *                     payment_method:
+ *                       type: string
+ *                     shipping_address:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ */
+
+/**
+ * @swagger
+ * /order/update-status/{id}:
+ *   put:
+ *     summary: Update only the status of an existing order (Admin or Owner)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Order ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - status
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 example: "shipped"
+ *                 description: "Order status (pending, shipped, completed, cancelled)"
+ *     responses:
+ *       200:
+ *         description: Order status updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش با موفقیت آپدیت شد"
+ *                 order:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 12
+ *                     status:
+ *                       type: string
+ *                       example: "shipped"
+ *                     total_price:
+ *                       type: number
+ *                       example: 128.4
+ *                     payment_method:
+ *                       type: string
+ *                       example: "online"
+ *                     shipping_address:
+ *                       type: string
+ *                       example: "تهران، خیابان ولیعصر، پلاک 123"
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *       403:
+ *         description: Unauthorized to update this order
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "شما اجازه تغییر وضعیت این سفارش را ندارید"
+ *       404:
+ *         description: Order not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "سفارش یافت نشد"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+/**
+ * @swagger
+ * /order/admin/status:
+ *   get:
+ *     summary: Get orders filtered by status (Admin Only)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           example: "pending"
+ *         description: Filter orders by status (pending, shipped, completed, cancelled)
+ *     responses:
+ *       200:
+ *         description: List of filtered orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "لیست تمام سفارش‌ها با موفقیت دریافت شد"
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       user_id:
+ *                         type: integer
+ *                       total_price:
+ *                         type: number
+ *                       status:
+ *                         type: string
+ *                       payment_method:
+ *                         type: string
+ *                       shipping_address:
+ *                         type: string
+ *                       createdAt:
+ *                         type: string
+ *                       updatedAt:
+ *                         type: string
+ *                       order_items:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             product_id:
+ *                               type: integer
+ *                             quantity:
+ *                               type: integer
+ *                             price:
+ *                               type: number
+ *                             total_price:
+ *                               type: number
+ */
