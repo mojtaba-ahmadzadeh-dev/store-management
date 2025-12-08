@@ -58,7 +58,7 @@ class OrderController {
     async getAllOrders(req, res, next) {
         try {
             const orders = await this.#service.getAllOrders()
-            
+
             res.json({
                 message: OrderMessage.ADMIN_GET_ALL_ORDERS_SUCCESS,
                 orders
@@ -100,6 +100,18 @@ class OrderController {
         } catch (error) {
             next(error)
         }
+    }
+
+    async updateOrderStatus(req, res, next) {
+        const userId = req.user.id;
+        const orderId = req.params.id;
+        const { status } = req.body;
+        const isAdmin = req.user.role === "admin";
+        const updatedOrder = await this.#service.updateOrderStatus(orderId, userId, status, isAdmin);
+        res.json({
+            message: OrderMessage.ORDER_UPDATE_SUCCESS,
+            order: updatedOrder
+        });
     }
 }
 
