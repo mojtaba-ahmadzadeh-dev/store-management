@@ -58,6 +58,7 @@ class OrderController {
     async getAllOrders(req, res, next) {
         try {
             const orders = await this.#service.getAllOrders()
+            
             res.json({
                 message: OrderMessage.ADMIN_GET_ALL_ORDERS_SUCCESS,
                 orders
