@@ -66,6 +66,21 @@ class OrderController {
             next(error)
         }
     }
+
+    async updateOrder(req, res, next) {
+        const userId = req.user.id;
+        const orderId = req.params.id;
+        const { shipping_address, payment_method, status } = req.body;
+        const updatedOrder = await this.#service.updateOrder(orderId, userId, {
+            shipping_address,
+            payment_method,
+            status
+        })
+        res.json({
+            message: OrderMessage.ORDER_UPDATE_SUCCESS,
+            order: updatedOrder
+        });
+    }
 }
 
 export default new OrderController();

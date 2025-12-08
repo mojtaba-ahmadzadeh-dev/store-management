@@ -76,6 +76,8 @@ const OrderMessage = {
     GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
     GET_ORDER_BY_ID_SUCCESS: "جزئیات سفارش با موفقیت دریافت شد",
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
+    ORDER_NOT_FOUND: "سفارش یافت نشد",
+    ORDER_UPDATE_SUCCESS: "سفارش با موفقیت آپدیت شد",
 }
 
 const RBACMessage = {

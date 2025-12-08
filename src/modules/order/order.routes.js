@@ -9,5 +9,6 @@ router.post("/create", authGuard, orderController.createOrder);
 router.get("/admin", adminMiddleware, orderController.getAllOrders);
 router.get("/", authGuard, orderController.getUserOrders);
 router.get("/:id", authGuard, orderController.getOrderById);
+router.patch("/update/:id", authGuard, orderController.updateOrder);
 
 export { router as OrderRoutes };

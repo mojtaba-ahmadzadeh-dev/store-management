@@ -3,6 +3,7 @@ import { Order, OrderItem } from "./order.model.js";
 import BasketService from "../basket/basket.service.js";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { OrderMessage } from "../../constant/messages.constant.js";
+import createHttpError from "http-errors";
 
 class OrderService {
     constructor() {
@@ -91,6 +92,18 @@ class OrderService {
             ],
             order: [["createdAt", "DESC"]]
         });
+    }
+
+    async updateOrder(orderId, userId, { shipping_address, payment_method, status }) {
+        const order = await Order.findOne({ where: { id: orderId, user_id: userId } })
+        if (!order) throw createHttpError(404, OrderMessage.ORDER_NOT_FOUND);
+
+        if (shipping_address !== undefined) order.shipping_address = shipping_address;
+        if (payment_method !== undefined) order.payment_method = payment_method;
+        if (status !== undefined) order.status = status;
+
+        await order.save();
+        return order;
     }
 }
 
