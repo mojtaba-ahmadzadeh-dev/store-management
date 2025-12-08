@@ -26,22 +26,18 @@ const initDatabase = async () => {
     OrderItem.belongsTo(Order, { foreignKey: 'order_id' });
 
     Role.belongsToMany(Permission, {
-        through: 'role_permissions',
+        through: RolePermissions,
         foreignKey: 'roleId',
         otherKey: 'permissionId',
         as: 'permissions'
     });
 
     Permission.belongsToMany(Role, {
-        through: 'role_permissions',
+        through: RolePermissions,
         foreignKey: 'permissionId',
         otherKey: 'roleId',
         as: 'roles'
     });
-
-    // RolePermissions.sync()
-    // Permission.sync()
-    // Role.sync()
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");
