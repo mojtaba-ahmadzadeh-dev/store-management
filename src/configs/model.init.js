@@ -4,6 +4,7 @@ import { Product } from "../modules/product/product.modle.js";
 import { Category } from "../modules/category/category.model.js";
 import { Basket } from "../modules/basket/basket.model.js";
 import { Order, OrderItem } from "../modules/order/order.model.js";
+import { Permission, Role, RolePermissions } from "../modules/RBAC/rbac.model.js";
 
 const initDatabase = async () => {
     User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
@@ -24,8 +25,19 @@ const initDatabase = async () => {
     Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE' });
     OrderItem.belongsTo(Order, { foreignKey: 'order_id' });
 
-    // Order.sync()
-    // OrderItem.sync()
+    Role.belongsToMany(Permission, {
+        through: RolePermissions,
+        foreignKey: 'roleId',
+        otherKey: 'permissionId',
+        as: 'permissions'
+    });
+
+    Permission.belongsToMany(Role, {
+        through: RolePermissions,
+        foreignKey: 'permissionId',
+        otherKey: 'roleId',
+        as: 'roles'
+    });
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");

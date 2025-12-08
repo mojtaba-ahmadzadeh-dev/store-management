@@ -78,4 +78,29 @@ const OrderMessage = {
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
 }
 
-export { AuthMessage, UserMessage, CategoryMessage, ProductMessage, BasketMessage, OrderMessage };
+const RBACMessage = {
+    ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
+    ROLE_ALREADY_EXISTS: "Role با عنوان مشخص قبلاً موجود است",
+    USER_ROLES_FETCHED: "نقش‌های کاربر با موفقیت دریافت شد",
+    PERMISSIONS_FETCHED_SUCCESS: "دسترسی‌ها با موفقیت دریافت شدند",
+    PERMISSION_UPDATED_SUCCESS: "دسترسی با موفقیت بروزرسانی شد",
+    PERMISSION_DELETED_SUCCESS: "دسترسی با موفقیت حذف شد",
+    PERMISSION_NOT_FOUND: "Permission پیدا نشد",
+    PERMISSION_ALREADY_EXISTS: 'Permission با نام مشخص قبلاً موجود است',
+    ROLES_FETCHED_SUCCESS: "لیست نقش‌ها با موفقیت دریافت شد",
+    ROLE_UPDATED_SUCCESS: "نقش با موفقیت بروزرسانی شد",
+    ROLE_NOT_FOUND: "Role پیدا نشد",
+    ROLE_ALREADY_EXISTS: "Role با این عنوان قبلاً موجود است",
+    ROLE_DELETED_SUCCESS: "نقش با موفقیت حذف شد",
+    PERMISSION_ASSIGN_SUCCESS: "دسترسی‌ها با موفقیت به نقش اختصاص داده شد",
+};
+
+export {
+    AuthMessage,
+    UserMessage,
+    CategoryMessage,
+    ProductMessage,
+    BasketMessage,
+    OrderMessage,
+    RBACMessage
+};
