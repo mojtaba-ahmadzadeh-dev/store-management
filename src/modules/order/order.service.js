@@ -127,6 +127,22 @@ class OrderService {
         await order.save()
         return order
     }
+
+    async getOrdersByStatus(status) {
+        const whereClause = {}
+        if (status) whereClause.status = status;
+        return await Order.findAll({
+            where: whereClause,
+            include: [
+                {
+                    model: OrderItem,
+                    as: "order_items",
+                    attributes: ['product_id', 'quantity', 'price', 'total_price']
+                }
+            ],
+            order: [["createdAt", "DESC"]]
+        })
+    }
 }
 
 export default new OrderService();

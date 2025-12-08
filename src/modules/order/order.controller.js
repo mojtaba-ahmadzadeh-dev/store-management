@@ -113,6 +113,19 @@ class OrderController {
             order: updatedOrder
         });
     }
+
+    async getOrdersByStatus(req, res, next) {
+        try {
+            const status = req.query.status;
+            const orders = await this.#service.getOrdersByStatus(status);
+            res.json({
+                message: OrderMessage.ADMIN_GET_ALL_ORDERS_SUCCESS,
+                orders
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new OrderController();

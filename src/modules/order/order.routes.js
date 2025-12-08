@@ -12,5 +12,6 @@ router.patch("/update/:id", authGuard, orderController.updateOrder);
 router.get("/:id", authGuard, orderController.getOrderById);
 router.delete("/delete/:id", authGuard, orderController.deleteOrder);
 router.put("/update-status/:id", authGuard, adminMiddleware, orderController.updateOrderStatus);
+router.get("/admin/status", authGuard, adminMiddleware, orderController.getOrdersByStatus);
 
 export { router as OrderRoutes };

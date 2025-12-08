@@ -554,3 +554,65 @@
  *                   type: string
  *                   example: "Internal server error"
  */
+
+/**
+ * @swagger
+ * /order/admin/status:
+ *   get:
+ *     summary: Get orders filtered by status (Admin Only)
+ *     tags: [Order 📦]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           example: "pending"
+ *         description: Filter orders by status (pending, shipped, completed, cancelled)
+ *     responses:
+ *       200:
+ *         description: List of filtered orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "لیست تمام سفارش‌ها با موفقیت دریافت شد"
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       user_id:
+ *                         type: integer
+ *                       total_price:
+ *                         type: number
+ *                       status:
+ *                         type: string
+ *                       payment_method:
+ *                         type: string
+ *                       shipping_address:
+ *                         type: string
+ *                       createdAt:
+ *                         type: string
+ *                       updatedAt:
+ *                         type: string
+ *                       order_items:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             product_id:
+ *                               type: integer
+ *                             quantity:
+ *                               type: integer
+ *                             price:
+ *                               type: number
+ *                             total_price:
+ *                               type: number
+ */
