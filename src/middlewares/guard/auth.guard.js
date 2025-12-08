@@ -29,6 +29,7 @@ export const authGuard = async (req, res, next) => {
             id: user.id,
             mobile: user.mobile,
             full_name: user.full_name,
+            role: user.role
         };
 
         next();

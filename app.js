@@ -13,6 +13,7 @@ import { ProductRoutes } from './src/modules/product/product.routes.js';
 import { BasketRoutes } from './src/modules/basket/basket.routes.js';
 import { OrderRoutes } from './src/modules/order/order.routes.js';
 import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
+import { PaymentRoutes } from './src/modules/payment/payment.routes.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -47,6 +48,7 @@ class App {
         this.app.use('/basket', BasketRoutes)
         this.app.use('/order', OrderRoutes)
         this.app.use('/', RBACRoutes)
+        this.app.use('/payment', PaymentRoutes)
     }
 
     initSwagger() {
