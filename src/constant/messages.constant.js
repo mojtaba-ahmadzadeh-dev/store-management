@@ -106,6 +106,13 @@ const BlogMessage = {
     BLOG_DELETED: 'بلاگ با موفقیت حذف شد',
 };
 
+const CommentMessage = {
+    REQUIRED: "متن کامنت و یکی از فیلدهای blog_id یا product_id الزامی است.",
+    CREATE_comment_success: "کامنت با موفقیت ثبت شد.",
+    INTERNAL_ERROR: "خطای داخلی سرور رخ داد.",
+    BLOG_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد."
+}
+
 export {
     AuthMessage,
     UserMessage,
@@ -114,5 +121,6 @@ export {
     BasketMessage,
     OrderMessage,
     RBACMessage,
-    BlogMessage
+    BlogMessage,
+    CommentMessage
 };

@@ -74,3 +74,54 @@
  *       401:
  *         description: User not authenticated
  */
+
+/**
+ * @swagger
+ * /comment:
+ *   get:
+ *     summary: Get all comments
+ *     description: Returns a list of all submitted comments.
+ *     tags: [Comments 💬]
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the list of comments
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Comments retrieved successfully."
+ *                 comments:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       content:
+ *                         type: string
+ *                         example: "This is a test comment."
+ *                       user_id:
+ *                         type: integer
+ *                         example: 5
+ *                       blog_id:
+ *                         type: integer
+ *                         example: 2
+ *                       product_id:
+ *                         type: integer
+ *                         example: null
+ *                       status:
+ *                         type: string
+ *                         example: "pending"
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-01T12:00:00.000Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-01T12:00:00.000Z"
+ */
