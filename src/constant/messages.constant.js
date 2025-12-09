@@ -97,6 +97,11 @@ const RBACMessage = {
     PERMISSION_ASSIGN_SUCCESS: "دسترسی‌ها با موفقیت به نقش اختصاص داده شد",
 };
 
+const BlogMessage = {
+    CREATE_BLOG_SUCESS: 'بلاگ با موفقیت ایجاد شد',
+    SLUG_ALREADY_EXISTS: "این slug قبلا استفاده شده",
+}
+
 export {
     AuthMessage,
     UserMessage,
@@ -104,5 +109,6 @@ export {
     ProductMessage,
     BasketMessage,
     OrderMessage,
-    RBACMessage
+    RBACMessage,
+    BlogMessage
 };
