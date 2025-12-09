@@ -36,6 +36,14 @@ class BlogService {
             order: [["createdAt", "DESC"]]
         })
     }
+
+    async getBlogById(id) {
+        const blog = await Blog.findByPk(id, {
+            attributes: { exclude: ["updatedAt"] }
+        });
+        if (!blog) throw createHttpError(404, BlogMessage.BLOG_NOT_FOUND);
+        return blog
+    }
 }
 
 export default new BlogService();

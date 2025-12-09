@@ -38,6 +38,19 @@ class BlogController {
             next(error)
         }
     }
+
+    async getBlogById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const blog = await this.#service.getBlogById(id);
+            res.status(200).json({
+                message: BlogMessage.BLOG_FETCHED,
+                blog
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new BlogController();

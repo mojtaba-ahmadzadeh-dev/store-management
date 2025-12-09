@@ -186,3 +186,90 @@
  *       401:
  *         description: Unauthorized
  */
+
+/**
+ * @swagger
+ * /blog/{id}:
+ *   get:
+ *     summary: Get a blog by its ID
+ *     tags: [Blog 📝]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the blog to retrieve
+ *     responses:
+ *       200:
+ *         description: Blog fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "جزئیات بلاگ با موفقیت دریافت شد"
+ *                 blog:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     title:
+ *                       type: string
+ *                       example: "How to learn Node.js"
+ *                     summary:
+ *                       type: string
+ *                       example: "A quick guide to learn Node.js efficiently."
+ *                     content:
+ *                       type: string
+ *                       example: "Full content of the blog goes here..."
+ *                     thumbnail:
+ *                       type: string
+ *                       example: "/uploads/blog/1692098765432-123456789.png"
+ *                     slug:
+ *                       type: string
+ *                       example: "how-to-learn-nodejs"
+ *                     status:
+ *                       type: string
+ *                       example: "draft"
+ *                     category_id:
+ *                       type: integer
+ *                       example: 3
+ *                     author_id:
+ *                       type: integer
+ *                       example: 1
+ *                     views:
+ *                       type: integer
+ *                       example: 152
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *       404:
+ *         description: Blog not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "بلاگ پیدا نشد"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized"
+ */

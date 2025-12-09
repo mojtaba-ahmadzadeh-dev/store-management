@@ -101,6 +101,8 @@ const BlogMessage = {
     CREATE_BLOG_SUCESS: 'بلاگ با موفقیت ایجاد شد',
     SLUG_ALREADY_EXISTS: "این slug قبلا استفاده شده",
     ALL_BLOGS_FETCHED: "لیست بلاگ‌ها با موفقیت دریافت شد",
+    BLOG_NOT_FOUND: "بلاگ پیدا نشد",
+    BLOG_FETCHED: "جزئیات بلاگ با موفقیت دریافت شد",
 }
 
 export {
