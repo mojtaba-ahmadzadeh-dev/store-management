@@ -6,6 +6,8 @@ import { Basket } from "../modules/basket/basket.model.js";
 import { Order, OrderItem } from "../modules/order/order.model.js";
 import { Permission, Role, RolePermissions } from "../modules/RBAC/rbac.model.js";
 import { Blog } from "../modules/blog/blog.model.js";
+import { Comment } from "../modules/comment/comment.model.js";
+
 
 const initDatabase = async () => {
     User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
@@ -26,9 +28,14 @@ const initDatabase = async () => {
     Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE' });
     OrderItem.belongsTo(Order, { foreignKey: 'order_id' });
 
-    User.hasMany(Blog, { foreignKey: 'author_id', onDelete: 'CASCADE' });
-    Blog.belongsTo(User, { foreignKey: 'author_id' });
+    User.hasMany(Blog, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+    Blog.belongsTo(User, { foreignKey: 'user_id' });
 
+    Blog.hasMany(Comment, { foreignKey: 'blog_id', as: 'comments' });
+    Comment.belongsTo(Blog, { foreignKey: 'blog_id', as: 'blog' });
+
+    Product.hasMany(Comment, { foreignKey: 'product_id', as: 'comments' });
+    Comment.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
 
     Role.belongsToMany(Permission, {
         through: RolePermissions,
@@ -44,11 +51,12 @@ const initDatabase = async () => {
         as: 'roles'
     });
 
-    // Payment.sync()
-    // Order.sync()
-
     // Blog.sync()
+
     // User.sync()
+
+    // Comment.sync()
+    // Comment.sync()
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");

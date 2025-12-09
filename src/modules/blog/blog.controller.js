@@ -14,7 +14,7 @@ class BlogController {
             const thumbnail = req.file ? `/uploads/products/${req.file.filename}` : null;
             const blog = await this.#service.createBlog({
                 ...req.body,
-                author_id: req.user.id,
+                user_id: req.user.id,
                 thumbnail,
             });
 

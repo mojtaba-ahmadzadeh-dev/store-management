@@ -14,6 +14,7 @@ import { BasketRoutes } from './src/modules/basket/basket.routes.js';
 import { OrderRoutes } from './src/modules/order/order.routes.js';
 import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
 import { BlogRoutes } from './src/modules/blog/blog.routes.js';
+import { CommentRoutes } from './src/modules/comment/comment.routes.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -49,6 +50,7 @@ class App {
         this.app.use('/order', OrderRoutes)
         this.app.use('/', RBACRoutes)
         this.app.use('/blog', BlogRoutes)
+        this.app.use('/comment', CommentRoutes)
     }
 
     initSwagger() {
