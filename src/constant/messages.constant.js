@@ -70,13 +70,15 @@ const BasketMessage = {
 }
 
 const OrderMessage = {
+    ORDER_NOT_FOUND: "سفارش یافت نشد",
     ORDER_SUCCESS: "سفارش با موفقیت ثبت شد",
-    ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
-    ORDER_FAILED: "ثبت سفارش با خطا مواجه شد",
+    ORDER_UPDATE_SUCCESS: "سفارش با موفقیت آپدیت شد",
+    ORDER_DELETE_SUCCESS: "سفارش با موفقیت حذف شد",
     GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
-    GET_ORDER_BY_ID_SUCCESS: "جزئیات سفارش با موفقیت دریافت شد",
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
-}
+    ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
+    ORDER_NOT_AUTHORIZED: "شما اجازه دسترسی به این سفارش را ندارید"
+};
 
 const RBACMessage = {
     ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
@@ -94,6 +96,15 @@ const RBACMessage = {
     ROLE_DELETED_SUCCESS: "نقش با موفقیت حذف شد",
     PERMISSION_ASSIGN_SUCCESS: "دسترسی‌ها با موفقیت به نقش اختصاص داده شد",
 };
+const BlogMessage = {
+    CREATE_BLOG_SUCESS: "بلاگ با موفقیت ایجاد شد",
+    ALL_BLOGS_FETCHED: "لیست بلاگ‌ها با موفقیت دریافت شد",
+    BLOG_FETCHED: "بلاگ با موفقیت دریافت شد",
+    BLOG_NOT_FOUND: "بلاگ مورد نظر یافت نشد",
+    BLOG_UPDATED: "بلاگ با موفقیت ویرایش شد",
+    SLUG_ALREADY_EXISTS: "Slug تکراری است",
+    BLOG_DELETED: 'بلاگ با موفقیت حذف شد',
+};
 
 export {
     AuthMessage,
@@ -102,5 +113,6 @@ export {
     ProductMessage,
     BasketMessage,
     OrderMessage,
-    RBACMessage
+    RBACMessage,
+    BlogMessage
 };

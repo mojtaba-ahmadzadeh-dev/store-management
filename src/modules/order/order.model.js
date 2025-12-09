@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
-import { OrderStatus } from "../../constant/orderStatus.constant.js";
+import { OrderStatus } from "../../constant/order_status.constant.js";
 
 const Order = sequelize.define("order", {
     id: {
