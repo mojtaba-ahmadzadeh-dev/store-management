@@ -5,6 +5,7 @@ import blogController from "./blog.controller.js";
 
 const router = Router()
 
-router.post('/', authGuard, uploadBlogImage.single("thumbnail"), blogController.createBlog)
+router.post('/create', authGuard, uploadBlogImage.single("thumbnail"), blogController.createBlog)
+router.get('/', authGuard, blogController.getAllBlogs)
 
 export { router as BlogRoutes }

@@ -10,7 +10,7 @@
 -------------------------------------------------------------- */
 /**
  * @swagger
- * /blog:
+ * /blog/create:
  *   post:
  *     summary: Create a new blog post with optional thumbnail upload
  *     tags: [Blog 📝]
@@ -119,4 +119,70 @@
  *                 message:
  *                   type: string
  *                   example: "Unauthorized"
+ */
+
+/* -------------------------------------------------------------
+   📌 Get All Blogs (GET /blog/all)
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /blog:
+ *   get:
+ *     summary: Get list of all blogs
+ *     tags: [Blog 📝]
+ *     security:
+ *       - bearerAuth: []
+ *
+ *     responses:
+ *       200:
+ *         description: List of all blogs retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Blogs fetched successfully"
+ *                 blogs:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       title:
+ *                         type: string
+ *                         example: "How to learn Node.js"
+ *                       summary:
+ *                         type: string
+ *                         example: "A quick guide to learn Node.js efficiently."
+ *                       slug:
+ *                         type: string
+ *                         example: "how-to-learn-nodejs"
+ *                       thumbnail:
+ *                         type: string
+ *                         example: "/uploads/blog/1692098765432-123456789.png"
+ *                       status:
+ *                         type: string
+ *                         example: "published"
+ *                       category_id:
+ *                         type: integer
+ *                         example: 3
+ *                       author_id:
+ *                         type: integer
+ *                         example: 12
+ *                       views:
+ *                         type: integer
+ *                         example: 152
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *
+ *       401:
+ *         description: Unauthorized
  */

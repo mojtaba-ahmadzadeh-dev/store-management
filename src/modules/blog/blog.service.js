@@ -27,6 +27,15 @@ class BlogService {
 
         return blog;
     }
+
+    async getAllBlogs() {
+        return await Blog.findAll({
+            attributes: {
+                exclude: ["updatedAt"]
+            },
+            order: [["createdAt", "DESC"]]
+        })
+    }
 }
 
 export default new BlogService();

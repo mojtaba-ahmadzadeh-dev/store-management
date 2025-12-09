@@ -26,6 +26,18 @@ class BlogController {
             next(error);
         }
     }
+
+    async getAllBlogs(req, res, next) {
+        try {
+            const blogs = await this.#service.getAllBlogs()
+            res.status(200).json({
+                message: BlogMessage.ALL_BLOGS_FETCHED,
+                blogs
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new BlogController();
