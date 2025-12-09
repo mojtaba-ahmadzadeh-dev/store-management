@@ -51,6 +51,21 @@ class BlogController {
             next(error)
         }
     }
+
+    async updateBlogById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = { ...req.body };
+            if (req.file) data.thumbnail = `/uploads/blog/${req.file.filename}`;
+            const updatedBlog = await this.#service.updateBlogById(id, data);
+            res.status(200).json({
+                message: BlogMessage.BLOG_UPDATED,
+                blog: updatedBlog
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new BlogController();

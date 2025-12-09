@@ -96,14 +96,14 @@ const RBACMessage = {
     ROLE_DELETED_SUCCESS: "نقش با موفقیت حذف شد",
     PERMISSION_ASSIGN_SUCCESS: "دسترسی‌ها با موفقیت به نقش اختصاص داده شد",
 };
-
 const BlogMessage = {
-    CREATE_BLOG_SUCESS: 'بلاگ با موفقیت ایجاد شد',
-    SLUG_ALREADY_EXISTS: "این slug قبلا استفاده شده",
+    CREATE_BLOG_SUCESS: "بلاگ با موفقیت ایجاد شد",
     ALL_BLOGS_FETCHED: "لیست بلاگ‌ها با موفقیت دریافت شد",
-    BLOG_NOT_FOUND: "بلاگ پیدا نشد",
-    BLOG_FETCHED: "جزئیات بلاگ با موفقیت دریافت شد",
-}
+    BLOG_FETCHED: "بلاگ با موفقیت دریافت شد",
+    BLOG_NOT_FOUND: "بلاگ مورد نظر یافت نشد",
+    BLOG_UPDATED: "بلاگ با موفقیت ویرایش شد",
+    SLUG_ALREADY_EXISTS: "Slug تکراری است"
+};
 
 export {
     AuthMessage,

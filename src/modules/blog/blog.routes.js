@@ -8,5 +8,6 @@ const router = Router()
 router.post('/create', authGuard, uploadBlogImage.single("thumbnail"), blogController.createBlog)
 router.get('/', authGuard, blogController.getAllBlogs)
 router.get('/:id', authGuard, blogController.getBlogById);
+router.patch('/update/:id', authGuard, uploadBlogImage.single("thumbnail"), blogController.updateBlogById);
 
 export { router as BlogRoutes }

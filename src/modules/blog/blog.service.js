@@ -44,6 +44,18 @@ class BlogService {
         if (!blog) throw createHttpError(404, BlogMessage.BLOG_NOT_FOUND);
         return blog
     }
+
+    async updateBlogById(id, data) {
+        const blog = await Blog.findByPk(id);
+        if (!blog) throw createHttpError(404, BlogMessage.BLOG_NOT_FOUND);
+        if (data.slug && data.slug !== blog.slug) {
+            const exist = await Blog.findOne({ where: { slug: data.slug } });
+            if (exist) throw createHttpError(400, BlogMessage.SLUG_ALREADY_EXISTS);
+        }
+        await blog.update(data);
+        return blog;
+
+    }
 }
 
 export default new BlogService();

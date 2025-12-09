@@ -273,3 +273,129 @@
  *                   type: string
  *                   example: "Unauthorized"
  */
+
+/**
+ * @swagger
+ * /blog/update/{id}:
+ *   patch:
+ *     summary: Update a blog by ID
+ *     tags: [Blog 📝]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Blog ID to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: New title of the blog
+ *                 example: "Updated Blog Title"
+ *               summary:
+ *                 type: string
+ *                 example: "Updated summary..."
+ *               content:
+ *                 type: string
+ *                 example: "Updated full content..."
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
+ *                 description: Upload new cover image
+ *               slug:
+ *                 type: string
+ *                 example: "updated-blog-slug"
+ *                 description: Unique URL-friendly identifier
+ *               status:
+ *                 type: string
+ *                 enum: [draft, published]
+ *                 example: "published"
+ *               category_id:
+ *                 type: integer
+ *                 example: 3
+ *
+ *     responses:
+ *       200:
+ *         description: Blog updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "بلاگ با موفقیت ویرایش شد"
+ *                 blog:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     title:
+ *                       type: string
+ *                       example: "Updated Blog Title"
+ *                     summary:
+ *                       type: string
+ *                     content:
+ *                       type: string
+ *                     thumbnail:
+ *                       type: string
+ *                       example: "/uploads/blog/1692098765432-123456789.png"
+ *                     slug:
+ *                       type: string
+ *                       example: "updated-blog-slug"
+ *                     status:
+ *                       type: string
+ *                       example: "published"
+ *                     category_id:
+ *                       type: integer
+ *                     author_id:
+ *                       type: integer
+ *                     views:
+ *                       type: integer
+ *                       example: 152
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
+ *
+ *       400:
+ *         description: Validation error or slug already exists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Slug تکراری است"
+ *
+ *       404:
+ *         description: Blog not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "بلاگ مورد نظر یافت نشد"
+ *
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized"
+ */
