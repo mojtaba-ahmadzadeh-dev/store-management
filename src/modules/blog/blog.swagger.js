@@ -399,3 +399,43 @@
  *                   type: string
  *                   example: "Unauthorized"
  */
+
+/**
+ * @swagger
+ * /blog/delete/{id}:
+ *   delete:
+ *     summary: Delete a blog by ID
+ *     tags: [Blog 📝]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the blog to delete
+ *     responses:
+ *       200:
+ *         description: Blog deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Blog deleted successfully"
+ *       404:
+ *         description: Blog not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Blog not found"
+ *       401:
+ *         description: Unauthorized
+ */

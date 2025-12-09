@@ -102,7 +102,8 @@ const BlogMessage = {
     BLOG_FETCHED: "بلاگ با موفقیت دریافت شد",
     BLOG_NOT_FOUND: "بلاگ مورد نظر یافت نشد",
     BLOG_UPDATED: "بلاگ با موفقیت ویرایش شد",
-    SLUG_ALREADY_EXISTS: "Slug تکراری است"
+    SLUG_ALREADY_EXISTS: "Slug تکراری است",
+    BLOG_DELETED: 'بلاگ با موفقیت حذف شد',
 };
 
 export {

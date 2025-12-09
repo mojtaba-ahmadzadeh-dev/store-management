@@ -66,6 +66,18 @@ class BlogController {
             next(error)
         }
     }
+
+    async deleteBlogById(req, res, next) {
+        try {
+            const { id } = req.params;
+            await this.#service.deleteBlogById(id);
+            res.status(200).json({
+                message: BlogMessage.BLOG_DELETED,
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new BlogController();

@@ -56,6 +56,14 @@ class BlogService {
         return blog;
 
     }
+
+    async deleteBlogById(id) {
+        const blog = await Blog.findByPk(id);
+        if (!blog) throw createHttpError(404, BlogMessage.BLOG_NOT_FOUND);
+
+        await blog.destroy();
+        return true;
+    }
 }
 
 export default new BlogService();
