@@ -25,12 +25,21 @@ class CommentService {
         });
     }
 
-    async getCommentsByProduct(product_id) {
-        const comments = await Comment.findAll({
+    async getCommentsByProduct(product_id, page = 1, limit = 10) {
+        const offset = (page - 1) * limit;
+
+        const { rows, count } = await Comment.findAndCountAll({
             where: { product_id },
             order: [['createdAt', 'DESC']],
+            limit,
+            offset
         });
-        return comments
+        return {
+            totalItems: count,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            comments: rows
+        }
     }
 
     async updateComment(id, user_id, content) {

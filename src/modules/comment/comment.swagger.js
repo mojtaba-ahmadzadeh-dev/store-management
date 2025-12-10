@@ -171,7 +171,7 @@
  * @swagger
  * /comment/product/{product_id}:
  *   get:
- *     summary: Get comments of a specific product
+ *     summary: Get comments of a specific product with pagination
  *     tags: [Comments 💬]
  *     parameters:
  *       - in: path
@@ -180,9 +180,68 @@
  *         schema:
  *           type: integer
  *         description: ID of the product
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of comments per page
  *     responses:
  *       200:
- *         description: Successfully retrieved product comments
+ *         description: Successfully retrieved product comments with pagination
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کامنت‌ها با موفقیت دریافت شد."
+ *                 totalItems:
+ *                   type: integer
+ *                   example: 45
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 5
+ *                 currentPage:
+ *                   type: integer
+ *                   example: 1
+ *                 comments:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       content:
+ *                         type: string
+ *                         example: "این یک کامنت تستی است."
+ *                       user_id:
+ *                         type: integer
+ *                         example: 5
+ *                       product_id:
+ *                         type: integer
+ *                         example: 2
+ *                       status:
+ *                         type: string
+ *                         example: "pending"
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-01T12:00:00.000Z"
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2025-01-01T12:00:00.000Z"
  *       404:
  *         description: Product not found or no comments
  */

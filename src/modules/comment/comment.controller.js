@@ -34,13 +34,14 @@ class CommentController {
 
     async getCommentsByProduct(req, res, next) {
         try {
-            const { id: product_id } = req.params;
+            const { product_id } = req.params;
+            const { page = 1, limit = 10 } = req.query;
 
-            const comments = await commentService.getCommentsByProduct(product_id);
+            const result = await commentService.getCommentsByProduct(product_id, +page, +limit);
 
             res.status(200).json({
                 message: CommentMessage.FETCHED_SUCCESS,
-                comments
+                ...result
             });
 
         } catch (error) {
