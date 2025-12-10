@@ -8,6 +8,7 @@ import { Permission, Role, RolePermissions } from "../modules/RBAC/rbac.model.js
 import { Blog } from "../modules/blog/blog.model.js";
 import { Comment } from "../modules/comment/comment.model.js";
 import { Discount } from "../modules/discount/discount.model.js";
+import { Notification } from "../modules/notfication/notfication.model.js";
 
 
 const initDatabase = async () => {
@@ -44,6 +45,9 @@ const initDatabase = async () => {
     User.hasMany(Discount, { foreignKey: "user_id", onDelete: "SET NULL" });
     Discount.belongsTo(User, { foreignKey: "user_id" });
 
+    User.hasMany(Notification, { foreignKey: "user_id", onDelete: "CASCADE" });
+    Notification.belongsTo(User, { foreignKey: "user_id" });
+
     Role.belongsToMany(Permission, {
         through: RolePermissions,
         foreignKey: 'roleId',
@@ -58,14 +62,7 @@ const initDatabase = async () => {
         as: 'roles'
     });
 
-    // Blog.sync()
-
-    // User.sync()
-
-    // Comment.sync()
-    // Comment.sync()
-
-    // Discount.sync()
+    // Notification.sync()
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");
