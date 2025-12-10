@@ -106,6 +106,33 @@ const BlogMessage = {
     BLOG_DELETED: 'بلاگ با موفقیت حذف شد',
 };
 
+const CommentMessage = {
+    REQUIRED: "متن کامنت و یکی از فیلدهای blog_id یا product_id الزامی است.",
+    CREATE_COMMENT_SUCCESS: "کامنت با موفقیت ثبت شد.",
+    INTERNAL_ERROR: "خطای داخلی سرور رخ داد.",
+    BLOG_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد.",
+    FETCHED_SUCCESS: "کامنت‌ها با موفقیت دریافت شد.",
+    UPDATE_SUCCESS: "کامنت با موفقیت ویرایش شد.",
+    NOT_FOUND: "کامنت مورد نظر یافت نشد.",
+    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید.",
+    DELETED_COMMENT_SUCCESS: "کامنت با موفقیت حذف شد",
+    ADMIN_DELETE_DENIED: "فقط مدیران اجازه حذف کامنت را دارند",
+    EITHER_BLOG_OR_PRODUCT_REQUIRED: "یکی از فیلدهای blog_id یا product_id الزامی است",
+};
+
+const DiscountMessage = {
+    REQUIRED_FIELDS: "فیلدهای الزامی را وارد کنید.",
+    DUPLICATE: "کد تخفیف تکراری است.",
+    CREATED: "کد تخفیف با موفقیت ایجاد شد.",
+    LIST_FETCHED: "لیست تخفیف‌ها با موفقیت دریافت شد.",
+    FETCHED: "تخفیف با موفقیت دریافت شد.",
+    UPDATED: "تخفیف با موفقیت ویرایش شد.",
+    NOT_FOUND: "تخفیف مورد نظر یافت نشد.",
+    ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید.",
+    DELETE_DISCOUNT_SUCCESS: "کد تخفیف‌ها حذف شدند",
+ DELETE_DISCOUNT_ONE_SUCCESS: "کد تخفیف با موفقیت حذف شد"
+};
+
 export {
     AuthMessage,
     UserMessage,
@@ -114,5 +141,7 @@ export {
     BasketMessage,
     OrderMessage,
     RBACMessage,
-    BlogMessage
+    BlogMessage,
+    CommentMessage,
+    DiscountMessage
 };

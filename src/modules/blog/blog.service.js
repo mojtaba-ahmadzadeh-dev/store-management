@@ -9,7 +9,7 @@ class BlogService {
     }
 
     async createBlog(data) {
-        const { title, summary, content, thumbnail, slug, status, category_id, author_id } = data;
+        const { title, summary, content, thumbnail, slug, status, category_id, user_id } = data;
 
         const exist = await Blog.findOne({ where: { slug } });
         if (exist) createHttpError(400, BlogMessage.SLUG_ALREADY_EXISTS);
@@ -22,7 +22,7 @@ class BlogService {
             slug,
             status,
             category_id,
-            author_id,
+            user_id,
         });
 
         return blog;
