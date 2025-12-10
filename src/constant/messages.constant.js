@@ -120,6 +120,13 @@ const CommentMessage = {
     EITHER_BLOG_OR_PRODUCT_REQUIRED: "یکی از فیلدهای blog_id یا product_id الزامی است",
 };
 
+const DiscountMessage = {
+    REQUIRED_FIELDS: "وارد کردن code و percentage الزامی است.",
+    CREATED: "کد تخفیف با موفقیت ایجاد شد.",
+    DUPLICATE: "کد تخفیف تکراری است.",
+    SERVER_ERROR: "خطای داخلی سرور رخ داده است.",
+};
+
 export {
     AuthMessage,
     UserMessage,
@@ -129,5 +136,6 @@ export {
     OrderMessage,
     RBACMessage,
     BlogMessage,
-    CommentMessage
+    CommentMessage,
+    DiscountMessage
 };
