@@ -112,3 +112,50 @@
  *                   type: string
  *                   example: "توکن معتبر نیست"
  */
+
+/**
+ * @swagger
+ * /discount:
+ *   get:
+ *     summary: Get the list of all discounts
+ *     tags: [Discount 🎟️]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully fetched the list of discounts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Successfully fetched the list of discounts."
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       code:
+ *                         type: string
+ *                         example: "OFF20"
+ *                       percentage:
+ *                         type: integer
+ *                         example: 20
+ *                       max_usage:
+ *                         type: integer
+ *                         example: 10
+ *                       used_count:
+ *                         type: integer
+ *                         example: 0
+ *                       expire_at:
+ *                         type: string
+ *                         example: "2025-06-30T00:00:00Z"
+ *                       status:
+ *                         type: string
+ *                         example: "active"
+ */

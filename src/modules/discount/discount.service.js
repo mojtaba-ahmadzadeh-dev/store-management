@@ -17,6 +17,12 @@ class DiscountService {
         }
         return await this.#model.create(data);
     }
+
+    async getAllDiscount() {
+        return await this.#model.findAll({
+            order: [["createdAt", "DESC"]],
+        });
+    }
 }
 
 export default new DiscountService()

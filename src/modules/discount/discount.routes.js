@@ -5,5 +5,6 @@ import discountController from "./discount.controller.js";
 const router = Router()
 
 router.post('/', authGuard, discountController.create)
+router.get('/', authGuard, discountController.getAllDiscount);
 
-export {router as DiscountRoutes}
+export { router as DiscountRoutes }

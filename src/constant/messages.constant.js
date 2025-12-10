@@ -125,6 +125,7 @@ const DiscountMessage = {
     CREATED: "کد تخفیف با موفقیت ایجاد شد.",
     DUPLICATE: "کد تخفیف تکراری است.",
     SERVER_ERROR: "خطای داخلی سرور رخ داده است.",
+    LIST_FETCHED: "لیست تخفیف‌ها با موفقیت دریافت شد.",
 };
 
 export {

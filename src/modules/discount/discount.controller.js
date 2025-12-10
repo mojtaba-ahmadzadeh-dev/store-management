@@ -9,6 +9,7 @@ class DiscountController {
         autoBind(this)
         this.#service = discountService;
     }
+
     async create(req, res, next) {
         try {
             const { code, percentage, max_usage, expire_at, product_id, user_id } = req.body;
@@ -30,6 +31,19 @@ class DiscountController {
             next(error)
         }
     }
+
+    async getAllDiscount(req, res, next) {
+        try {
+            const discounts = await this.#service.getAllDiscount();
+            return res.status(200).json({
+                message: DiscountMessage.LIST_FETCHED,
+                data: discounts
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 export default new DiscountController()
