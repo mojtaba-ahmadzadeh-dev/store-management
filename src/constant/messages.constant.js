@@ -117,6 +117,7 @@ const CommentMessage = {
     ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید.",
     DELETED_COMMENT_SUCCESS: "کامنت با موفقیت حذف شد",
     ADMIN_DELETE_DENIED: "فقط مدیران اجازه حذف کامنت را دارند",
+    EITHER_BLOG_OR_PRODUCT_REQUIRED: "یکی از فیلدهای blog_id یا product_id الزامی است",
 };
 
 export {

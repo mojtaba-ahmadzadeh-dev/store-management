@@ -6,7 +6,7 @@ class CommentService {
 
     async createComment({ content, user_id, blog_id, product_id = null }) {
         if (!blog_id && !product_id) {
-            throw new Error("Either blog_id or product_id must be provided");
+            throw createHttpError(CommentMessage.EITHER_BLOG_OR_PRODUCT_REQUIRED);
         }
 
         const comment = await Comment.create({
