@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
-import { Blog } from "../blog/blog.model.js";
 import { Product } from "../product/product.modle.js";
+import { UserStatus } from "../../constant/status.constant.js";
 
 const Comment = sequelize.define('comment', {
     id: {
@@ -26,19 +26,20 @@ const Comment = sequelize.define('comment', {
         },
         onDelete: 'CASCADE',
     },
-    blog_id: {
+    likes: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: Blog,
-            key: 'id',
-        },
-        onDelete: 'CASCADE',
+        defaultValue: 0,
+    },
+    dislikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
     },
     status: {
-        type: DataTypes.ENUM("pending", "approved", "rejected"),
+        type: DataTypes.ENUM(UserStatus.PENDING, UserStatus.APPROVED, UserStatus.REJECT),
         allowNull: false,
-        defaultValue: "pending",
+        defaultValue: UserStatus.PENDING,
     },
 }, {
     timestamps: true,

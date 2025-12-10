@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
-import { OrderStatus } from "../../constant/order_status.constant.js";
+import {  UserStatus } from "../../constant/status.constant.js";
 
 const Order = sequelize.define("order", {
     id: {
@@ -17,8 +17,8 @@ const Order = sequelize.define("order", {
         allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM(...Object.values(OrderStatus)),
-        defaultValue: OrderStatus.PENDING,
+        type: DataTypes.ENUM(...Object.values(UserStatus)),
+        defaultValue: UserStatus.PENDING,
     },
     payment_method: {
         type: DataTypes.STRING,

@@ -108,13 +108,15 @@ const BlogMessage = {
 
 const CommentMessage = {
     REQUIRED: "متن کامنت و یکی از فیلدهای blog_id یا product_id الزامی است.",
-    CREATE_comment_success: "کامنت با موفقیت ثبت شد.",
+    CREATE_COMMENT_SUCCESS: "کامنت با موفقیت ثبت شد.",
     INTERNAL_ERROR: "خطای داخلی سرور رخ داد.",
     BLOG_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد.",
     FETCHED_SUCCESS: "کامنت‌ها با موفقیت دریافت شد.",
     UPDATE_SUCCESS: "کامنت با موفقیت ویرایش شد.",
     NOT_FOUND: "کامنت مورد نظر یافت نشد.",
-    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید."
+    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید.",
+    DELETED_COMMENT_SUCCESS: "کامنت با موفقیت حذف شد",
+    ADMIN_DELETE_DENIED: "فقط مدیران اجازه حذف کامنت را دارند",
 };
 
 export {

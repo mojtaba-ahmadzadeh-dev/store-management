@@ -54,6 +54,30 @@ class CommentService {
 
         return comment;
     }
+
+    async toggleCommentLike(id, mode) {
+        const comment = await Comment.findByPk(id);
+        if (!comment) throw createHttpError(404, "Comment not found");
+        if (mode === "like") {
+            comment.likes += 1;
+        } else if (mode === "dislike") {
+            comment.dislikes += 1;
+        } else {
+            throw createHttpError(400, "Invalid mode, must be 'like' or 'dislike'");
+        }
+        await comment.save();
+        return comment;
+    }
+
+    async deleteCommentByAdmin(id, userRole) {
+        if (userRole !== "admin") throw createHttpError(403, CommentMessage.ADMIN_DELETE_DENIED);
+
+        const comment = await Comment.findByPk(id);
+        if (!comment) throw createHttpError(404, CommentMessage.NOT_FOUND);
+
+        await comment.destroy();
+        return comment
+    }
 }
 
 export const commentService = new CommentService();

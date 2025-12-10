@@ -245,3 +245,78 @@
  *       404:
  *         description: Product not found or no comments
  */
+
+/**
+ * @swagger
+ * /comment/like/{id}:
+ *   put:
+ *     summary: Like or dislike a comment
+ *     tags: [Comments 💬]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Comment ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - mode
+ *             properties:
+ *               mode:
+ *                 type: string
+ *                 enum: [like, dislike]
+ *                 example: like
+ *     responses:
+ *       200:
+ *         description: Comment liked/disliked successfully
+ *       400:
+ *         description: Invalid mode
+ *       404:
+ *         description: Comment not found
+ */
+
+/* -------------------------------------------------------------
+   📌 Delete Comment by Admin (DELETE /comment/admin/{id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /comment/admin/{id}:
+ *   delete:
+ *     summary: Delete a comment by admin
+ *     description: Allows only admins to delete any comment.
+ *     tags: [Comments 💬]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Comment ID to delete
+ *     responses:
+ *       200:
+ *         description: Comment deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Comment deleted successfully"
+ *       403:
+ *         description: Access denied, only admins can delete comments
+ *       404:
+ *         description: Comment not found
+ *       401:
+ *         description: User not authenticated
+ */
