@@ -7,6 +7,7 @@ import { Order, OrderItem } from "../modules/order/order.model.js";
 import { Permission, Role, RolePermissions } from "../modules/RBAC/rbac.model.js";
 import { Blog } from "../modules/blog/blog.model.js";
 import { Comment } from "../modules/comment/comment.model.js";
+import { Discount } from "../modules/discount/discount.model.js";
 
 
 const initDatabase = async () => {
@@ -37,6 +38,12 @@ const initDatabase = async () => {
     Product.hasMany(Comment, { foreignKey: 'product_id', as: 'comments' });
     Comment.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
 
+    Product.hasMany(Discount, { foreignKey: "product_id", onDelete: "SET NULL" });
+    Discount.belongsTo(Product, { foreignKey: "product_id" });
+
+    User.hasMany(Discount, { foreignKey: "user_id", onDelete: "SET NULL" });
+    Discount.belongsTo(User, { foreignKey: "user_id" });
+
     Role.belongsToMany(Permission, {
         through: RolePermissions,
         foreignKey: 'roleId',
@@ -57,6 +64,8 @@ const initDatabase = async () => {
 
     // Comment.sync()
     // Comment.sync()
+
+    // Discount.sync()
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");
