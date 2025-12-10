@@ -41,6 +41,19 @@ class DiscountService {
 
         return discount;
     }
+
+    async updateDiscountById({ id }, data) {
+        const discount = await this.getDiscountById({ id });
+
+        if (data.code && data.code !== discount.code) {
+            const exists = await this.#model.findOne({ where: { code: data.code } });
+            if (exists) throw createHttpError(400, DiscountMessage.DUPLICATE);
+        }
+
+        await discount.update(data);
+        return discount;
+    }
+
 }
 
 export default new DiscountService()

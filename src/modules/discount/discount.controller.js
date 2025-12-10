@@ -65,6 +65,27 @@ class DiscountController {
         }
     }
 
+    async updateDiscountById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = req.body;
+
+            if (!id) throw createHttpError(400, DiscountMessage.ID_OR_CODE_REQUIRED);
+
+            const updatedDiscount = await this.#service.updateDiscountById(
+                { id: Number(id) },
+                data
+            );
+
+            return res.status(200).json({
+                message: DiscountMessage.UPDATED,
+                data: updatedDiscount
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default new DiscountController()

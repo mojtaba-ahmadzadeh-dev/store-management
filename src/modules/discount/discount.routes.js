@@ -7,5 +7,6 @@ const router = Router()
 router.post('/', authGuard, discountController.create)
 router.get('/', authGuard, discountController.getAllDiscount);
 router.get('/:idOrCode', authGuard, discountController.getDiscountById);
+router.patch('/:id', authGuard, discountController.updateDiscountById);
 
 export { router as DiscountRoutes }

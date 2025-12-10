@@ -215,3 +215,115 @@
  *       404:
  *         description: Discount not found
  */
+
+/**
+ * @swagger
+ * /discount/{id}:
+ *   patch:
+ *     summary: Update a discount by ID
+ *     tags: [Discount 🎟️]
+ *     security:
+ *       - bearerAuth: []
+ *     description: Update the details of an existing discount code (admin only)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the discount to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               code:
+ *                 type: string
+ *                 example: "OFF25"
+ *                 description: Updated discount code
+ *               percentage:
+ *                 type: integer
+ *                 example: 25
+ *                 description: Updated discount percentage
+ *               max_usage:
+ *                 type: integer
+ *                 example: 20
+ *                 description: Updated maximum usage
+ *               expire_at:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-07-31T00:00:00Z"
+ *                 description: Updated expiration date
+ *               product_id:
+ *                 type: integer
+ *                 example: 5
+ *                 description: Updated product ID
+ *               user_id:
+ *                 type: integer
+ *                 example: 12
+ *                 description: Updated user ID
+ *     responses:
+ *       200:
+ *         description: Discount updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "تخفیف با موفقیت ویرایش شد"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     code:
+ *                       type: string
+ *                       example: "OFF25"
+ *                     percentage:
+ *                       type: integer
+ *                       example: 25
+ *                     max_usage:
+ *                       type: integer
+ *                       example: 20
+ *                     used_count:
+ *                       type: integer
+ *                       example: 0
+ *                     expire_at:
+ *                       type: string
+ *                       example: "2025-07-31T00:00:00Z"
+ *                     status:
+ *                       type: string
+ *                       example: "active"
+ *       400:
+ *         description: Invalid input or duplicate discount code
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کد تخفیف تکراری است"
+ *       401:
+ *         description: Unauthorized — token is missing or invalid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "توکن معتبر نیست"
+ *       404:
+ *         description: Discount not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "تخفیف مورد نظر یافت نشد"
+ */
