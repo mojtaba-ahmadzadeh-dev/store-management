@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { Product } from "../product/product.modle.js";
 import { UserStatus } from "../../constant/status.constant.js";
+import { Blog } from "../blog/blog.model.js";
 
 const Comment = sequelize.define('comment', {
     id: {
@@ -25,6 +26,14 @@ const Comment = sequelize.define('comment', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+    },
+    blog_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: Blog,
+            key: 'id',
+        },
     },
     likes: {
         type: DataTypes.INTEGER,
