@@ -121,11 +121,13 @@ const CommentMessage = {
 };
 
 const DiscountMessage = {
-    REQUIRED_FIELDS: "وارد کردن code و percentage الزامی است.",
-    CREATED: "کد تخفیف با موفقیت ایجاد شد.",
+    REQUIRED_FIELDS: "لطفاً کد و درصد تخفیف را وارد کنید.",
     DUPLICATE: "کد تخفیف تکراری است.",
-    SERVER_ERROR: "خطای داخلی سرور رخ داده است.",
+    CREATED: "کد تخفیف با موفقیت ایجاد شد.",
     LIST_FETCHED: "لیست تخفیف‌ها با موفقیت دریافت شد.",
+    FETCHED: "تخفیف با موفقیت دریافت شد.",
+    NOT_FOUND: "تخفیف مورد نظر پیدا نشد.",
+    ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید."
 };
 
 export {

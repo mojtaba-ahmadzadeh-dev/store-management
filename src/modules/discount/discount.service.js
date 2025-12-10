@@ -23,6 +23,24 @@ class DiscountService {
             order: [["createdAt", "DESC"]],
         });
     }
+
+    async getDiscountById({ id, code }) {
+        const where = {};
+        if (id) where.id = id;
+        if (code) where.code = code;
+
+        if (!Object.keys(where).length) {
+            throw createHttpError(400, DiscountMessage.ID_OR_CODE_REQUIRED);
+        }
+
+        const discount = await this.#model.findOne({ where });
+
+        if (!discount) {
+            throw createHttpError(404, DiscountMessage.NOT_FOUND);
+        }
+
+        return discount;
+    }
 }
 
 export default new DiscountService()

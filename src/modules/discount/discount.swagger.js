@@ -159,3 +159,59 @@
  *                         type: string
  *                         example: "active"
  */
+
+/**
+ * @swagger
+ * /discount/{idOrCode}:
+ *   get:
+ *     summary: Get a single discount by ID or code
+ *     tags: [Discount 🎟️]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idOrCode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID or code of the discount
+ *     responses:
+ *       200:
+ *         description: Discount fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Discount fetched successfully."
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     code:
+ *                       type: string
+ *                       example: "OFF20"
+ *                     percentage:
+ *                       type: integer
+ *                       example: 20
+ *                     max_usage:
+ *                       type: integer
+ *                       example: 10
+ *                     used_count:
+ *                       type: integer
+ *                       example: 0
+ *                     expire_at:
+ *                       type: string
+ *                       example: "2025-06-30T00:00:00Z"
+ *                     status:
+ *                       type: string
+ *                       example: "active"
+ *       400:
+ *         description: ID or code is required
+ *       404:
+ *         description: Discount not found
+ */

@@ -44,6 +44,27 @@ class DiscountController {
         }
     }
 
+    async getDiscountById(req, res, next) {
+        try {
+            const { idOrCode } = req.params;
+
+            if (!idOrCode) throw createHttpError(400, DiscountMessage.ID_OR_CODE_REQUIRED);
+
+            const isNumber = !isNaN(Number(idOrCode));
+            const discount = await this.#service.getDiscountById({
+                id: isNumber ? Number(idOrCode) : undefined,
+                code: !isNumber ? idOrCode : undefined
+            });
+
+            return res.status(200).json({
+                message: DiscountMessage.FETCHED,
+                data: discount
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default new DiscountController()
