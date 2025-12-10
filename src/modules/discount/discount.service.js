@@ -54,6 +54,10 @@ class DiscountService {
         return discount;
     }
 
+    async deleteAllDiscounts() {
+        const deletedCount = await this.#model.destroy({ where: {} });
+        return deletedCount;
+    }
 }
 
 export default new DiscountService()

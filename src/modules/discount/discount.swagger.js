@@ -327,3 +327,30 @@
  *                   type: string
  *                   example: "تخفیف مورد نظر یافت نشد"
  */
+
+/**
+ * @swagger
+ * /discount:
+ *   delete:
+ *     summary: Delete all discount codes (admin only)
+ *     tags: [Discount 🎟️]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: All discounts deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "تمام کدهای تخفیف حذف شدند"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     deletedCount:
+ *                       type: integer
+ *                       example: 5
+ */

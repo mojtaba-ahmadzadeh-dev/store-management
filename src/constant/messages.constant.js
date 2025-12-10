@@ -128,7 +128,9 @@ const DiscountMessage = {
     FETCHED: "تخفیف با موفقیت دریافت شد.",
     UPDATED: "تخفیف با موفقیت ویرایش شد.",
     NOT_FOUND: "تخفیف مورد نظر یافت نشد.",
-    ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید."
+    ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید.",
+    DELETE_DISCOUNT_SUCCESS: "کد تخفیف‌ها حذف شدند"
+
 };
 
 export {

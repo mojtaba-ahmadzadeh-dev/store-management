@@ -1,7 +1,7 @@
 import autoBind from "auto-bind"
 import discountService from "./discount.service.js";
 import createHttpError from "http-errors";
-import { DiscountMessage } from "../../constant/messages.constant.js";
+import { CommentMessage, DiscountMessage } from "../../constant/messages.constant.js";
 
 class DiscountController {
     #service
@@ -86,6 +86,17 @@ class DiscountController {
         }
     }
 
+    async deleteAllDiscounts(req, res, next) {
+        try {
+            const deletedCount = await this.#service.deleteAllDiscounts();
+            return res.status(200).json({
+                message: CommentMessage.DELETED_COMMENT_SUCCESS,
+                data: { deletedCount }
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new DiscountController()
