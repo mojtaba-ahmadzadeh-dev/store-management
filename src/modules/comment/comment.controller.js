@@ -32,6 +32,22 @@ class CommentController {
         }
     }
 
+    async getCommentsByProduct(req, res, next) {
+        try {
+            const { id: product_id } = req.params;
+
+            const comments = await commentService.getCommentsByProduct(product_id);
+
+            res.status(200).json({
+                message: CommentMessage.FETCHED_SUCCESS,
+                comments
+            });
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
     async updateComment(req, res, next) {
         try {
             const { id } = req.params;

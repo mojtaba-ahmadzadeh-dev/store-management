@@ -25,6 +25,14 @@ class CommentService {
         });
     }
 
+    async getCommentsByProduct(product_id) {
+        const comments = await Comment.findAll({
+            where: { product_id },
+            order: [['createdAt', 'DESC']],
+        });
+        return comments
+    }
+
     async updateComment(id, user_id, content) {
         const comment = await Comment.findByPk(id);
 

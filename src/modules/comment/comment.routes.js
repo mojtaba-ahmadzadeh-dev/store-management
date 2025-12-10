@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", authGuard, commentController.createComment);
 router.get("/", commentController.getAllComments);
+router.get("/product/:product_id", commentController.getCommentsByProduct);
 router.patch("/:id", authGuard, commentController.updateComment);
 
 

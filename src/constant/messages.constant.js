@@ -107,15 +107,14 @@ const BlogMessage = {
 };
 
 const CommentMessage = {
-    REQUIRED: "متن کامنت الزامی است.",
-    TARGET_REQUIRED: "ارسال blog_id یا product_id الزامی است.",
-    CREATE_COMMENT_SUCCESS: "کامنت با موفقیت ثبت شد.",
+    REQUIRED: "متن کامنت و یکی از فیلدهای blog_id یا product_id الزامی است.",
+    CREATE_comment_success: "کامنت با موفقیت ثبت شد.",
     INTERNAL_ERROR: "خطای داخلی سرور رخ داد.",
-    COMMENTS_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد.",
-    NOT_FOUND: "کامنت موردنظر یافت نشد.",
-    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید.",
+    BLOG_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد.",
+    FETCHED_SUCCESS: "کامنت‌ها با موفقیت دریافت شد.",
     UPDATE_SUCCESS: "کامنت با موفقیت ویرایش شد.",
-    ACCESS_DENIED: "شما اجازه دسترسی به این عملیات را ندارید.",
+    NOT_FOUND: "کامنت مورد نظر یافت نشد.",
+    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید."
 };
 
 export {

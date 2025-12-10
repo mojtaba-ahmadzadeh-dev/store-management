@@ -162,3 +162,27 @@
  *       404:
  *         description: Comment not found
  */
+
+
+/* -------------------------------------------------------------
+   📌 Get Comments by Product (GET /comment/product/{product_id})
+-------------------------------------------------------------- */
+/**
+ * @swagger
+ * /comment/product/{product_id}:
+ *   get:
+ *     summary: Get comments of a specific product
+ *     tags: [Comments 💬]
+ *     parameters:
+ *       - in: path
+ *         name: product_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the product
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved product comments
+ *       404:
+ *         description: Product not found or no comments
+ */
