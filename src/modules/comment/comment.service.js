@@ -1,4 +1,6 @@
+import createHttpError from "http-errors";
 import { Comment } from "./comment.model.js";
+import { CommentMessage } from "../../constant/messages.constant.js";
 
 class CommentService {
 
@@ -23,6 +25,18 @@ class CommentService {
         });
     }
 
+    async updateComment(id, user_id, content) {
+        const comment = await Comment.findByPk(id);
+
+        if (!comment) throw createHttpError(404, CommentMessage.NOT_FOUND)
+
+        if (comment.user_id !== user_id) throw createHttpError(CommentMessage.ACCESS_DENIED)
+
+        comment.content = content;
+        await comment.save();
+
+        return comment;
+    }
 }
 
 export const commentService = new CommentService();

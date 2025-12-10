@@ -31,6 +31,25 @@ class CommentController {
             next(error)
         }
     }
+
+    async updateComment(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { content } = req.body;
+            const user_id = req.user.id;
+
+            const result = await commentService.updateComment(id, user_id, content);
+
+            res.status(200).json({
+                message: CommentMessage.UPDATE_SUCCESS,
+                comment: result
+            });
+
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export const commentController = new CommentController();

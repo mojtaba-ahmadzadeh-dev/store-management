@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", authGuard, commentController.createComment);
 router.get("/", commentController.getAllComments);
+router.patch("/:id", authGuard, commentController.updateComment);
 
 
 export { router as CommentRoutes };

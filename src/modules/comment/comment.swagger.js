@@ -125,3 +125,40 @@
  *                         format: date-time
  *                         example: "2025-01-01T12:00:00.000Z"
  */
+
+/**
+ * @swagger
+ * /comment/{id}:
+ *   patch:
+ *     summary: Update a comment
+ *     description: Allows the owner of a comment to edit it.
+ *     tags: [Comments 💬]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Comment ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *                 example: "Updated comment text."
+ *     responses:
+ *       200:
+ *         description: Comment updated successfully
+ *       400:
+ *         description: Content missing
+ *       403:
+ *         description: Access denied
+ *       404:
+ *         description: Comment not found
+ */
