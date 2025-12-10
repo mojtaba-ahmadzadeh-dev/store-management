@@ -162,7 +162,7 @@
 
 /**
  * @swagger
- * /discount/{idOrCode}:
+ * /discount/{id}:
  *   get:
  *     summary: Get a single discount by ID or code
  *     tags: [Discount 🎟️]
@@ -170,7 +170,7 @@
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: idOrCode
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
@@ -353,4 +353,60 @@
  *                     deletedCount:
  *                       type: integer
  *                       example: 5
+ */
+
+/**
+ * @swagger
+ * /discount/{id}:
+ *   delete:
+ *     summary: Delete a single discount by ID
+ *     tags: [Discount 🎟️]
+ *     security:
+ *       - bearerAuth: []
+ *     description: حذف یک کد تخفیف خاص (فقط مدیر می‌تواند)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the discount to delete
+ *     responses:
+ *       200:
+ *         description: Discount deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "کد تخفیف با موفقیت حذف شد"
+ *       400:
+ *         description: ID is required
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "لطفاً id یا code را وارد کنید."
+ *       404:
+ *         description: Discount not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "تخفیف مورد نظر یافت نشد"
+ *       401:
+ *         description: Unauthorized — token is missing or invalid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "توکن معتبر نیست"
  */

@@ -46,14 +46,14 @@ class DiscountController {
 
     async getDiscountById(req, res, next) {
         try {
-            const { idOrCode } = req.params;
+            const { id } = req.params;
 
-            if (!idOrCode) throw createHttpError(400, DiscountMessage.ID_OR_CODE_REQUIRED);
+            if (!id) throw createHttpError(400, DiscountMessage.ID_OR_CODE_REQUIRED);
 
-            const isNumber = !isNaN(Number(idOrCode));
+            const isNumber = !isNaN(Number(id));
             const discount = await this.#service.getDiscountById({
-                id: isNumber ? Number(idOrCode) : undefined,
-                code: !isNumber ? idOrCode : undefined
+                id: isNumber ? Number(id) : undefined,
+                code: !isNumber ? id : undefined
             });
 
             return res.status(200).json({
@@ -92,6 +92,20 @@ class DiscountController {
             return res.status(200).json({
                 message: CommentMessage.DELETED_COMMENT_SUCCESS,
                 data: { deletedCount }
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async deleteDiscountById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const deletedDiscount = await this.#service.deleteDiscountById({ id: Number(id) });
+
+            return res.status(200).json({
+                message: DiscountMessage.DELETE_DISCOUNT_ONE_SUCCESS,
+                data: deletedDiscount
             });
         } catch (error) {
             next(error)

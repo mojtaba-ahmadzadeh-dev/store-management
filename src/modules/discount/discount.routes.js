@@ -6,8 +6,9 @@ const router = Router()
 
 router.post('/', authGuard, discountController.create)
 router.get('/', authGuard, discountController.getAllDiscount);
-router.get('/:idOrCode', authGuard, discountController.getDiscountById);
+router.get('/:id', authGuard, discountController.getDiscountById);
 router.patch('/:id', authGuard, discountController.updateDiscountById);
 router.delete('/', authGuard, discountController.deleteAllDiscounts);
+router.delete('/:id', authGuard, discountController.deleteDiscountById);
 
 export { router as DiscountRoutes }

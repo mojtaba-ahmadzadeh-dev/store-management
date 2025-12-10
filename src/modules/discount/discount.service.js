@@ -58,6 +58,15 @@ class DiscountService {
         const deletedCount = await this.#model.destroy({ where: {} });
         return deletedCount;
     }
+
+    async deleteDiscountById({id}) {
+        if (!id) throw createHttpError(400, DiscountMessage.ID_REQUIRED);
+
+        const discount = await this.getDiscountById({ id });
+        await discount.destroy();
+
+        return discount;
+    }
 }
 
 export default new DiscountService()
