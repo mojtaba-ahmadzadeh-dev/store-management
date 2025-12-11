@@ -16,6 +16,7 @@ import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
 import { BlogRoutes } from './src/modules/blog/blog.routes.js';
 import { CommentRoutes } from './src/modules/comment/comment.routes.js';
 import { DiscountRoutes } from './src/modules/discount/discount.routes.js';
+import { NotficationRoutes } from './src/modules/notfication/notfication.routes.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -53,6 +54,7 @@ class App {
         this.app.use('/blog', BlogRoutes)
         this.app.use('/comment', CommentRoutes)
         this.app.use('/discount', DiscountRoutes)
+        this.app.use('/notfication', NotficationRoutes)
     }
 
     initSwagger() {
