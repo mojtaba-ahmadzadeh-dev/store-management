@@ -130,8 +130,19 @@ const DiscountMessage = {
     NOT_FOUND: "تخفیف مورد نظر یافت نشد.",
     ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید.",
     DELETE_DISCOUNT_SUCCESS: "کد تخفیف‌ها حذف شدند",
- DELETE_DISCOUNT_ONE_SUCCESS: "کد تخفیف با موفقیت حذف شد"
+    DELETE_DISCOUNT_ONE_SUCCESS: "کد تخفیف با موفقیت حذف شد"
 };
+
+const NotficationMessage = {
+    REQUIRED_FIELDS: "title و message الزامی هستند.",
+    CREATE_NOTFICATION_SUCCESS: "اعلان با موفقیت ایجاد شد.",
+    FETCH_ALL_SUCCESS: "لیست اعلان‌ها با موفقیت دریافت شد.",
+    FETCH_ONE_SUCCESS: "اعلان با موفقیت دریافت شد.",
+    NOT_FOUND: "اعلان مورد نظر یافت نشد.",
+    DELETE_SUCCESS: "اعلان با موفقیت حذف شد.",
+    DELETE_ALL_SUCCESS: "تمام اعلان‌ها با موفقیت حذف شدند.",
+    UPDATE_SUCCESS: "اعلان با موفقیت بروزرسانی شد."
+}
 
 export {
     AuthMessage,
@@ -143,5 +154,6 @@ export {
     RBACMessage,
     BlogMessage,
     CommentMessage,
-    DiscountMessage
+    DiscountMessage,
+    NotficationMessage
 };
