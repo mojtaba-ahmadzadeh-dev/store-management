@@ -1,7 +1,7 @@
 /**
  * @swagger
  * tags:
- *   name: Notification 🔔
+ *   name: Notfication 🔔
  *   description: APIs for managing system and user notifications
  */
 
@@ -13,7 +13,7 @@
  * /notfication:
  *   post:
  *     summary: Create a new notification
- *     tags: [Notification 🔔]
+ *     tags: [Notfication 🔔]
  *     description: |
  *       Create a notification sent by the system or admin. 
  *       The `type` field specifies the type of notification, 
@@ -104,7 +104,7 @@
  * /notfication/user/{id}:
  *   get:
  *     summary: Get all notifications of a specific user
- *     tags: [Notification 🔔]
+ *     tags: [Notfication 🔔]
  *     description: Fetch notifications for a user. Each notification may relate to an order, comment, product, or discount.
  *     parameters:
  *       - in: path

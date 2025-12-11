@@ -1,4 +1,6 @@
+import createHttpError from "http-errors";
 import { Notfication } from "./notfication.model.js";
+import { NotficationMessage } from "../../constant/messages.constant.js";
 
 class NotficationController {
 
@@ -21,6 +23,8 @@ class NotficationController {
             where: { user_id: id },
             order: [["createdAt", "DESC"]]
         });
+
+        if (notifications.length === 0) throw createHttpError(404, NotficationMessage.NOT_FOUND)
 
         return notifications;
     }
