@@ -1,4 +1,4 @@
-import { Notification } from "./notfication.model.js";
+import { Notfication } from "./notfication.model.js";
 
 class NotficationController {
 
@@ -6,18 +6,18 @@ class NotficationController {
     }
 
     async createNotfication(data) {
-        return await Notification.create({
+        return await Notfication.create({
             title: data.title,
             message: data.message,
             user_id: data.user_id || null,
-            product_id: data.product_id || null,
+            related_id: data.related_id || null,
             type: data.type || "info",
             read: false
         });
     }
 
     async getUserNotifications(id) {
-        const notifications = await Notification.findAll({
+        const notifications = await Notfication.findAll({
             where: { user_id: id },
             order: [["createdAt", "DESC"]]
         });

@@ -10,7 +10,7 @@ class NotficationService {
 
     async createNotfication(req, res, next) {
         try {
-            const { title, message, user_id, product_id, type } = req.body;
+            const { title, message, user_id, product_id, type, related_id } = req.body;
 
             if (!title || !message) throw createHttpError(NotficationMessage.REQUIRED_FIELDS)
 
@@ -19,7 +19,8 @@ class NotficationService {
                 message,
                 user_id,
                 product_id,
-                type
+                type,
+                related_id
             });
 
             return res.status(201).json({

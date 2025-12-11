@@ -6,7 +6,7 @@
  */
 
 /* -------------------------------------------------------------
-   📌 Create Notification (POST /notfication)
+   📌 Create Notification (POST /notification)
 -------------------------------------------------------------- */
 /**
  * @swagger
@@ -15,7 +15,9 @@
  *     summary: Create a new notification
  *     tags: [Notification 🔔]
  *     description: |
- *       This API is used to create a new notification sent by the admin or the system.
+ *       Create a notification sent by the system or admin. 
+ *       The `type` field specifies the type of notification, 
+ *       and `related_id` links to the corresponding item (order, comment, product, etc.).
  *
  *     requestBody:
  *       required: true
@@ -29,23 +31,24 @@
  *             properties:
  *               title:
  *                 type: string
- *                 example: "Special Discount"
+ *                 example: "New Order"
  *                 description: Notification title
  *               message:
  *                 type: string
- *                 example: "Get 30% off on all Call of Duty items!"
+ *                 example: "Order #254 has been placed"
  *               user_id:
  *                 type: integer
- *                 example: 3
- *                 description: Send notification to a specific user (optional)
- *               product_id:
- *                 type: integer
  *                 example: 12
- *                 description: Link notification to a specific product (optional)
+ *                 description: The user who will receive the notification
+ *               related_id:
+ *                 type: integer
+ *                 example: 254
+ *                 description: The ID of the related item (order, comment, product, etc.)
  *               type:
  *                 type: string
- *                 example: "discount"
- *                 description: Notification type (info, warning, discount, order, etc.)
+ *                 enum: [info, order, comment, product, discount]
+ *                 example: "order"
+ *                 description: Type of notification
  *
  *     responses:
  *       201:
@@ -70,7 +73,7 @@
  *                       type: string
  *                     user_id:
  *                       type: integer
- *                     product_id:
+ *                     related_id:
  *                       type: integer
  *                     type:
  *                       type: string
@@ -91,13 +94,10 @@
  *                 message:
  *                   type: string
  *                   example: "title and message are required"
- *
- *       500:
- *         description: Internal server error
  */
 
 /* -------------------------------------------------------------
-   📌 Get User Notifications (GET /notfication/user/{userId})
+   📌 Get User Notifications (GET /notification/user/{userId})
 -------------------------------------------------------------- */
 /**
  * @swagger
@@ -105,7 +105,7 @@
  *   get:
  *     summary: Get all notifications of a specific user
  *     tags: [Notification 🔔]
- *     description: Fetch a list of notifications related to the given user ID.
+ *     description: Fetch notifications for a user. Each notification may relate to an order, comment, product, or discount.
  *     parameters:
  *       - in: path
  *         name: id
@@ -142,11 +142,12 @@
  *                       user_id:
  *                         type: integer
  *                         example: 12
- *                       product_id:
+ *                       related_id:
  *                         type: integer
- *                         example: 5
+ *                         example: 254
  *                       type:
  *                         type: string
+ *                         enum: [info, order, comment, product, discount]
  *                         example: "order"
  *                       createdAt:
  *                         type: string

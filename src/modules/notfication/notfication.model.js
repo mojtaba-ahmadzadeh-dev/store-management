@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 
-const Notification = sequelize.define('notification', {
+const Notfication = sequelize.define('notification', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,6 +19,14 @@ const Notification = sequelize.define('notification', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    type: {
+        type: DataTypes.ENUM("info", "order", "comment", "product", "discount"),
+        defaultValue: "info",
+    },
+    related_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true, 
+    },
     read: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -28,4 +36,4 @@ const Notification = sequelize.define('notification', {
     timestamps: true
 });
 
-export { Notification };
+export { Notfication };
