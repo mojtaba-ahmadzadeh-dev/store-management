@@ -1,7 +1,8 @@
 import autoBind from "auto-bind"
-import { Permission, Role } from "./rbac.model.js";
 import createHttpError from "http-errors";
 import { RBACMessage } from "../../constant/messages.constant.js";
+import { Role, Permission, RolePermission } from "./rbac.model.js";
+import { Op } from "sequelize";
 class RBACService {
     #model;
     constructor() {
@@ -49,18 +50,15 @@ class RBACService {
     }
 
     async createRole(data) {
-        const { title, description, permissionIds = [] } = data;
+        const { title, description } = data;
         const exists = await Role.findOne({ where: { title } });
-        if (exists) throw createHttpError(400, RBACMessage.ROLE_ALREADY_EXISTS);
+        if (exists) throw createHttpError(409, RBACMessage.ROLE_ALREADY_EXISTS);
 
-        const role = await Role.create({ title, description });
-
-        if (permissionIds.length > 0) {
-            const permissions = await Permission.findAll({ where: { id: permissionIds } });
-            await role.setPermissions(permissions);
-        }
-
-        return await Role.findByPk(role.id, { include: ["permissions"] });
+        const role = await Role.create({
+            title,
+            description
+        })
+        return role
     }
 
     async getAllRoles() {
@@ -105,15 +103,20 @@ class RBACService {
         return role
     }
 
-    async assignPermissionToRole(roleId, permissionIds = []) {
-        const role = await Role.findByPk(roleId, { include: ["permissions"] });
+    async assignPermissionToRole(roleId, permissions = []) {
+        let role = await Role.findOne({ where: { id: roleId } });
         if (!role) throw createHttpError(404, RBACMessage.ROLE_NOT_FOUND);
-        const permissions = await Permission.findAll({ where: { id: permissionIds } });
-        if (permissions.length !== permissionIds.length) {
-            throw createHttpError(404, RBACMessage.PERMISSION_NOT_FOUND);
+        if (permissions.length > 0) {
+            const permissionCount = await Permission.count({ where: { id: { [Op.in]: permissions } } })
+            if (permissionCount !== permissions.length) {
+                throw createHttpError(400, RBACMessage.PERMISSION_SOME_NOT_FOUND)
+            }
+            const permissionList = permissions.map(per => ({
+                roleId,
+                permissionId: per
+            }))
+            await RolePermission.bulkCreate(permissionList)
         }
-        await role.addPermissions(permissions);
-        return await Role.findByPk(roleId, { include: ["permissions"] });
     }
 }
 

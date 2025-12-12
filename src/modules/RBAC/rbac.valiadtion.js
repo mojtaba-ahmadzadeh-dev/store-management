@@ -58,7 +58,7 @@ export const assignPermissionToRoleValidation = Joi.object({
         .integer()
         .required()
         .error(createHttpError.BadRequest("شناسه نقش معتبر نیست")),
-    permissionIds: Joi.array()
+    permissions: Joi.array()
         .items(Joi.number().integer())
         .required()
         .error(createHttpError.BadRequest("لیست دسترسی‌ها معتبر نیست"))

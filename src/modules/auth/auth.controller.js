@@ -3,6 +3,7 @@ import autoBind from "auto-bind";
 import authService from "./auth.service.js";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import createHttpError from "http-errors";
+import { log } from "console";
 
 class AuthController {
     #service;
@@ -86,8 +87,7 @@ class AuthController {
 
     async getMe(req, res, next) {
         try {
-            if (!req.user) throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
-
+            
             return res.json({
                 message: AuthMessage.GET_ME_SUCCESS,
                 result: req.user

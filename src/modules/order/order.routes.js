@@ -1,13 +1,12 @@
 import express from "express";
 import orderController from "./order.controller.js";
-import { authGuard } from "../../middlewares/guard/auth.guard.js";
 import adminMiddleware from "../../middlewares/admin.middleware.js";
 
 const router = express.Router();
 
-router.post("/create", authGuard, orderController.createOrder);
+router.post("/create", orderController.createOrder);
 router.get("/admin", adminMiddleware, orderController.getAllOrders);
-router.get("/", authGuard, orderController.getUserOrders);
-router.get("/:id", authGuard, orderController.getOrderById);
+router.get("/", orderController.getUserOrders);
+router.get("/:id", orderController.getOrderById);
 
 export { router as OrderRoutes };
