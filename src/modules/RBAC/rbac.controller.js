@@ -1,6 +1,7 @@
 import autoBind from "auto-bind"
 import rbacService from "./rbac.service.js";
 import { RBACMessage } from "../../constant/messages.constant.js";
+import createHttpError from "http-errors";
 
 class RBACController {
     #service;
@@ -11,15 +12,21 @@ class RBACController {
 
     async createPermission(req, res, next) {
         try {
-            const { name, description } = req.body
-            const permission = await this.#service.createPermission({ name, description })
+            const { name, description } = req.body;
+
+            if (!name) {
+                throw createHttpError(400, "title is required");
+            }
+
+            const permission = await this.#service.createPermission({ name, description });
+
             res.status(201).json({
-                message: RBACMessage.ROLE_CREATED_SUCCESS,
+                message: RBACMessage.PERMISSION_ASSIGN_SUCCESS,
                 success: true,
                 data: permission
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -67,15 +74,16 @@ class RBACController {
 
     async createRole(req, res, next) {
         try {
-            const { title, description, permissionIds } = req.body;
-            const role = await this.#service.createRole({ title, description, permissionIds });
+            const { title, description } = req.body;
+
+            const role = await this.#service.createRole({ title, description });
             res.status(201).json({
-                message: RBACMessage.ROLE_CREATED_SUCCESS,
+                message: "Role created successfully",
                 success: true,
                 data: role
             });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 
@@ -124,8 +132,8 @@ class RBACController {
 
     async assignPermissionToRole(req, res, next) {
         try {
-            const { roleId, permissionIds } = req.body;
-            const updatedRole = await this.#service.assignPermissionToRole(roleId, permissionIds)
+            const { roleId, permissions } = req.body;
+            const updatedRole = await this.#service.assignPermissionToRole(roleId, permissions)
             res.status(200).json({
                 message: RBACMessage.PERMISSION_ASSIGN_SUCCESS,
                 success: true,
@@ -135,6 +143,26 @@ class RBACController {
             next(error)
         }
     }
+
+    async assignRoleToUser(req, res, next) {
+        try {
+            const { userId, roleIds } = req.body;
+            if (!userId || !roleIds || !Array.isArray(roleIds)) {
+                throw createHttpError(400, "userId and roleIds are required");
+            }
+
+            const updatedUser = await this.#service.assignRoleToUser(userId, roleIds);
+
+            res.status(200).json({
+                message: RBACMessage.USER_ROLE_ASSIGNED_SUCCESS,
+                success: true,
+                data: updatedUser
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default new RBACController()

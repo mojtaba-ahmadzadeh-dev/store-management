@@ -1,7 +1,7 @@
 import { sequelize } from "../../configs/sequelize.config.js";
 import { DataTypes } from "sequelize";
 import { Category } from "../category/category.model.js";
-import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
+import { STATUS } from "../../constant/status.constant.js";
 
 const Product = sequelize.define('product', {
     id: {
@@ -24,9 +24,9 @@ const Product = sequelize.define('product', {
         defaultValue: 0,
     },
     status: {
-        type: DataTypes.ENUM(CATEGORY_STATUS.ACTIVE, CATEGORY_STATUS.INACTIVE),
+        type: DataTypes.ENUM(STATUS.ACTIVE, STATUS.INACTIVE),
         allowNull: true,
-        defaultValue: CATEGORY_STATUS.ACTIVE,
+        defaultValue: STATUS.ACTIVE,
     },
     likes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     bookmarked: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },

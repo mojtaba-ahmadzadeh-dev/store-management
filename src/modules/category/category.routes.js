@@ -1,13 +1,11 @@
 import { Router } from "express";
-import categoryController from "./category.controller.js";
-import { authGuard } from "../../middlewares/guard/auth.guard.js";
-
+import categoryController from "./category.controller.js"
 const router = Router()
 
-router.post('/create', authGuard, categoryController.createCategory)
-router.get('/', authGuard, categoryController.getAllCategories)
-router.get('/:id', authGuard, categoryController.getCategoryById)
-router.put('/:id', authGuard, categoryController.updateCategoryById)
-router.delete('/delete/:id', authGuard, categoryController.deleteCategory)
+router.post('/create', categoryController.createCategory)
+router.get('/', categoryController.getAllCategories)
+router.get('/:id', categoryController.getCategoryById)
+router.put('/:id', categoryController.updateCategoryById)
+router.delete('/delete/:id', categoryController.deleteCategory)
 
 export { router as CategoryRoutes }

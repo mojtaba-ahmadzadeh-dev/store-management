@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-export const STATUS = Object.freeze({
-    ACTIVE: 'active',
-    INACTIVE: 'inactive',
-}) 
-=======
 <<<<<<<< HEAD:src/constant/order_status.constant.js
 export const OrderStatus = Object.freeze({
 ========
@@ -21,4 +15,3 @@ export const UserStatus = {
   REJECT: "rejected"
 };
 >>>>>>>> develop:src/constant/status.constant.js
->>>>>>> develop

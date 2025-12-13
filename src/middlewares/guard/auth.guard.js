@@ -1,41 +1,32 @@
-import jwt from "jsonwebtoken";
+// middlewares/guard/auth.guard.js
 import createHttpError from "http-errors";
 import { User } from "../../modules/user/user.model.js";
-import { AuthMessage } from "../../constant/messages.constant.js";
+import jwt from "jsonwebtoken";
+import { RBACMessage } from "../../constant/messages.constant.js";
 
-export const authGuard = async (req, res, next) => {
-
+export const authGuard = () => {
+  return async (req, res, next) => {
     try {
-        let token = req.headers.authorization?.startsWith("Bearer ")
-            ? req.headers.authorization.split(" ")[1]
-            : null;
+      const token = req.cookies?.accessToken;
+      if (!token) throw createHttpError.Unauthorized(RBACMessage.ACCESS_TOKEN_NOT_FOUND);
 
-        if (!token && req.cookies?.accessToken) {
-            token = req.cookies.accessToken;
-        }
+      const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      if (!payload?.userId) throw createHttpError.Unauthorized("Invalid token");
 
-        if (!token) {
-            throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
-        }
+      const user = await User.findByPk(payload.userId);
+      if (!user) throw createHttpError.NotFound(RBACMessage.USER_NOT_FOUND);
 
-        const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      req.user = user;
 
-        const user = await User.findByPk(verified.userId);
-        if (!user) {
-            throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
-        }
-
-        req.user = {
-            id: user.id,
-            mobile: user.mobile,
-            full_name: user.full_name,
-            role: user.role,
-        };
-
-        next();
-
-    } catch (error) {
-        console.error(error);
-        return next(createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID));
+      next();
+    } catch (err) {
+      if (err.name === "TokenExpiredError") {
+        return next(createHttpError.Unauthorized("Token expired"));
+      }
+      if (err.name === "JsonWebTokenError") {
+        return next(createHttpError.Unauthorized("Invalid token"));
+      }
+      next(err);
     }
+  };
 };

@@ -5,6 +5,7 @@ import createHttpError from "http-errors";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import { randomInt } from "crypto";
 import jwt from 'jsonwebtoken';
+import { USER_ROLES } from "../../constant/roles.constant.js";
 
 class AuthService {
     #userModel
@@ -24,7 +25,10 @@ class AuthService {
         const expires_in = new Date(now.getTime() + 2 * 60 * 1000);
 
         if (!user) {
-            user = await this.#userModel.create({ mobile });
+            const usersCount = await this.#userModel.count();
+            const isAdmin = usersCount === 0;
+
+            user = await this.#userModel.create({ mobile, isAdmin });
         }
 
         await this.#otpModel.destroy({ where: { user_id: user.id } });
@@ -81,10 +85,14 @@ class AuthService {
     async getMe(userId) {
         const user = await this.#userModel.findOne({
             where: { id: userId },
-        })
-        if (!user) throw new createHttpError.NotFound(AuthMessage.USER_NOT_FOUND);
-        return user
+            attributes: ['id', 'mobile', 'full_name', 'avatar', 'isAdmin', 'is_banned', 'created_at']
+        });
+
+        if (!user) throw new createHttpError.NotFound("User not found");
+
+        return user;
     }
+
 }
 
 export default new AuthService();

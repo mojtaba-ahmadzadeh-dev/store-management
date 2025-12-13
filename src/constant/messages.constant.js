@@ -95,6 +95,9 @@ const RBACMessage = {
     ROLE_ALREADY_EXISTS: "Role با این عنوان قبلاً موجود است",
     ROLE_DELETED_SUCCESS: "نقش با موفقیت حذف شد",
     PERMISSION_ASSIGN_SUCCESS: "دسترسی‌ها با موفقیت به نقش اختصاص داده شد",
+    PERMISSION_SOME_NOT_FOUND: "برخی از دسترسی‌های ارسال‌شده یافت نشدند",
+    ACCESS_TOKEN_NOT_FOUND: "توکن دسترسی یافت نشد",
+    USER_NOT_FOUND: "کاربر پیدا نشد",
 };
 const BlogMessage = {
     CREATE_BLOG_SUCESS: "بلاگ با موفقیت ایجاد شد",
