@@ -70,13 +70,15 @@ const BasketMessage = {
 }
 
 const OrderMessage = {
+    ORDER_NOT_FOUND: "سفارش یافت نشد",
     ORDER_SUCCESS: "سفارش با موفقیت ثبت شد",
-    ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
-    ORDER_FAILED: "ثبت سفارش با خطا مواجه شد",
+    ORDER_UPDATE_SUCCESS: "سفارش با موفقیت آپدیت شد",
+    ORDER_DELETE_SUCCESS: "سفارش با موفقیت حذف شد",
     GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
-    GET_ORDER_BY_ID_SUCCESS: "جزئیات سفارش با موفقیت دریافت شد",
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
-}
+    ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
+    ORDER_NOT_AUTHORIZED: "شما اجازه دسترسی به این سفارش را ندارید"
+};
 
 const RBACMessage = {
     ROLE_CREATED_SUCCESS: "نقش با موفقیت ایجاد شد",
@@ -97,6 +99,53 @@ const RBACMessage = {
     ACCESS_TOKEN_NOT_FOUND: "توکن دسترسی یافت نشد",
     USER_NOT_FOUND: "کاربر پیدا نشد",
 };
+const BlogMessage = {
+    CREATE_BLOG_SUCESS: "بلاگ با موفقیت ایجاد شد",
+    ALL_BLOGS_FETCHED: "لیست بلاگ‌ها با موفقیت دریافت شد",
+    BLOG_FETCHED: "بلاگ با موفقیت دریافت شد",
+    BLOG_NOT_FOUND: "بلاگ مورد نظر یافت نشد",
+    BLOG_UPDATED: "بلاگ با موفقیت ویرایش شد",
+    SLUG_ALREADY_EXISTS: "Slug تکراری است",
+    BLOG_DELETED: 'بلاگ با موفقیت حذف شد',
+};
+
+const CommentMessage = {
+    REQUIRED: "متن کامنت و یکی از فیلدهای blog_id یا product_id الزامی است.",
+    CREATE_COMMENT_SUCCESS: "کامنت با موفقیت ثبت شد.",
+    INTERNAL_ERROR: "خطای داخلی سرور رخ داد.",
+    BLOG_FETCHED: "لیست کامنت‌ها با موفقیت دریافت شد.",
+    FETCHED_SUCCESS: "کامنت‌ها با موفقیت دریافت شد.",
+    UPDATE_SUCCESS: "کامنت با موفقیت ویرایش شد.",
+    NOT_FOUND: "کامنت مورد نظر یافت نشد.",
+    ACCESS_DENIED: "شما اجازه ویرایش این کامنت را ندارید.",
+    DELETED_COMMENT_SUCCESS: "کامنت با موفقیت حذف شد",
+    ADMIN_DELETE_DENIED: "فقط مدیران اجازه حذف کامنت را دارند",
+    EITHER_BLOG_OR_PRODUCT_REQUIRED: "یکی از فیلدهای blog_id یا product_id الزامی است",
+};
+
+const DiscountMessage = {
+    REQUIRED_FIELDS: "فیلدهای الزامی را وارد کنید.",
+    DUPLICATE: "کد تخفیف تکراری است.",
+    CREATED: "کد تخفیف با موفقیت ایجاد شد.",
+    LIST_FETCHED: "لیست تخفیف‌ها با موفقیت دریافت شد.",
+    FETCHED: "تخفیف با موفقیت دریافت شد.",
+    UPDATED: "تخفیف با موفقیت ویرایش شد.",
+    NOT_FOUND: "تخفیف مورد نظر یافت نشد.",
+    ID_OR_CODE_REQUIRED: "لطفاً id یا code را وارد کنید.",
+    DELETE_DISCOUNT_SUCCESS: "کد تخفیف‌ها حذف شدند",
+    DELETE_DISCOUNT_ONE_SUCCESS: "کد تخفیف با موفقیت حذف شد"
+};
+
+const NotficationMessage = {
+    REQUIRED_FIELDS: "title و message الزامی هستند.",
+    CREATE_NOTFICATION_SUCCESS: "اعلان با موفقیت ایجاد شد.",
+    FETCH_ALL_SUCCESS: "لیست اعلان‌ها با موفقیت دریافت شد.",
+    FETCH_ONE_SUCCESS: "اعلان با موفقیت دریافت شد.",
+    NOT_FOUND: "اعلان مورد نظر یافت نشد.",
+    DELETE_SUCCESS: "اعلان با موفقیت حذف شد.",
+    DELETE_ALL_SUCCESS: "تمام اعلان‌ها با موفقیت حذف شدند.",
+    UPDATE_SUCCESS: "اعلان با موفقیت بروزرسانی شد."
+}
 
 export {
     AuthMessage,
@@ -105,5 +154,9 @@ export {
     ProductMessage,
     BasketMessage,
     OrderMessage,
-    RBACMessage
+    RBACMessage,
+    BlogMessage,
+    CommentMessage,
+    DiscountMessage,
+    NotficationMessage
 };

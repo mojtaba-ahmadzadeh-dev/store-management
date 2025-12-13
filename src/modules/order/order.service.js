@@ -3,6 +3,7 @@ import { Order, OrderItem } from "./order.model.js";
 import BasketService from "../basket/basket.service.js";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { OrderMessage } from "../../constant/messages.constant.js";
+import createHttpError from "http-errors";
 
 class OrderService {
     constructor() {
@@ -91,6 +92,56 @@ class OrderService {
             ],
             order: [["createdAt", "DESC"]]
         });
+    }
+
+    async updateOrder(orderId, userId, { shipping_address, payment_method, status }) {
+        const order = await Order.findOne({ where: { id: orderId, user_id: userId } })
+        if (!order) throw createHttpError(404, OrderMessage.ORDER_NOT_FOUND);
+
+        if (shipping_address !== undefined) order.shipping_address = shipping_address;
+        if (payment_method !== undefined) order.payment_method = payment_method;
+        if (status !== undefined) order.status = status;
+
+        await order.save();
+        return order;
+    }
+
+    async deleteOrder(orderId, userId, isAdmin = false) {
+        const order = await Order.findOne({ where: { id: orderId } });
+        if (!order) throw createHttpError(404, OrderMessage.ORDER_NOT_FOUND);
+
+        if (!isAdmin && order.user_id !== userId) {
+            throw createHttpError(403, OrderMessage.ORDER_NOT_AUTHORIZED);
+        }
+        await order.destroy();
+        return order;
+    }
+
+    async updateOrderStatus(orderId, userId, status, isAdmin = false) {
+        const order = await Order.findOne({ where: { id: orderId } })
+        if (!order) throw createHttpError(404, OrderMessage.ORDER_NOT_FOUND);
+        if (!isAdmin && order.user_id !== userId) {
+            throw createHttpError(403, OrderMessage.ORDER_NOT_AUTHORIZED);
+        }
+        order.status = status;
+        await order.save()
+        return order
+    }
+
+    async getOrdersByStatus(status) {
+        const whereClause = {}
+        if (status) whereClause.status = status;
+        return await Order.findAll({
+            where: whereClause,
+            include: [
+                {
+                    model: OrderItem,
+                    as: "order_items",
+                    attributes: ['product_id', 'quantity', 'price', 'total_price']
+                }
+            ],
+            order: [["createdAt", "DESC"]]
+        })
     }
 }
 
