@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authController from "./auth.controller.js";
 import { validateCheckOTP, validateSendOTP } from "./auth.validation.js";
+import { authGuard } from "../../middlewares/guard/auth.guard.js";
 
 
 const router = Router();

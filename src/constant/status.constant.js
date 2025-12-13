@@ -1,4 +1,4 @@
-export const CATEGORY_STATUS = Object.freeze({
+export const STATUS = Object.freeze({
     ACTIVE: 'active',
     INACTIVE: 'inactive',
 }) 

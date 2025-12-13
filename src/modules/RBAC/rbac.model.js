@@ -28,5 +28,14 @@ const RolePermission = sequelize.define('role_permission', {
   timestamps: false
 });
 
+const UserRole = sequelize.define('user_role', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  userId: { type: DataTypes.INTEGER, allowNull: false },
+  roleId: { type: DataTypes.INTEGER, allowNull: false }
+}, {
+  modelName: 'user_role',
+  timestamps: false
+});
 
-export { Role, Permission, RolePermission };
+
+export { Role, Permission, RolePermission, UserRole };

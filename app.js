@@ -13,6 +13,7 @@ import { ProductRoutes } from './src/modules/product/product.routes.js';
 import { BasketRoutes } from './src/modules/basket/basket.routes.js';
 import { OrderRoutes } from './src/modules/order/order.routes.js';
 import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
+import { seedPermissionsAndRoles } from './src/configs/rbac.seed.js';
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -58,6 +59,7 @@ class App {
             await sequelize.authenticate();
             console.log('Database connection has been established successfully.');
             await initDb();
+            await seedPermissionsAndRoles();
         } catch (error) {
             console.log('Unable to connect to the database:', error);
         }

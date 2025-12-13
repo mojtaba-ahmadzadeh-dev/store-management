@@ -3,6 +3,7 @@ import createHttpError from "http-errors";
 import { RBACMessage } from "../../constant/messages.constant.js";
 import { Role, Permission, RolePermission } from "./rbac.model.js";
 import { Op } from "sequelize";
+import { User } from "../user/user.model.js";
 class RBACService {
     #model;
     constructor() {
@@ -118,6 +119,23 @@ class RBACService {
             await RolePermission.bulkCreate(permissionList)
         }
     }
+
+    async assignRoleToUser(userId, roleIds = []) {
+        const user = await User.findByPk(userId);
+        if (!user) throw createHttpError(404, "User not found");
+
+        if (roleIds.length > 0) {
+            const roles = await Role.findAll({ where: { id: { [Op.in]: roleIds } } });
+            if (roles.length !== roleIds.length) {
+                throw createHttpError(400, "Some roles not found");
+            }
+            await user.setRoles(roles); // متد belongsToMany Sequelize
+        }
+
+        return await User.findByPk(userId, { include: [{ model: Role, as: "roles" }] });
+    }
+
+
 }
 
 export default new RBACService()

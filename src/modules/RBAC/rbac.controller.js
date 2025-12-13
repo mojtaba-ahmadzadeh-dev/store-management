@@ -1,7 +1,6 @@
 import autoBind from "auto-bind"
 import rbacService from "./rbac.service.js";
 import { RBACMessage } from "../../constant/messages.constant.js";
-import { Role, Permission } from "./rbac.model.js";
 import createHttpError from "http-errors";
 
 class RBACController {
@@ -30,7 +29,6 @@ class RBACController {
             next(error);
         }
     }
-
 
     async getAllPermissions(req, res, next) {
         try {
@@ -145,6 +143,26 @@ class RBACController {
             next(error)
         }
     }
+
+    async assignRoleToUser(req, res, next) {
+        try {
+            const { userId, roleIds } = req.body;
+            if (!userId || !roleIds || !Array.isArray(roleIds)) {
+                throw createHttpError(400, "userId and roleIds are required");
+            }
+
+            const updatedUser = await this.#service.assignRoleToUser(userId, roleIds);
+
+            res.status(200).json({
+                message: RBACMessage.USER_ROLE_ASSIGNED_SUCCESS,
+                success: true,
+                data: updatedUser
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 export default new RBACController()

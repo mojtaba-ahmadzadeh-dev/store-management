@@ -1,6 +1,6 @@
 import Joi from "joi";
 import createHttpError from "http-errors";
-import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
+import { STATUS } from "../../constant/status.constant.js";
 
 export const productValidation = Joi.object({
     name: Joi.string()
@@ -21,7 +21,7 @@ export const productValidation = Joi.object({
         .error(createHttpError.BadRequest("قیمت وارد شده صحیح نمی‌باشد")),
 
     status: Joi.string()
-        .valid(CATEGORY_STATUS.ACTIVE, CATEGORY_STATUS.INACTIVE)
+        .valid(STATUS.ACTIVE, STATUS.INACTIVE)
         .required()
         .error(createHttpError.BadRequest("وضعیت محصول معتبر نیست")),
 
