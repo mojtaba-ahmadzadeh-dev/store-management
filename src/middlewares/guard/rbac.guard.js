@@ -9,7 +9,7 @@ export const rbacGuard = (requiredPermissions = [], requireAll = true) => {
         throw createHttpError(401, "Unauthorized");
       }
 
-          // Fetch user along with roles and permissions
+      // Fetch user along with roles and permissions
       const user = await User.findByPk(req.user.id, {
         include: [
           {
@@ -38,6 +38,10 @@ export const rbacGuard = (requiredPermissions = [], requireAll = true) => {
 
       // If no specific permission is required, allow access
       if (!requiredPermissions || requiredPermissions.length === 0) {
+        return next();
+      }
+
+      if (req.user?.isAdmin === 1) {
         return next();
       }
 
