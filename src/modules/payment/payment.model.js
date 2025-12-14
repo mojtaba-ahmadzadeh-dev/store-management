@@ -35,7 +35,6 @@ const Payment = sequelize.define("payment", {
     transaction_id: {
         type: DataTypes.STRING,
         allowNull: true,
-        unique: true,
     },
 }, {
     tableName: "payments",

@@ -4,10 +4,10 @@ import { authGuard } from "../../middlewares/guard/auth.guard.js";
 
 const router = Router()
 
-router.post('/create', authGuard, categoryController.createCategory)
-router.get('/', authGuard, categoryController.getAllCategories)
-router.get('/:id', authGuard, categoryController.getCategoryById)
-router.put('/:id', authGuard, categoryController.updateCategoryById)
-router.delete('/delete/:id', authGuard, categoryController.deleteCategory)
+router.post('/create', authGuard(), categoryController.createCategory)
+router.get('/', authGuard(), categoryController.getAllCategories)
+router.get('/:id', authGuard(), categoryController.getCategoryById)
+router.put('/:id', authGuard(), categoryController.updateCategoryById)
+router.delete('/delete/:id', authGuard(), categoryController.deleteCategory)
 
 export { router as CategoryRoutes }

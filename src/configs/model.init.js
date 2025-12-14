@@ -29,22 +29,12 @@ const initDatabase = async () => {
     Order.hasMany(Payment, { foreignKey: 'order_id', onDelete: 'CASCADE' });
     Payment.belongsTo(Order, { foreignKey: 'order_id' });
 
-    Role.belongsToMany(Permission, {
-        through: RolePermissions,
-        foreignKey: 'roleId',
-        otherKey: 'permissionId',
-        as: 'permissions'
-    });
-
-    Permission.belongsToMany(Role, {
-        through: RolePermissions,
-        foreignKey: 'permissionId',
-        otherKey: 'roleId',
-        as: 'roles'
-    });
+    Role.belongsToMany(Permission, { through: RolePermissions, foreignKey: 'roleId', otherKey: 'permissionId', as: 'permissions' });
+    Permission.belongsToMany(Role, { through: RolePermissions, foreignKey: 'permissionId', otherKey: 'roleId', as: 'roles' });
 
     // Payment.sync()
     // Order.sync()
+    // OrderItem.sync()
 
     // await sequelize.sync({ alter: true });
     // console.log("Database initialized with Order & OrderItem!");
