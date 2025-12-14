@@ -6,10 +6,10 @@ class PaymentController {
     }
     async paymentBasket(req, res, next) {
         try {
-                console.log("req.user:", req.user); 
-           const userId = req.user.id;
-           
-            const result = await paymentService.paymentBasket(userId);
+            console.log("req.user:", req.user);
+            const userId = req.user.id;
+            const user = req.user;
+            const result = await paymentService.paymentBasket(userId, user);
             return res.json({
                 success: true,
                 message: 'پرداخت ایجاد شد',

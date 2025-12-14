@@ -2,13 +2,14 @@ import { Payment } from "./payment.model.js"
 import { Order, OrderItem } from "../order/order.model.js";
 import { OrderStatus } from "../../constant/order_status.constant.js";
 import basketService from "../basket/basket.service.js";
+import zarinpalService from "../zarinpal/zarinpal.service.js";
 
 class PaymentService {
     constructor() {
 
     }
 
-    async paymentBasket(userId) {
+    async paymentBasket(userId, user) {
         const userBasket = await basketService.getUserBasket(userId);
         const basket = userBasket.items;
         const total_price = userBasket.totalPrice;
@@ -46,8 +47,9 @@ class PaymentService {
 
         await OrderItem.bulkCreate(orderItems);
 
-        const paymentUrl = `https://zarinpal.com/payment/${payment.id}`;
-        return { order, orderItems, payment: paymentUrl };
+        const result = await zarinpalService.zarinpalRequest(payment?.amount, user);
+
+        return result 
     }
 
 }
