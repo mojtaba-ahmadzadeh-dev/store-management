@@ -4,4 +4,5 @@ export const OrderStatus = {
   SHIPPED: 'shipped',
   COMPLETED: 'completed',
   CANCELLED: 'cancelled',
+  INPROCCESS: 'inproccess'
 };

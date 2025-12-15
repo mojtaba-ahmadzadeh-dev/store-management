@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { Order } from "../order/order.model.js";
 import { PaymentStatus } from "../../constant/payment_status.constant.js";
+import { User } from "../user/user.model.js";
 
 const Payment = sequelize.define("payment", {
     id: {
@@ -18,6 +19,15 @@ const Payment = sequelize.define("payment", {
         },
         onDelete: "CASCADE",
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: User,
+            key: "id"
+        },
+        onDelete: "CASCADE"
+    },
     amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
@@ -26,6 +36,11 @@ const Payment = sequelize.define("payment", {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "online",
+    },
+    authority: {            // اضافه شد
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true
     },
     status: {
         type: DataTypes.ENUM(...Object.values(PaymentStatus)),

@@ -1,13 +1,13 @@
-import { Payment } from "./payment.model.js"
+import { Payment } from "./payment.model.js";
 import { Order, OrderItem } from "../order/order.model.js";
 import { OrderStatus } from "../../constant/order_status.constant.js";
 import basketService from "../basket/basket.service.js";
-import zarinpalService from "../zarinpal/zarinpal.service.js";
+import zarinpalService from "../services/zarinpal.service.js";
+import createHttpError from "http-errors";
+import { Basket } from "../basket/basket.model.js";
+import { PaymentStatus } from "../../constant/payment_status.constant.js";
 
 class PaymentService {
-    constructor() {
-
-    }
 
     async paymentBasket(userId, user) {
         const userBasket = await basketService.getUserBasket(userId);
@@ -29,9 +29,11 @@ class PaymentService {
 
         const payment = await Payment.create({
             order_id: order.id,
+            user_id: userId,
             amount: final_amount,
             method: "online",
-            status: OrderStatus.PENDING
+            status: OrderStatus.PENDING,
+            authority: 'temp'
         });
 
         order.payment_id = payment.id;
@@ -47,11 +49,50 @@ class PaymentService {
 
         await OrderItem.bulkCreate(orderItems);
 
-        const result = await zarinpalService.zarinpalRequest(payment?.amount, user);
+        const result = await zarinpalService.zarinpalRequest(payment.amount, user);
 
-        return result 
+        payment.authority = result?.authority;
+        await payment.save();
+
+        return result;
+    }
+
+    async paymentVerify(status, authority) {
+        try {
+            if (status === 'OK' && authority) {
+                const payment = await Payment.findOne({ where: { authority } });
+                if (!payment) throw createHttpError(404, 'پرداخت یافت نشد');
+
+                const result = await zarinpalService.zarinpalVerify(payment.amount, authority);
+
+                payment.status = PaymentStatus.SUCCESS;
+                payment.transaction_id = result.ref_id ?? '32435';
+                await payment.save();
+
+                const order = await Order.findByPk(payment.order_id);
+                if (!order) throw createHttpError(404, 'سفارش یافت نشد');
+
+                order.status = OrderStatus.INPROCCESS;
+
+                await order.save();
+                await payment.save();
+                await Basket.destroy({ where: { user_id: order.user_id } });
+
+                return {
+                    success: true,
+                    amount: payment.amount,
+                    ref_id: result.ref_id,
+                    code: result.code,
+                };
+            } else {
+                return { success: false };
+            }
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
 }
 
-export default new PaymentService()
+export default new PaymentService();
