@@ -15,21 +15,21 @@ import { Notfication } from "../modules/notfication/notfication.model.js";
 const initDatabase = async () => {
 
     // USER
-    User.hasMany(Basket, {foreignKey: 'user_id',onDelete: 'CASCADE',as: 'baskets'});
+    User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE', as: 'baskets' });
     Basket.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-    User.hasMany(Order, {foreignKey: 'user_id',onDelete: 'CASCADE',as: 'orders'});
+    User.hasMany(Order, { foreignKey: 'user_id', onDelete: 'CASCADE', as: 'orders' });
     Order.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-    User.hasMany(Payment, {foreignKey: 'user_id',onDelete: 'CASCADE',as: 'payments'});
+    User.hasMany(Payment, { foreignKey: 'user_id', onDelete: 'CASCADE', as: 'payments' });
     Payment.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
     // CATEGORY & PRODUCT
-    Category.hasMany(Product, {foreignKey: 'category_id',onDelete: 'CASCADE',as: 'products'});
+    Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE', as: 'products' });
     Product.belongsTo(Category, { foreignKey: 'category_id', as: 'category' });
 
     // BASKET
-    Product.hasMany(Basket, {foreignKey: 'product_id',onDelete: 'CASCADE',as: 'basketItems'});
+    Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE', as: 'basketItems' });
     Basket.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
 
 
