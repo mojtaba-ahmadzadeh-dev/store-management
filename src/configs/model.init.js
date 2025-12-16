@@ -16,9 +16,12 @@ import { Comment } from "../modules/comment/comment.model.js";
 import { Discount } from "../modules/discount/discount.model.js";
 import { Notfication } from "../modules/notfication/notfication.model.js";
 
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> origin/develop
 const initDatabase = async () => {
 
     /* ===================== USER ===================== */
@@ -119,6 +122,18 @@ const initDatabase = async () => {
         foreignKey: "permissionId"
     });
 
+<<<<<<< HEAD
+    // Notfication.sync()
+    // Blog.sync()
+    // Product.sync()
+    // Basket.sync()
+    // Comment.sync()
+    // Blog.sync()
+
+    // Discount.sync()
+    // OrderItem.sync()
+    // Order.sync()
+=======
 
     // Payment.sync()
 
@@ -128,6 +143,7 @@ const initDatabase = async () => {
 };
 
 export { initDatabase };
+>>>>>>> origin/develop
 
     // await sequelize.sync({ alter: true });
 

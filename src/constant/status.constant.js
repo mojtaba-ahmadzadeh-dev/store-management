@@ -1,4 +1,4 @@
-export const UserStatus = Object.freeze({
-  APPROVED: 'approved',
-  REJECT: 'rejected'
-});
+export const STATUS = Object.freeze({
+    ACTIVE: 'active',
+    INACTIVE: 'inactive',
+}) 

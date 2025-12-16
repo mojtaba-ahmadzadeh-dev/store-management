@@ -6,7 +6,7 @@ import { notficationValidation } from "./notfication.validation.js";
 
 const router = Router()
 
-router.post('/', authGuard, validate(notficationValidation), notficationController.createNotfication)
+router.post('/', authGuard(), validate(notficationValidation), notficationController.createNotfication)
 router.get("/user/:id", notficationController.getUserNotifications);
 
 export { router as NotficationRoutes }

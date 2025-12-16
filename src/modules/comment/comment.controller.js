@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
 import { CommentMessage } from "../../constant/messages.constant.js";
-import { commentService } from "./comment.service.js";
+import CommentService from "./comment.service.js"
 
 class CommentController {
 
@@ -13,7 +13,7 @@ class CommentController {
                 throw createHttpError(400, CommentMessage.REQUIRED);
             }
 
-            const comment = await commentService.createComment({ content, user_id, blog_id, product_id });
+            const comment = await CommentService.createComment({ content, user_id, blog_id, product_id });
             res.status(201).json({ message: CommentMessage.CREATE_COMMENT_SUCCESS, comment });
         } catch (error) {
             next(error)
@@ -22,7 +22,7 @@ class CommentController {
 
     async getAllComments(req, res, next) {
         try {
-            const comments = await commentService.getAllComments();
+            const comments = await CommentService.getAllComments();
             res.status(200).json({
                 message: CommentMessage.BLOG_FETCHED,
                 comments
@@ -37,7 +37,7 @@ class CommentController {
             const { product_id } = req.params;
             const { page = 1, limit = 10 } = req.query;
 
-            const result = await commentService.getCommentsByProduct(product_id, +page, +limit);
+            const result = await CommentService.getCommentsByProduct(product_id, +page, +limit);
 
             res.status(200).json({
                 message: CommentMessage.FETCHED_SUCCESS,
@@ -55,7 +55,7 @@ class CommentController {
             const { content } = req.body;
             const user_id = req.user.id;
 
-            const result = await commentService.updateComment(id, user_id, content);
+            const result = await CommentService.updateComment(id, user_id, content);
 
             res.status(200).json({
                 message: CommentMessage.UPDATE_SUCCESS,
@@ -71,7 +71,7 @@ class CommentController {
         try {
             const { id } = req.params;
             const { mode } = req.body;
-            const comment = await commentService.toggleCommentLike(id, mode);
+            const comment = await CommentService.toggleCommentLike(id, mode);
             res.status(200).json({
                 message: `Comment ${mode}d successfully`,
                 comment
@@ -85,7 +85,7 @@ class CommentController {
         try {
             const { id } = req.params;
             const userRole = req.user.role;
-            const result = await commentService.deleteCommentByAdmin(id, userRole);
+            const result = await CommentService.deleteCommentByAdmin(id, userRole);
             res.status(200).json({
                 message: CommentMessage.DELETED_COMMENT_SUCCESS,
                 result
@@ -96,4 +96,4 @@ class CommentController {
     }
 }
 
-export const commentController = new CommentController();
+export default new CommentController()
