@@ -1,9 +1,14 @@
 import { sequelize } from "./sequelize.config.js";
+
 import { User } from "../modules/user/user.model.js";
 import { Product } from "../modules/product/product.modle.js";
 import { Category } from "../modules/category/category.model.js";
 import { Basket } from "../modules/basket/basket.model.js";
 import { Order, OrderItem } from "../modules/order/order.model.js";
+
+import { Payment } from "../modules/payment/payment.model.js";
+import { Permission, Role, RolePermissions } from "../modules/RBAC/rbac.model.js";
+
 
 import { Role, Permission, RolePermission, UserRole } from "../modules/RBAC/rbac.model.js";
 import { Blog } from "../modules/blog/blog.model.js";
@@ -13,24 +18,71 @@ import { Notfication } from "../modules/notfication/notfication.model.js";
 
 
 
+
 const initDatabase = async () => {
-    User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-    Basket.belongsTo(User, { foreignKey: 'user_id' });
 
-    User.hasMany(Order, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-    Order.belongsTo(User, { foreignKey: 'user_id' });
+    /* ===================== USER ===================== */
+    User.hasMany(Basket, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        as: 'baskets'
+    });
+    Basket.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-    Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE' });
-    Product.belongsTo(Category, { foreignKey: 'category_id' });
+    User.hasMany(Order, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        as: 'orders'
+    });
+    Order.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-    Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE' });
-    Basket.belongsTo(Product, { foreignKey: 'product_id' });
+    User.hasMany(Payment, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        as: 'payments'
+    });
+    Payment.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-    Product.hasMany(OrderItem, { foreignKey: 'product_id' });
-    OrderItem.belongsTo(Product, { foreignKey: 'product_id' });
+    /* ===================== CATEGORY & PRODUCT ===================== */
+    Category.hasMany(Product, {
+        foreignKey: 'category_id',
+        onDelete: 'CASCADE',
+        as: 'products'
+    });
+    Product.belongsTo(Category, { foreignKey: 'category_id', as: 'category' });
 
-    Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE' });
-    OrderItem.belongsTo(Order, { foreignKey: 'order_id' });
+    /* ===================== BASKET ===================== */
+    Product.hasMany(Basket, {
+        foreignKey: 'product_id',
+        onDelete: 'CASCADE',
+        as: 'basketItems'
+    });
+    Basket.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
+
+
+    /* ===================== ORDER ===================== */
+    Order.hasMany(OrderItem, {
+        foreignKey: 'order_id',
+        onDelete: 'CASCADE',
+        as: 'items'
+    });
+    OrderItem.belongsTo(Order, { foreignKey: 'order_id', as: 'order' });
+
+    Product.hasMany(OrderItem, {
+        foreignKey: 'product_id',
+        as: 'orderItems'
+    });
+    OrderItem.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
+
+    /* ===================== PAYMENT ===================== */
+    Order.hasOne(Payment, {
+        foreignKey: 'order_id',
+        onDelete: 'CASCADE',
+        as: 'payment'
+    });
+    Payment.belongsTo(Order, { foreignKey: 'order_id', as: 'order' });
+
+    /* ===================== RBAC ===================== */
 
 
     User.belongsToMany(Role, { through: UserRole, as: 'roles', foreignKey: 'userId' });
@@ -54,6 +106,7 @@ const initDatabase = async () => {
 
     User.hasMany(Notfication, { foreignKey: "user_id", onDelete: "CASCADE" });
     Notfication.belongsTo(User, { foreignKey: "user_id" });
+
     Role.belongsToMany(Permission, {
         through: RolePermission,
         as: "permissions",
@@ -66,7 +119,16 @@ const initDatabase = async () => {
         foreignKey: "permissionId"
     });
 
+
+    // Payment.sync()
+
+    /* ===================== SYNC (اختیاری) ===================== */
     // await sequelize.sync({ alter: true });
-}
+    // console.log('Database synced successfully');
+};
+
+export { initDatabase };
+
+    // await sequelize.sync({ alter: true });
 
 export { initDatabase }

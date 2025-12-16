@@ -57,12 +57,13 @@ class OrderService {
             include: [
                 {
                     model: OrderItem,
+                    as: 'items',
                     attributes: ['product_id', 'quantity', 'price', 'total_price']
                 }
             ],
             order: [['createdAt', 'DESC']]
-        })
-        return orders
+        });
+        return orders;
     }
 
     async getOrderById(orderId, userId) {
