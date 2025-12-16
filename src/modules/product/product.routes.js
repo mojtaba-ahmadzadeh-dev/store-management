@@ -14,26 +14,12 @@ router.post('/create', authGuard(),
     validate(productValidation),
     productController.createProduct
 );
+router.get('/', authGuard(), productController.getAllProducts)
+router.get('/:id', authGuard(), productController.getProductById)
+router.delete('/:id', authGuard(), productController.deleteProductById)
+router.patch('/update/:id', authGuard(), validate(productValidation), productController.updateProductById)
+router.put('/like/:id', authGuard(), productController.toggleProductLike)
+router.put('/bookmark/:id', authGuard(), productController.toggleProductBookmark)
 
-router.delete(
-    '/:id',
-    authGuard(),
-    rbacGuard(['ADMIN']),
-    productController.deleteProductById
-);
-
-router.patch(
-    '/update/:id',
-    authGuard(),
-    rbacGuard(['ADMIN']),
-    validate(productValidation),
-    productController.updateProductById
-);
-
-router.get('/', productController.getAllProducts);
-router.get('/:id', productController.getProductById);
-
-router.put('/like/:id', authGuard(), productController.toggleProductLike);
-router.put('/bookmark/:id', authGuard(), productController.toggleProductBookmark);
 
 export { router as ProductRoutes };

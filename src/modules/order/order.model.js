@@ -13,7 +13,15 @@ const Order = sequelize.define("order", {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    payment_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
     total_price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+    },
+    final_amount: { 
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
     },

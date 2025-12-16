@@ -9,4 +9,5 @@ router.get('/:id', categoryController.getCategoryById)
 router.put('/:id', rbacGuard(['ADMIN']), categoryController.updateCategoryById)
 router.delete('/delete/:id', rbacGuard(['ADMIN']), categoryController.deleteCategory)
 
+
 export { router as CategoryRoutes }
