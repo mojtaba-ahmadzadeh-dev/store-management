@@ -11,8 +11,6 @@ import { Comment } from "../modules/comment/comment.model.js";
 import { Discount } from "../modules/discount/discount.model.js";
 import { Notfication } from "../modules/notfication/notfication.model.js";
 
-
-
 const initDatabase = async () => {
     User.hasMany(Basket, { foreignKey: 'user_id', onDelete: 'CASCADE' });
     Basket.belongsTo(User, { foreignKey: 'user_id' });
@@ -65,6 +63,17 @@ const initDatabase = async () => {
         as: "roles",
         foreignKey: "permissionId"
     });
+
+    // Notfication.sync()
+    // Blog.sync()
+    // Product.sync()
+    // Basket.sync()
+    // Comment.sync()
+    // Blog.sync()
+
+    // Discount.sync()
+    // OrderItem.sync()
+    // Order.sync()
 
     // await sequelize.sync({ alter: true });
 }

@@ -80,4 +80,4 @@ class CommentService {
     }
 }
 
-export const commentService = new CommentService();
+export default new CommentService();

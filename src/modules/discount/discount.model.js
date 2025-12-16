@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { User } from "../user/user.model.js";
-import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
+import { STATUS } from "../../constant/status.constant.js";
 import { Product } from "../product/product.modle.js";
 
 const Discount = sequelize.define(
@@ -42,8 +42,8 @@ const Discount = sequelize.define(
         },
 
         status: {
-            type: DataTypes.ENUM(CATEGORY_STATUS.ACTIVE, CATEGORY_STATUS.INACTIVE),
-            defaultValue: CATEGORY_STATUS.ACTIVE,
+            type: DataTypes.ENUM(STATUS.ACTIVE, STATUS.INACTIVE),
+            defaultValue: STATUS.ACTIVE,
         },
 
         product_id: {
