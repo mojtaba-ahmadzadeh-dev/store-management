@@ -105,20 +105,26 @@ class RBACService {
     }
 
     async assignPermissionToRole(roleId, permissions = []) {
-        let role = await Role.findOne({ where: { id: roleId } });
+        const role = await Role.findByPk(roleId);
         if (!role) throw createHttpError(404, RBACMessage.ROLE_NOT_FOUND);
+
         if (permissions.length > 0) {
-            const permissionCount = await Permission.count({ where: { id: { [Op.in]: permissions } } })
-            if (permissionCount !== permissions.length) {
-                throw createHttpError(400, RBACMessage.PERMISSION_SOME_NOT_FOUND)
+            // پیدا کردن permission هایی که واقعا وجود دارند
+            const permissionList = await Permission.findAll({
+                where: { id: { [Op.in]: permissions } }
+            });
+
+            if (permissionList.length !== permissions.length) {
+                throw createHttpError(400, RBACMessage.PERMISSION_SOME_NOT_FOUND);
             }
-            const permissionList = permissions.map(per => ({
-                roleId,
-                permissionId: per
-            }))
-            await RolePermission.bulkCreate(permissionList)
+
+            // ⚡️ استفاده از متد instance Sequelize
+            await role.setPermissions(permissionList);
         }
+
+        return await Role.findByPk(roleId, { include: ["permissions"] });
     }
+
 
     async assignRoleToUser(userId, roleIds = []) {
         const user = await User.findByPk(userId);

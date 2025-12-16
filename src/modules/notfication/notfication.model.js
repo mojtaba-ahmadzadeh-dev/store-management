@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 
-const Notfication = sequelize.define('notification', {
+const Notfication = sequelize.define('notfication', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -32,7 +32,7 @@ const Notfication = sequelize.define('notification', {
         defaultValue: false,
     },
 }, {
-    tableName: 'notifications',
+    tableName: 'notfications',
     timestamps: true
 });
 
