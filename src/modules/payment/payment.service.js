@@ -72,7 +72,7 @@ class PaymentService {
                 const order = await Order.findByPk(payment.order_id);
                 if (!order) throw createHttpError(404, 'سفارش یافت نشد');
 
-                order.status = OrderStatus.INPROCCESS;
+                order.status = OrderStatus.IN_PROGRESS;
 
                 await order.save();
                 await payment.save();
