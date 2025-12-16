@@ -1,7 +1,7 @@
 import autoBind from "auto-bind"
 import { Category } from "./category.model.js";
 import { CategoryMessage } from "../../constant/messages.constant.js";
-import { CATEGORY_STATUS } from "../../constant/category_status.constant.js";
+import { STATUS } from "../../constant/status.constant.js";
 import createHttpError from "http-errors";
 import { Product } from "../product/product.modle.js";
 
@@ -23,7 +23,7 @@ class CategoryService {
         const category = await Category.create({
             title: data.title,
             description: data.description || null,
-            status: data.status || CATEGORY_STATUS.ACTIVE
+            status: data.status || STATUS.ACTIVE
         });
 
         return category

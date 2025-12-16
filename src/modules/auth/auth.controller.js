@@ -3,6 +3,10 @@ import autoBind from "auto-bind";
 import authService from "./auth.service.js";
 import { AuthMessage } from "../../constant/messages.constant.js";
 import createHttpError from "http-errors";
+import jwt from 'jsonwebtoken'
+import { config } from "dotenv";
+
+config()
 
 class AuthController {
     #service;
@@ -14,7 +18,7 @@ class AuthController {
     async sendOTP(req, res, next) {
         try {
             const { mobile } = req.body;
-             await this.#service.sendOTP(mobile);
+            await this.#service.sendOTP(mobile);
 
             return res.json({
                 message: AuthMessage.OTP_SENT_SUCCESS,
@@ -86,12 +90,17 @@ class AuthController {
 
     async getMe(req, res, next) {
         try {
-            if (!req.user) throw createHttpError.Unauthorized(AuthMessage.ACCESS_TOKEN_INVALID);
+            const token = req.cookies.accessToken;
+            if (!token) throw createHttpError.Unauthorized("Access token not found");
 
-            return res.json({
-                message: AuthMessage.GET_ME_SUCCESS,
-                result: req.user
-            });
+            const { ACCESS_TOKEN_SECRET } = process.env;
+            const payload = jwt.verify(token, ACCESS_TOKEN_SECRET);
+
+            if (!payload?.userId) throw createHttpError.Unauthorized("Invalid token");
+
+            const user = await this.#service.getMe(payload.userId);
+
+            return res.json({ user });
         } catch (error) {
             next(error);
         }

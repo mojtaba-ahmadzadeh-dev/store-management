@@ -637,3 +637,161 @@
  *                   type: boolean
  *                   example: false
  */
+
+// ================= Assign Role to User =================
+/**
+ * @swagger
+ * /role/assign-user:
+ *   post:
+ *     summary: Assign a role to a user
+ *     tags: [RBAC 🔑]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userId
+ *               - roleId
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *                 example: 1
+ *                 description: ID of the user
+ *               roleId:
+ *                 type: integer
+ *                 example: 2
+ *                 description: ID of the role to assign
+ *
+ *     responses:
+ *       200:
+ *         description: Role assigned to user successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Role assigned to user successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     userId:
+ *                       type: integer
+ *                     roleId:
+ *                       type: integer
+ *
+ *       404:
+ *         description: User or Role not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "User or Role not found"
+ */
+
+/**
+ * @swagger
+ * /role/assign-user:
+ *   post:
+ *     summary: Assign a role to a user
+ *     description: Assigns a role to a specific user. User must exist, and role must exist.
+ *     tags: [RBAC 🔑]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userId
+ *               - roleId
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *                 example: 1
+ *                 description: ID of the user
+ *               roleId:
+ *                 type: integer
+ *                 example: 2
+ *                 description: ID of the role to assign
+ *
+ *     responses:
+ *       200:
+ *         description: Role assigned to user successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Role assigned to user successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     userId:
+ *                       type: integer
+ *                       example: 1
+ *                     roleId:
+ *                       type: integer
+ *                       example: 2
+ *
+ *       404:
+ *         description: User or Role not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "User or Role not found"
+ *
+ *       401:
+ *         description: Unauthorized (missing or invalid JWT)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "User not authenticated"
+ *
+ *       403:
+ *         description: Forbidden (insufficient permissions)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Access denied"
+ */

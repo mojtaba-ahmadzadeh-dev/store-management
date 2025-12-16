@@ -1,3 +1,4 @@
+
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { Order } from "../order/order.model.js";

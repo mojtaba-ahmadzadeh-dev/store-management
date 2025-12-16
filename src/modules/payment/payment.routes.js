@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 import paymentController from "./payment.controller.js";
 import { authGuard } from "../../middlewares/guard/auth.guard.js";
@@ -8,3 +9,4 @@ router.post('/', authGuard(), paymentController.paymentBasket);
 router.get('/verify', paymentController.paymentVerify);
 
 export { router as PaymentRoutes };
+

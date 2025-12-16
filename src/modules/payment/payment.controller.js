@@ -30,10 +30,10 @@ class PaymentController {
             const result = await paymentService.paymentVerify(Status, Authority);
 
             return res.send(`
-            <h1>پرداخت موفق ✅</h1>
-            <p>مبلغ: ${result.amount.toLocaleString()} تومان</p>
-            <p>شماره تراکنش: ${result.ref_id}</p>
-        `);
+                <h1>پرداخت موفق ✅</h1>
+                <p>مبلغ: ${result.amount.toLocaleString()} تومان</p>
+                <p>شماره تراکنش: ${result.ref_id}</p>
+            `);
         } catch (err) {
             return res.send(`<h1>خطا: ${err.message}</h1>`);
         }

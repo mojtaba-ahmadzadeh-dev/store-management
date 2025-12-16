@@ -13,7 +13,14 @@ import { ProductRoutes } from './src/modules/product/product.routes.js';
 import { BasketRoutes } from './src/modules/basket/basket.routes.js';
 import { OrderRoutes } from './src/modules/order/order.routes.js';
 import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
-import { PaymentRoutes } from './src/modules/payment/payment.routes.js';
+<<<<<<< HEAD
+import { seedPermissionsAndRoles } from './src/configs/rbac.seed.js';
+=======
+import { BlogRoutes } from './src/modules/blog/blog.routes.js';
+import { CommentRoutes } from './src/modules/comment/comment.routes.js';
+import { DiscountRoutes } from './src/modules/discount/discount.routes.js';
+import { NotficationRoutes } from './src/modules/notfication/notfication.routes.js';
+>>>>>>> develop
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 
@@ -48,7 +55,10 @@ class App {
         this.app.use('/basket', BasketRoutes)
         this.app.use('/order', OrderRoutes)
         this.app.use('/', RBACRoutes)
-        this.app.use('/payment', PaymentRoutes)
+        this.app.use('/blog', BlogRoutes)
+        this.app.use('/comment', CommentRoutes)
+        this.app.use('/discount', DiscountRoutes)
+        this.app.use('/notfication', NotficationRoutes)
     }
 
     initSwagger() {
@@ -60,6 +70,7 @@ class App {
             await sequelize.authenticate();
             console.log('Database connection has been established successfully.');
             await initDb();
+            await seedPermissionsAndRoles();
         } catch (error) {
             console.log('Unable to connect to the database:', error);
         }
