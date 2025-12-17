@@ -150,6 +150,12 @@ const NotficationMessage = {
     UPDATE_SUCCESS: "اعلان با موفقیت بروزرسانی شد."
 }
 
+const PaymentMessage = {
+    PAYMENT_SUCCESS: "پرداخت با موفقیت تایید شد",
+    PAYMENT_CANCELLED_BY_USER: "پرداخت توسط کاربر لغو شد",
+    PAYMENT_FAILED: "پرداخت ناموفق بود"
+}
+
 export {
     AuthMessage,
     UserMessage,
@@ -161,5 +167,6 @@ export {
     BlogMessage,
     CommentMessage,
     DiscountMessage,
-    NotficationMessage
+    NotficationMessage,
+    PaymentMessage
 };

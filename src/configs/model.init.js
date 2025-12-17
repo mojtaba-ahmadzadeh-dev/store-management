@@ -6,7 +6,7 @@ import { Category } from "../modules/category/category.model.js";
 import { Basket } from "../modules/basket/basket.model.js";
 import { Order, OrderItem } from "../modules/order/order.model.js";
 import { Payment } from "../modules/payment/payment.model.js";
-import { Role, Permission, RolePermission, UserRole } from "../modules/RBAC/rbac.model.js";
+import { Permission, Role, RolePermission, UserRole } from "../modules/RBAC/rbac.model.js";
 import { Blog } from "../modules/blog/blog.model.js";
 import { Comment } from "../modules/comment/comment.model.js";
 import { Discount } from "../modules/discount/discount.model.js";
@@ -32,8 +32,6 @@ const initDatabase = async () => {
     Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE', as: 'basketItems' });
     Basket.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
 
-
-    // ORDER
     Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE', as: 'items' });
     OrderItem.belongsTo(Order, { foreignKey: 'order_id', as: 'order' });
 
@@ -68,7 +66,6 @@ const initDatabase = async () => {
 
     Role.belongsToMany(Permission, { through: RolePermission, as: "permissions", foreignKey: "roleId" });
     Permission.belongsToMany(Role, { through: RolePermission, as: "roles", foreignKey: "permissionId" });
-
 
     // await sequelize.sync({ alter: true });
     // console.log('Database synced successfully');

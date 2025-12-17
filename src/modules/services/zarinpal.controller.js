@@ -1,3 +1,4 @@
+import { PaymentMessage } from "../../constant/messages.constant.js";
 import zarinpalService from "./zarinpal.service.js";
 import ZarinpalService from "./zarinpal.service.js";
 
@@ -21,7 +22,7 @@ class ZarinpalController {
       if (!Authority || Status !== 'OK') {
         return res.status(400).json({
           success: false,
-          message: 'پرداخت توسط کاربر لغو شد'
+          message: PaymentMessage.PAYMENT_CANCELLED_BY_USER
         });
       }
 
@@ -31,13 +32,13 @@ class ZarinpalController {
 
       return res.json({
         success: true,
-        message: 'پرداخت با موفقیت تایید شد'
+        message: PaymentMessage.PAYMENT_SUCCESS
       })
     } catch (error) {
       next(error)
     }
   }
-
+  
 }
 
 export default new ZarinpalController();

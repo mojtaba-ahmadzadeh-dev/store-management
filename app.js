@@ -13,9 +13,7 @@ import { ProductRoutes } from './src/modules/product/product.routes.js';
 import { BasketRoutes } from './src/modules/basket/basket.routes.js';
 import { OrderRoutes } from './src/modules/order/order.routes.js';
 import { RBACRoutes } from './src/modules/RBAC/rbac.routes.js';
-
 import { seedPermissionsAndRoles } from './src/configs/rbac.seed.js';
-
 import { BlogRoutes } from './src/modules/blog/blog.routes.js';
 import { CommentRoutes } from './src/modules/comment/comment.routes.js';
 import { DiscountRoutes } from './src/modules/discount/discount.routes.js';

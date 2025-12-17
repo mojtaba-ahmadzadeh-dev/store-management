@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 import productController from "./product.controller.js";
 import { uploadProductImage } from "../../middlewares/upload/upload.middleware.js";
@@ -16,10 +17,9 @@ router.post('/create', authGuard(),
 );
 router.get('/', authGuard(), productController.getAllProducts)
 router.get('/:id', authGuard(), productController.getProductById)
-router.delete('/:id', authGuard(), productController.deleteProductById)
-router.patch('/update/:id', authGuard(), validate(productValidation), productController.updateProductById)
+router.delete('/:id', authGuard(), rbacGuard(['ADMIN']), productController.deleteProductById)
+router.patch('/update/:id', authGuard(), rbacGuard(['ADMIN']), validate(productValidation), productController.updateProductById)
 router.put('/like/:id', authGuard(), productController.toggleProductLike)
 router.put('/bookmark/:id', authGuard(), productController.toggleProductBookmark)
-
 
 export { router as ProductRoutes };
