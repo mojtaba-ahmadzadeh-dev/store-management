@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 import { Product } from "../product/product.modle.js";
-import { UserStatus } from "../../constant/status.constant.js";
+import { OrderStatus } from "../../constant/order_status.constant.js";
 import { Blog } from "../blog/blog.model.js";
 
 const Comment = sequelize.define('comment', {
@@ -46,9 +46,9 @@ const Comment = sequelize.define('comment', {
         defaultValue: 0,
     },
     status: {
-        type: DataTypes.ENUM(UserStatus.PENDING, UserStatus.APPROVED, UserStatus.REJECT),
+        type: DataTypes.ENUM(OrderStatus.PENDING, OrderStatus.APPROVED, OrderStatus.REJECT),
         allowNull: false,
-        defaultValue: UserStatus.PENDING,
+        defaultValue: OrderStatus.PENDING,
     },
 }, {
     timestamps: true,
