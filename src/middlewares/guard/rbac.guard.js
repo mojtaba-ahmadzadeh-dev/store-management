@@ -1,6 +1,7 @@
 import createHttpError from "http-errors";
 import { User } from "../../modules/user/user.model.js";
 import { Role, Permission } from "../../modules/RBAC/rbac.model.js";
+import { RBACMessage } from "../../constant/messages.constant.js";
 
 export const rbacGuard = (requiredPermissions = [], requireAll = true) => {
   return async (req, res, next) => {
@@ -28,7 +29,7 @@ export const rbacGuard = (requiredPermissions = [], requireAll = true) => {
       });
 
       if (!user) {
-        throw createHttpError(401, "User not found");
+        throw createHttpError(401, RBACMessage.USER_NOT_FOUND);
       }
 
       // Gather all permissions of the user
@@ -54,10 +55,7 @@ export const rbacGuard = (requiredPermissions = [], requireAll = true) => {
         ? permissions.every(p => userPermissions.has(p))
         : permissions.some(p => userPermissions.has(p));
 
-      if (!hasAccess) {
-        console.log("Access denied. User permissions:", [...userPermissions], "Required:", permissions);
-        throw createHttpError(403, "Access denied");
-      }
+      if (!hasAccess) throw createHttpError(403, RBACMessage.ACCESS_DENIED);
 
       next();
     } catch (error) {

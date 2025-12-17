@@ -32,7 +32,6 @@ const initDatabase = async () => {
     Product.hasMany(Basket, { foreignKey: 'product_id', onDelete: 'CASCADE', as: 'basketItems' });
     Basket.belongsTo(Product, { foreignKey: 'product_id', as: 'product' });
 
-    // ORDER
     Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE', as: 'items' });
     OrderItem.belongsTo(Order, { foreignKey: 'order_id', as: 'order' });
 
@@ -46,7 +45,6 @@ const initDatabase = async () => {
     // RBAC
     User.belongsToMany(Role, { through: UserRole, as: 'roles', foreignKey: 'userId' });
     Role.belongsToMany(User, { through: UserRole, as: 'users', foreignKey: 'roleId' });
-
 
     User.hasMany(Blog, { foreignKey: 'user_id', onDelete: 'CASCADE' });
     Blog.belongsTo(User, { foreignKey: 'user_id' });
@@ -73,4 +71,4 @@ const initDatabase = async () => {
     // console.log('Database synced successfully');
 };
 
-export { initDatabase };
+export { initDatabase }

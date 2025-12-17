@@ -15,4 +15,5 @@ router.patch('/update/:id', authGuard(), rbacGuard(['ADMIN']), uploadBlogImage.s
 router.delete('/delete/:id', authGuard(), rbacGuard(['ADMIN']), blogController.deleteBlogById);
 
 
+
 export { router as BlogRoutes }

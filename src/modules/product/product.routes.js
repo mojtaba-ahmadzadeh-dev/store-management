@@ -22,5 +22,4 @@ router.patch('/update/:id', authGuard(), rbacGuard(['ADMIN']), validate(productV
 router.put('/like/:id', authGuard(), productController.toggleProductLike)
 router.put('/bookmark/:id', authGuard(), productController.toggleProductBookmark)
 
-
 export { router as ProductRoutes };

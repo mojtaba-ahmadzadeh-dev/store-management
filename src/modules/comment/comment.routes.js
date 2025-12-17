@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { commentController } from "./comment.controller.js";
 import { authGuard } from "../../middlewares/guard/auth.guard.js";
 import { rbacGuard } from "../../middlewares/guard/rbac.guard.js";
+import commentController from "./comment.controller.js";
 
 const router = Router();
 

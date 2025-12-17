@@ -77,7 +77,8 @@ const OrderMessage = {
     GET_ORDERS_SUCCESS: "سفارش‌ها با موفقیت دریافت شدند",
     ADMIN_GET_ALL_ORDERS_SUCCESS: "لیست تمام سفارش‌ها با موفقیت دریافت شد",
     ORDER_EMPTY_BASKET: "سبد خرید شما خالی است",
-    ORDER_NOT_AUTHORIZED: "شما اجازه دسترسی به این سفارش را ندارید"
+    ORDER_NOT_AUTHORIZED: "شما اجازه دسترسی به این سفارش را ندارید",
+    GET_ORDER_BY_ID_SUCCESS: 'سفارش با موفقیت دریافت شد'
 };
 
 const RBACMessage = {
@@ -98,7 +99,9 @@ const RBACMessage = {
     PERMISSION_SOME_NOT_FOUND: "برخی از دسترسی‌های ارسال‌شده یافت نشدند",
     ACCESS_TOKEN_NOT_FOUND: "توکن دسترسی یافت نشد",
     USER_NOT_FOUND: "کاربر پیدا نشد",
+    ACCESS_DENIED: "شما اجازه دسترسی به این بخش را ندارید"
 };
+
 const BlogMessage = {
     CREATE_BLOG_SUCESS: "بلاگ با موفقیت ایجاد شد",
     ALL_BLOGS_FETCHED: "لیست بلاگ‌ها با موفقیت دریافت شد",

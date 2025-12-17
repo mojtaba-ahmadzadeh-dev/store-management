@@ -83,7 +83,7 @@ class OrderService {
     }
 
     async getAllOrders() {
-        return await Order.findAll({
+       const orders = await Order.findAll({
             include: [
                 {
                     model: OrderItem,
@@ -93,6 +93,7 @@ class OrderService {
             ],
             order: [["createdAt", "DESC"]]
         });
+           return orders || [];
     }
 
     async updateOrder(orderId, userId, { shipping_address, payment_method, status }) {

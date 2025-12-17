@@ -4,5 +4,7 @@ export const OrderStatus = Object.freeze({
   IN_PROGRESS: 'in_progress',
   SHIPPED: 'shipped',
   COMPLETED: 'completed',
-  CANCELLED: 'cancelled'
+  CANCELLED: 'cancelled',
+  APPROVED: 'approved',
+  REJECT: 'reject'
 });
