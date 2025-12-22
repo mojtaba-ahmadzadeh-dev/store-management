@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../configs/sequelize.config.js";
 
-const User = sequelize.define('user', {
+const User = sequelize.define('User', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     mobile: { type: DataTypes.STRING(15), allowNull: false, unique: true },
     full_name: { type: DataTypes.STRING(100), allowNull: true },
@@ -10,7 +10,7 @@ const User = sequelize.define('user', {
     isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, { timestamps: true, createdAt: 'created_at', updatedAt: false, modelName: 'user', tableName: 'users' });
 
-const OTP = sequelize.define('otp', {
+const OTP = sequelize.define('OTP', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     user_id: { type: DataTypes.INTEGER, allowNull: false },
     code: { type: DataTypes.STRING(6), allowNull: false },
