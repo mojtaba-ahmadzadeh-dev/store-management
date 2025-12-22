@@ -1,0 +1,87 @@
+import autoBind from "auto-bind"
+import { Category } from "./category.model.js";
+import { CategoryMessage } from "../../constant/messages.constant.js";
+import { STATUS } from "../../constant/status.constant.js";
+import createHttpError from "http-errors";
+import { Product } from "../product/product.modle.js";
+
+class CategoryService {
+    #model;
+    constructor() {
+        autoBind(this)
+        this.#model = Category
+    }
+
+    async createCategory(data) {
+        const existing = await this.#model.findOne({
+            where: { title: data.title }
+        })
+        if (existing) {
+            throw new Error(CategoryMessage.CATEGORY_ALREADY_EXISTS);
+        }
+
+        const category = await Category.create({
+            title: data.title,
+            description: data.description || null,
+            status: data.status || STATUS.ACTIVE
+        });
+
+        return category
+    }
+
+    async getAllCategories() {
+        const categories = await this.#model.findAll({
+            order: [["id", "ASC"]],
+            include: [
+                {
+                    model: Product,
+                    as: 'products',
+                    required: false 
+                }
+            ]
+        })
+        return categories
+    }
+
+    async getCategoryById(id) {
+        const category = await this.#model.findByPk(id)
+        if (!category) {
+            throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND);
+        }
+        return category
+    }
+
+    async updateCategoryById(id, data) {
+        const category = await this.#model.findOne({ where: { id } });
+
+        if (!category) {
+            throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND);
+        }
+
+        if (data.title) {
+            const exists = await this.#model.findOne({
+                where: { title: data.title, id: { $ne: id } }
+            })
+
+            if (exists) {
+                throw createHttpError(400, CategoryMessage.CATEGORY_ALREADY_EXISTS);
+            }
+
+            await category.update({
+                title: data.title ?? category.title,
+                description: data.description ?? category.description,
+                status: data.status ?? category.status
+            })
+        }
+    }
+
+    async deleteCategoryById(id) {
+        const category = await this.#model.findOne({ where: { id } });
+        if (!category) throw createHttpError(404, CategoryMessage.CATEGORY_NOT_FOUND)
+
+        await category.destroy();
+        return category
+    }
+}
+
+export default new CategoryService
